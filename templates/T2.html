@@ -92,7 +92,7 @@
 		<!-- Main Nav -->
 		<div id="navigation">
 			<ul>
-			    <li><a href="#" class="active"><span>Dashboard</span></a></li>
+			    <li><a href="http://localhost:8000/index/" class="active"><span>Dashboard</span></a></li>
 			    <li><a href="#"><span>New Files</span></a></li>
 			    <li><a href="#"><span>User Management</span></a></li>
 			    <li><a href="#"><span>Rules Gallery</span></a></li>
@@ -186,7 +186,7 @@
 						
 						<!-- Pagging -->
 						<div class="pagging">
-							<div class="left">Showing 1-{{ TheTopLength }} of {{ lengthofmylist }}</div>
+							<div class="left">Showing 1-{{ DataGridPageSize }} of {{ lengthofmylist }}</div>
 							<div class="right">
                             {%  if PreviousPage > 0 %}
 								<a href="{% url 'file_show' PreviousPage %}">Previous</a>

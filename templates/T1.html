@@ -126,9 +126,12 @@ function chooseFolder(){
 
     function bb()
     {
+        //alert("fff");
 
-
-        alert("BBBBB");
+           var f=document.getElementsByName("strName");
+        alert(f);
+            alert(f.name);
+        //alert("BBBBB");
 
     }
         function SetArticleId(o, i) {
@@ -199,7 +202,7 @@ function chooseFolder(){
 		<!-- Main Nav -->
 		<div id="navigation">
 			<ul>
-			    <li><a href="#" class="active"><span>Dashboard</span></a></li>
+			    <li><a href="http://localhost:8000/index/" class="active"><span>Dashboard</span></a></li>
 			    <li><a href="#"><span>New Files</span></a></li>
 			    <li><a href="#"><span>User Management</span></a></li>
 			    <li><a href="#"><span>Rules Gallery</span></a></li>
@@ -275,16 +278,21 @@ function chooseFolder(){
 			<div id="content">
 				
 				<!-- Box -->
+
 				<div class="box">
 					<!-- Box Head -->
+                <form action="/index/1/" method="post" >
 					<div class="box-head">
 						<h2 class="left">Current Router Files</h2>
 						<div class="right">
 							<label>search routers</label>
-							<input type="text" class="field small-field" />
-							<input type="submit" class="button" value="search" />
+							<input type="text" name="FilterName" class="field small-field" value="Filename" />
+                            <input type="text" name="FilterDate" class="field small-field" value="Y/Y-M/Y-M-D"/>
+                            <input type="text" name="FilterType" class="field small-field" value=".suffix"/>
+							<input type="submit" class="button" value="filter" />
 						</div>
 					</div>
+                </form>
 					<!-- End Box Head -->	
                     <form action="/rule_generate/" method="post" >
                     <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
@@ -293,7 +301,7 @@ function chooseFolder(){
 					<div class="table">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr class="odd">
-								<th width="13"><input type="checkbox" class="checkbox" /></th>
+								<th width="13"><input type="checkbox"  class="checkbox" /></th>
 								<th>FileName</th>
 								<th>FileDate</th>
 								<th>FileType</th>
@@ -301,14 +309,25 @@ function chooseFolder(){
 							</tr>
                             {%for eachlist1 in TheTopList%}
 							<tr>
-								<td><input on="bb()" type="checkbox" class="checkbox" name="strName" id="{{ eachlist1.filename }}" checked={{ eachlist1.check }}/></td>
+								<td><input onclick="bb()" type="checkbox" class="checkbox" name="strName" id="{{ eachlist1.filename }}" /></td>
                                 <td><input type="hidden"  name="FileName" value="{{ eachlist1.filename }}"/>
 								<h3>{{ eachlist1.filename }}</h3></td>
 								<td>{{ eachlist1.filedate }}</td>
 								<td>{{ eachlist1.filetype }}</td>
-								<td><a href="#" class="ico del">Delete</a><a href="#" class="ico edit">Edit</a></td>
-							</tr>
+
+                                <td>
+                                <form action="{% url 'file_delete' CurrentPage %}" method="post">
+								<input type="hidden"  name="FileNameToDelete" value="{{ eachlist1.filename }}"/>
+                                    <input type="hidden"  name="FileCheckToDelete" checked="{{ eachlist1.check }}"/>
+                                    <input type="submit" name="deletedfile" class="ico del" value="Delete">
+                                    <a href="#" class="ico edit">Edit</a>
+                                </form>
+                                </td>
+
+                            </tr>
                             {%endfor%}
+
+
 							<tr class="odd">
 								<td><input type="hidden" class="checkbox" /></td>
 								<td><h3><a href="#">welcome to this system!</a></h3></td>
@@ -321,7 +340,7 @@ function chooseFolder(){
 						
 						<!-- Pagging -->
 						<div class="pagging">
-							<div class="left">Showing 1-{{ TheTopLength }} of {{ lengthofmylist }}</div>
+							<div class="left">Showing 1-{{ DataGridPageSize }} of {{ lengthofmylist }}</div>
 							<div class="right">
                             {%  if PreviousPage > 0 %}
 								<a href="{% url 'file_show' PreviousPage %}">Previous</a>
