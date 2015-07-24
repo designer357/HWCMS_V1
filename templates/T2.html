@@ -76,7 +76,7 @@
 	<div class="shell">
 		<!-- Logo + Top Nav -->
 		<div id="top">
-			<h1><a href='http://localhost:8000/fileinfo/'>Configuration Files Management</a></h1>
+			<h1><a href='http://localhost:8000/index/'>Configuration Files Management</a></h1>
 			<div id="top-navigation">
 				Welcome <a href="#"><strong>Administrator</strong></a>
 				<span>|</span>
@@ -150,7 +150,7 @@
 						</div>
 					</div>
 					<!-- End Box Head -->	
-                    <form action="/fileinfo3/" method="post" >
+                    <form action="/rule_generate/" method="post" >
                     <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
 
 					<!-- Table -->
@@ -189,15 +189,15 @@
 							<div class="left">Showing 1-{{ TheTopLength }} of {{ lengthofmylist }}</div>
 							<div class="right">
                             {%  if PreviousPage > 0 %}
-								<a href="{% url 'fileinfo2' PreviousPage %}">Previous</a>
+								<a href="{% url 'file_show' PreviousPage %}">Previous</a>
                             {% endif %}
                                 {% for t in PagesList%}
-								<a href="{% url 'fileinfo2' t  %}">{{ t }}</a>
+								<a href="{% url 'file_show' t  %}">{{ t }}</a>
 
                                 {% endfor %}
 								<span>...</span>
                                 {% if NextPage <= Pages%}
-								<a href="{% url 'fileinfo2' NextPage %}">Next</a>
+								<a href="{% url 'file_show' NextPage %}">Next</a>
                                 {% endif %}
 
 								<a href="#">View all</a>

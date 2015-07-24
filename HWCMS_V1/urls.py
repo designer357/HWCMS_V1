@@ -17,20 +17,18 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls import patterns, include, url
-from HWCMS.views import current_datetime,hours_ahead,file_info,file_info2,file_info3,file_info4,send_message
+from HWCMS.views import current_datetime,hours_ahead,index_page,file_show,rule_generate,file_upload,send_message
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'^time/$', current_datetime),
     (r'^time/plus/(\d{1,2})/$', hours_ahead),
-    url(r'^fileinfo/selectedfiles',file_info4,name='fileinfo4'),
-    url(r'^fileinfo/$',file_info),
-    url(r'^fileinfo/(\d)/$',file_info2,name='fileinfo2'),
-    url(r'^fileinfo3/$',file_info3,name='fileinfo3'),
+    url(r'^index/uploadedfiles',file_upload,name='file_upload'),
+    url(r'^index/$',index_page),
+    url(r'^index/(\d)/$',file_show,name='file_show'),
+    url(r'^rule_generate/$',rule_generate,name='rule_generate'),
     ('^send_message/$', send_message),
 
 
 )
-#urlpatterns = [
-#    url(r'^admin/', include(admin.site.urls)),
-#]
+

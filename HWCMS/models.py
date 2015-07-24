@@ -12,3 +12,17 @@ class Person(models.Model):
     last_name = models.CharField(max_length=30)
     email = models.EmailField()
     date_of_birth = models.DateField()
+
+class Parameter:
+    def __init__(self,supp,cond,lift,kulc,ir):
+        self.min_supp=supp
+        self.min_cond=cond
+        self.min_lift=lift
+        self.min_kulc=kulc
+        self.thresh_ir=ir
+class FileList:
+    def __init__(self,filename,filedate,filetype,check):
+        self.filename=filename
+        self.filedate=filedate
+        self.filetype=filetype
+        self.check=check
