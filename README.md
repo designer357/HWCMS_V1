@@ -1,2 +1,2 @@
-# DjangoProject2ForHuaWei
+# HWCMS
 This is a django project!
