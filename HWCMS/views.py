@@ -88,6 +88,15 @@ def file_upload(request):
         tempfullfilelist.append(os.path.join(os.getcwd(),FilesStoreFolder)+'/' + f.name)
     print("222222222222222222222222222222222222222")
 
+    for f in files:
+        if f.name in TotalFileNameList:
+            f.name = f.name.split('.')[0] + '_copy.' + f.name.split('.')[1]
+        destination = open(os.path.join(os.getcwd(),FilesStoreFolder)+'/' + f.name,'wb+')
+
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+
 
     for eachfile in tempfilenamelist:
         if '.' in eachfile:
@@ -105,13 +114,7 @@ def file_upload(request):
             eachfile = eachfile.split('.')[0] + '_copy.' + eachfile.split('.')[1]
             TotalFileList.append(FileList(eachfile,timestr,suffix,check))
             TotalFileNameList.append(eachfile)
-    for f in files:
-        if f.name in TotalFileNameList:
-            f.name = f.name.split('.')[0] + '_copy.' + f.name.split('.')[1]
-        destination = open(os.path.join(os.getcwd(),FilesStoreFolder)+'/' + f.name,'wb+')
 
-        for chunk in f.chunks():
-            destination.write(chunk)
 
 
 
