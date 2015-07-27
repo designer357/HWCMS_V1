@@ -186,7 +186,7 @@ function chooseFolder(){
 	<div class="shell">
 		<!-- Logo + Top Nav -->
 		<div id="top">
-			<h1><a href="http://localhost:8000/index/">Configuration Files Management</a></h1>
+			<h1><a href="{% url 'JumpToIndex' %}">Configuration Files Management</a></h1>
 			<div id="top-navigation">
 				Welcome <a href="#"><strong>Administrator</strong></a>
 				<span>|</span>
@@ -202,7 +202,7 @@ function chooseFolder(){
 		<!-- Main Nav -->
 		<div id="navigation">
 			<ul>
-			    <li><a href="http://localhost:8000/index/" class="active"><span>Dashboard</span></a></li>
+			    <li><a href="{% url 'JumpToIndex' %}" class="active"><span>Dashboard</span></a></li>
 			    <li><a href="#"><span>New Files</span></a></li>
 			    <li><a href="#"><span>User Management</span></a></li>
 			    <li><a href="#"><span>Rules Gallery</span></a></li>
@@ -254,10 +254,9 @@ function chooseFolder(){
 		<div class="msg msg-ok1">
 
 
-              <form action="/index/uploadedfiles/" enctype="multipart/form-data" method="post">
+              <form action="{% url 'file_upload' %}" enctype="multipart/form-data" method="post">
 			<p><strong>UpLoad Configuration Files：</strong><input type="file" class="button" name="multifile" id="multifile" multiple size="80"/><span>                                          </span>
                 <input type="hidden"  id="MyFileList" name="MyFileList" value=""/>
-                <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
                 <input type="hidden" class="button" onclick="showFileName1()" value="OK" />
                 <input type="submit" class="button"  value="upload" /></p>
 
@@ -281,7 +280,7 @@ function chooseFolder(){
 
 				<div class="box">
 					<!-- Box Head -->
-                <form action="/index/1/" method="post" >
+                <form action="{% url 'file_show' '1' %}" method="post" >
 					<div class="box-head">
 						<h2 class="left">Current Router Files</h2>
 						<div class="right">
@@ -294,8 +293,7 @@ function chooseFolder(){
 					</div>
                 </form>
 					<!-- End Box Head -->	
-                    <form action="/rule_generate/" method="post" >
-                    <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
+                    <form action="{% url 'rule_generate' %}" method="post" >
 
 					<!-- Table -->
 					<div class="table">
@@ -357,7 +355,7 @@ function chooseFolder(){
 								<a href="#">View all</a>
                                 <span>  </span>
                             {% if NextPage > 0%}
-                                <div class="right"><span>  </span><input type="submit" onclick="aa()" class="button" value="Generate Rules">{% csrf_token %}</div>
+                                <div class="right"><span>  </span><input type="submit" onclick="aa()" class="button" value="Generate Rules"></div>
                                 {% endif %}
 
 

@@ -6,7 +6,7 @@ from Agrawal's 'Fast Algorithms for Mining Association Rules'
 import itertools
 import sys
 from common import *
-
+import os
 #Generate all k size large itemsets, those with minimum support.
 #Return Ck where each member has two fields: i) itemset ii) support count
 #assumes itemset in Lk-1 is sorted
@@ -97,7 +97,7 @@ def LargeItemsetGen(transactions,minsupp):
     transTotal=len(transactions)
     L1=[]
     dictRawItem = {}
-    for tid in transactions:
+    for tid in range(transTotal):
         items = transactions[tid][1]
 
         for i in range(len(items)):
@@ -129,7 +129,8 @@ def aprioriTid(transactions, minsupp):
 
     # Initial values
     (L1, item_counts) = LargeItemsetGen(transactions, minsupp)
-    prevC_comp = transactions
+    prevC_comp = len(transactions)
+    prevC_comp2=transactions
     k = 2
     supportCounts = item_counts
     L = [ [],  L1]
@@ -141,11 +142,11 @@ def aprioriTid(transactions, minsupp):
         C_comp = {}
 
         # For every transaction in previous iteration C'
-        for tid in prevC_comp:
+        for tid in range(prevC_comp):
             if k == 2:
-                t_set_of_items = [[x] for x in prevC_comp[tid][1]]
+                t_set_of_items = [[x] for x in prevC_comp2[tid][1]]
             else:
-                t_set_of_items = prevC_comp[tid][1]
+                t_set_of_items = prevC_comp2[tid][1]
 
             Ct = []
             for c in Ck:
@@ -214,5 +215,28 @@ def aprioriTid(transactions, minsupp):
     # Retrun
     return (result, supportCounts)
 
+def dataFromFile(fname):
+    """Function which reads from the file and yields a generator"""
+    file_iter = open(fname, 'rU')
+    for line in file_iter:
+        #print(line)
+        line = line.strip().rstrip(',')                         # Remove trailing comma
+        record = frozenset(line.split(','))
+        yield record
+def getItemSetTransactionList(data_iterator):
+    transactionList = list()
+    itemSet = set()
+    for record in data_iterator:
+        transaction = frozenset(record)
+        transactionList.append(transaction)
+        for item in transaction:
+            itemSet.add(frozenset([item]))              # Generate 1-itemSets
+    return itemSet, transactionList
 
+#inFile=dataFromFile(os.getcwd()+"/test.csv")
+#itemSet, transactionList = getItemSetTransactionList(inFile)
+#print(transactionList)
+transactionList=[[0,['I1','I3','I4']],[1,['I2','I3','I5']],[2,['I1','I2','I3','I5']],[3,['I2','I5']]]
+minSupport=0.15
+aprioriTid(transactionList,minSupport)
 

@@ -76,7 +76,7 @@
 	<div class="shell">
 		<!-- Logo + Top Nav -->
 		<div id="top">
-			<h1><a href='http://localhost:8000/index/'>Configuration Files Management</a></h1>
+			<h1><a href="{% url 'JumpToIndex' %}">Configuration Files Management</a></h1>
 			<div id="top-navigation">
 				Welcome <a href="#"><strong>Administrator</strong></a>
 				<span>|</span>
@@ -92,7 +92,7 @@
 		<!-- Main Nav -->
 		<div id="navigation">
 			<ul>
-			    <li><a href="http://localhost:8000/index/" class="active"><span>Dashboard</span></a></li>
+			    <li><a href="{% url 'JumpToIndex' %}" class="active"><span>Dashboard</span></a></li>
 			    <li><a href="#"><span>New Files</span></a></li>
 			    <li><a href="#"><span>User Management</span></a></li>
 			    <li><a href="#"><span>Rules Gallery</span></a></li>
@@ -150,7 +150,7 @@
 						</div>
 					</div>
 					<!-- End Box Head -->	
-                    <form action="/rule_generate/" method="post" >
+                    <form action="{% url 'rule_generate' %}" method="post" >
                     <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
 
 					<!-- Table -->

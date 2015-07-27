@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.template import Template, Context,RequestContext
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import get_template
@@ -21,6 +21,7 @@ global datagridpagesize
 global TotalFileList,TotalFileNameList
 global FilesStoreFolder
 
+ProjectPath="/Library/WebServer/Documents/HWCMS_V1"
 excludelist=[]
 mylist=[]
 gloffset=-1
@@ -28,12 +29,12 @@ datagridpagesize=5
 FilesStoreFolder="ServerData1"
 TotalFileList=[]
 TotalFileNameList=[]
-for eachfile in os.listdir(os.path.join(os.getcwd(),FilesStoreFolder)):
+for eachfile in os.listdir(os.path.join(ProjectPath,FilesStoreFolder)):
     if '.' in eachfile:
         suffix=eachfile.split('.')[1]
     else:
         suffix=""
-    Time=os.stat(os.path.join(os.getcwd(),FilesStoreFolder)+'/'+eachfile)[ST_MTIME]
+    Time=os.stat(os.path.join(ProjectPath,FilesStoreFolder)+'/'+eachfile)[ST_MTIME]
     timeTuple = time.localtime(Time)
     timestr=time.strftime('%Y-%m-%d',timeTuple)
     check=""
@@ -60,6 +61,8 @@ def hours_ahead(request, offset):
 
     return HttpResponse(html)
 
+def JumpToIndex(request,n):
+    return HttpResponseRedirect('/HWCMS/index/')
 def file_upload(request):
     global datagridpagesize
     global TotalFileList,TotalFileNameList
@@ -67,8 +70,8 @@ def file_upload(request):
     tempfullfilelist=[]
     tempfilenamelist=[]
 
-    if not os.path.isdir(os.path.join(os.getcwd(),FilesStoreFolder)):
-        os.makedirs(os.path.join(os.getcwd(),FilesStoreFolder))
+    if not os.path.isdir(os.path.join(ProjectPath,FilesStoreFolder)):
+        os.makedirs(os.path.join(ProjectPath,FilesStoreFolder))
 
 
     if request.POST["MyFileList"]:
@@ -79,14 +82,23 @@ def file_upload(request):
     #print(files)
     for f in files:
         #print(f.name)
-        #destination = open(os.path.join(os.getcwd(),FilesStoreFolder)+'/' + f.name,'wb+')
+        #destination = open(os.path.join(ProjectPath,FilesStoreFolder)+'/' + f.name,'wb+')
         #for chunk in f.chunks():
             #pass
             #print(chunk)
         #destination.close()
         tempfilenamelist.append(f.name)
-        tempfullfilelist.append(os.path.join(os.getcwd(),FilesStoreFolder)+'/' + f.name)
+        tempfullfilelist.append(os.path.join(ProjectPath,FilesStoreFolder)+'/' + f.name)
     print("222222222222222222222222222222222222222")
+
+
+    for f in files:
+        if f.name in TotalFileNameList:
+            f.name = f.name.split('.')[0] + '_copy.' + f.name.split('.')[1]
+        destination = open(os.path.join(ProjectPath,FilesStoreFolder)+'/' + f.name,'wb+')
+
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 
     for eachfile in tempfilenamelist:
@@ -94,7 +106,7 @@ def file_upload(request):
             suffix=eachfile.split('.')[1]
         else:
             suffix=""
-        Time=os.stat(os.path.join(os.getcwd(),FilesStoreFolder)+'/'+eachfile)[ST_MTIME]
+        Time=os.stat(os.path.join(ProjectPath,FilesStoreFolder)+'/'+eachfile)[ST_MTIME]
         timeTuple = time.localtime(Time)
         timestr=time.strftime('%Y-%m-%d',timeTuple)
         check=""
@@ -105,13 +117,6 @@ def file_upload(request):
             eachfile = eachfile.split('.')[0] + '_copy.' + eachfile.split('.')[1]
             TotalFileList.append(FileList(eachfile,timestr,suffix,check))
             TotalFileNameList.append(eachfile)
-    for f in files:
-        if f.name in TotalFileNameList:
-            f.name = f.name.split('.')[0] + '_copy.' + f.name.split('.')[1]
-        destination = open(os.path.join(os.getcwd(),FilesStoreFolder)+'/' + f.name,'wb+')
-
-        for chunk in f.chunks():
-            destination.write(chunk)
 
 
 
@@ -151,8 +156,8 @@ def rule_generate(request):
         pass
     for tab in range(pages):
         pagelist.append(str(tab+1))
-    if os.path.isfile(os.getcwd()+"/templates/T2.html"):
-        fp = open(os.getcwd()+"/templates/T2.html")
+    if os.path.isfile(ProjectPath+"/templates/T2.html"):
+        fp = open(ProjectPath+"/templates/T2.html")
         t = Template(fp.read())
         fp.close()
     else:
@@ -169,30 +174,30 @@ def rule_generate(request):
     #starttime = time.time()
     #timestart = time.clock()
 
-    if not os.path.isdir(os.getcwd()+'/'+rulesfolder):
-        os.makedirs(os.getcwd()+'/'+rulesfolder)
-    if not os.path.isdir(str(os.getcwd()+'/results')):
-        os.makedirs(str(os.getcwd()+'/results'))
+    if not os.path.isdir(ProjectPath+'/'+rulesfolder):
+        os.makedirs(ProjectPath+'/'+rulesfolder)
+    if not os.path.isdir(str(ProjectPath+'/results')):
+        os.makedirs(str(ProjectPath+'/results'))
 
     for each in interests:
         #InputForRules.GenerateInputForRules(eachgroup)
-        with open(os.getcwd()+'/'+rulesfolder+"/input_"+each,"w")as fout:
+        with open(ProjectPath+'/'+rulesfolder+"/input_"+each,"w")as fout:
             pass
-        with open(os.getcwd()+"/results/RulesFor_"+each,"w")as fout:
+        with open(ProjectPath+"/results/RulesFor_"+each,"w")as fout:
             pass
     for each in TotalFileList:
         templist.append(each.filename)
     for each in interests:
         print(each+" is processing......")
-        InPutForRulesVersion2.MainFunc(templist,os.path.join(os.getcwd(),FilesStoreFolder),each.strip(),rulesfolder)
-        a = Apriori(para.min_supp,os.getcwd()+'/'+rulesfolder+"/input_"+each)
+        InPutForRulesVersion2.MainFunc(templist,os.path.join(ProjectPath,FilesStoreFolder),each.strip(),rulesfolder)
+        a = Apriori(para.min_supp,ProjectPath+'/'+rulesfolder+"/input_"+each)
         ls = a.do()
         rules = a.ralationRules(ls.get(ls.size()).items,para.min_cond,para.min_lift,para.min_kulc,para.thresh_ir)
         rule_count=0
         for rule in rules:
             rule_count += 1
             ruleslist.append(str(rule_count)+'th'+str(rule))
-        with open(os.getcwd()+"/results/RulesFor_"+each,"a")as fout:
+        with open(ProjectPath+"/results/RulesFor_"+each,"a")as fout:
             fout.write("min_support is "+str(para.min_supp)+".  min_confidence is "+str(para.min_cond)+"\n")
             for rule in rules:
                 fout.write(str(rule)+'\n')
@@ -327,8 +332,8 @@ def file_show(request,offset):
         previouspage=0
     for tab in range(pages):
         pagelist.append(str(tab+1))
-    if os.path.isfile(os.getcwd()+"/templates/T1.html"):
-        fp = open(os.getcwd()+"/templates/T1.html")
+    if os.path.isfile(ProjectPath+"/templates/T1.html"):
+        fp = open(ProjectPath+"/templates/T1.html")
         t = Template(fp.read())
         fp.close()
     else:
@@ -345,12 +350,12 @@ def index_page(request):
     global TotalFileNameList
     TotalFileList=[]
     TotalFileNameList=[]
-    for eachfile in os.listdir(os.path.join(os.getcwd(),FilesStoreFolder)):
+    for eachfile in os.listdir(os.path.join(ProjectPath,FilesStoreFolder)):
         if '.' in eachfile:
             suffix=eachfile.split('.')[1]
         else:
             suffix=""
-        Time=os.stat(os.path.join(os.getcwd(),FilesStoreFolder)+'/'+eachfile)[ST_MTIME]
+        Time=os.stat(os.path.join(ProjectPath,FilesStoreFolder)+'/'+eachfile)[ST_MTIME]
         timeTuple = time.localtime(Time)
         timestr=time.strftime('%Y-%m-%d',timeTuple)
         check=""
@@ -372,8 +377,8 @@ def index_page(request):
         checklist.append("")
     for tab in range(pages):
         pagelist.append(str(tab+1))
-    if os.path.isfile(os.getcwd()+"/templates/T1.html"):
-        fp = open(os.getcwd()+"/templates/T1.html")
+    if os.path.isfile(ProjectPath+"/templates/T1.html"):
+        fp = open(ProjectPath+"/templates/T1.html")
         t = Template(fp.read())
         fp.close()
     else:
@@ -388,7 +393,7 @@ def index_page(request):
 def send_message(request):
     name = "Joe Lennon"
     sent_date = datetime.datetime.now()
-    #return render_to_response(os.getcwd()+'/templates/U1.html', locals())
+    #return render_to_response(ProjectPath+'/templates/U1.html', locals())
     return render_to_response('U1.html', locals())
 
 def file_delete(request,offset):

@@ -5,6 +5,7 @@ import re
 import os
 import shutil
 from ciscoconfparse import CiscoConfParse
+ProjectPath="/Library/WebServer/Documents/HWCMS_V1"
 
 def iscontainingdigit(str):
     exclude="[\{\}]"
@@ -32,10 +33,10 @@ def myjoin(mystr,mylist):
 
 
 def returnAttributes():
-    filelist=os.listdir(os.getcwd())
+    filelist=os.listdir(ProjectPath)
     for eachfile in filelist:
         if '.xlsx' in eachfile:
-            data=xlrd.open_workbook(os.path.join(os.getcwd(),eachfile))
+            data=xlrd.open_workbook(os.path.join(ProjectPath,eachfile))
             table = data.sheets()[0]
             nrows = table.nrows #行数
             ncols = table.ncols #列数
@@ -98,7 +99,7 @@ def MainFunc(filelist,filepath,linstr,outputfolder):
                         Output[tab].extend(matchlist)
             #print(Output)
             #print(filepath+"/output"+linstr)
-            with open(os.getcwd()+"/"+outputfolder+"/input_"+linstr,"a")as fout:
+            with open(ProjectPath+"/"+outputfolder+"/input_"+linstr,"a")as fout:
                 for each in Output:
                     fout.writelines(each)
                 fout.write('\n')
@@ -107,7 +108,7 @@ def MainFunc(filelist,filepath,linstr,outputfolder):
 
 
 
-#MainFunc(os.getcwd()+'/data2',"group CONNECTOR {","inputrules")
+#MainFunc(ProjectPath+'/data2',"group CONNECTOR {","inputrules")
 
 
 

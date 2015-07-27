@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'hpdd1ovbqmvy1s*-7mbf_p$u)4&mf5eg=u*@&@cc0b5%l6o5c&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = True
+TEMPLATE_DEBUG = False
+ALLOWED_HOSTS = ['localhost']
+
 
 
 # Application definition
@@ -96,13 +98,22 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+path = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+PROJECT_ROOT = path
+STATIC_ROOT = path + '/HWCMS/static/'
 STATIC_URL = '/static/'
+ProjectPath="/Library/WebServer/Documents/HWCMS_V1"
+#STATIC_ROOT = ProjectPath + '/HWCMS/static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
+)
+
+STATICFILES_FINDERS = (
+'django.contrib.staticfiles.finders.FileSystemFinder',
+'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 #print(BASE_DIR)
