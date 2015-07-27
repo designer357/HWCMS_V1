@@ -21,11 +21,117 @@
          }
         }
     }
+
+
+
+    //----------------------------------------------------------------------
+    function pageInit(){
+    var vsCaption= window.dialogArguments;
+    if (vsCaption!= null) CaptionTD.innerText= vsCaption;
+    window.returnValue= null;
+    }
+//----------------------------------------------------------------------
+    function OKButton_Click(){
+    window.returnValue= textPath.value;
+    window.close();
+    }
+//----------------------------------------------------------------------
+function CancelButton_Click(){
+  window.returnValue= null;
+  window.close();
+}
+//----------------------------------------------------------------------
+function chooseFolder(){
+    var savePath;
+    var objSrc = new ActiveXObject("Shell.Application").BrowseForFolder(0,'请选择文件夹目录：',   0,   '');
+    if(objSrc != null){
+    savePath = objSrc.Items().Item().Path;
+    document.all.savePath.value = savePath;
+    }
+ }
+
+
+
+
+      function  handleFiles(files)
+  {
+    if(files.length)
+    {
+       var file = files[0];
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+           document.getElementById("filecontent").innerHTML = this.result;
+       };
+       reader.readAsText(file);
+    }
+  }
+
+
+  function showFileName1(){
+      //alert("HELLO");
+
+    alert("File SeLected Successfully!");
+    document.getElementById("MyFileList").value = "";
+    var file;
+    //取得FileList取得的file集合
+    for(var i = 0 ;i<document.getElementById("multifile").files.length;i++){
+        //file对象为用户选择的某一个文件
+        file=document.getElementById("multifile").files[i];
+        //此时取出这个文件进行处理，这里只是显示文件名
+
+        //alert("HAHA111111111111111111START");
+
+        //alert(typeof(file.getParent.fold));
+        //alert(file.path.value);
+        //alert(fin1.value);
+        //alert(document.getElementById("MyFileList").value);
+
+        document.getElementById("MyFileList").value = document.getElementById("MyFileList").value+'###'+file.name;
+        //fin1.setValue(file.name);
+        //alert(document.getElementById("MyFileList").value);
+        //alert("HAHA11111111111111111111END");
+
+
+    }
+ }
+  function showFileName2(){
+      //alert("HELLO");
+
+    //alert(" FileList Demo222222222222222222:");
+     var fin1=document.getElementById("MyFileList");
+     var file;
+    //取得FileList取得的file集合
+    for(var i = 0 ;i<document.getElementById("multifile").files.length;i++){
+        //file对象为用户选择的某一个文件
+        file=document.getElementById("multifile").files[i];
+        //此时取出这个文件进行处理，这里只是显示文件名
+        //alert("HAHA2222222222START");
+        //alert(file.name);
+        //alert(fin1.value);
+        //alert(document.getElementById("MyFileList").value);
+
+        //document.getElementById("MyFileList").value = file.name;
+        //fin1.setValue(file.name);
+
+        //alert(document.getElementById("MyFileList").value);
+        //alert("HAHA22222222222222END");
+
+
+    }
+ }
+
+
+
+
     function bb()
     {
+        //alert("fff");
 
-
-        alert("BBBBB");
+           var f=document.getElementsByName("strName");
+        alert(f);
+            alert(f.name);
+        //alert("BBBBB");
 
     }
         function SetArticleId(o, i) {
@@ -72,6 +178,10 @@
 
 <body>
 <!-- Header -->
+
+
+
+
 <div id="header">
 	<div class="shell">
 		<!-- Logo + Top Nav -->
@@ -105,6 +215,29 @@
 </div>
 <!-- End Header -->
 
+
+
+<table border="0" width="100%">
+
+
+
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Container -->
 <div id="container">
 	<div class="shell">
@@ -118,17 +251,22 @@
 		<!-- End Small Nav -->
 		
 		<!-- Message OK -->		
-		<div class="msg msg-ok">
-			<p><strong>Your file was uploaded succesifully!</strong></p>
-			<a href="#" class="close">close</a>
+		<div class="msg msg-ok1">
+
+
+              <form action="{% url 'file_upload' %}" enctype="multipart/form-data" method="post">
+			<p><strong>UpLoad Configuration Files：</strong><input type="file" class="button" name="multifile" id="multifile" multiple size="80"/><span>                                          </span>
+                <input type="hidden"  id="MyFileList" name="MyFileList" value=""/>
+                <input type="hidden" class="button" onclick="showFileName1()" value="OK" />
+                <input type="submit" class="button"  value="upload" /></p>
+
+              </form>
+			
 		</div>
 		<!-- End Message OK -->		
 		
 		<!-- Message Error -->
-		<div class="msg msg-error">
-			<p><strong>You must select a file to upload first!</strong></p>
-			<a href="#" class="close">close</a>
-		</div>
+
 		<!-- End Message Error -->
 		<br />
 		<!-- Main -->
@@ -139,25 +277,29 @@
 			<div id="content">
 				
 				<!-- Box -->
+
 				<div class="box">
 					<!-- Box Head -->
+                <form action="{% url 'file_show' '1' %}" method="post" >
 					<div class="box-head">
 						<h2 class="left">Current Router Files</h2>
 						<div class="right">
 							<label>search routers</label>
-							<input type="text" class="field small-field" />
-							<input type="submit" class="button" value="search" />
+							<input type="text" name="FilterName" class="field small-field" value="Filename" />
+                            <input type="text" name="FilterDate" class="field small-field" value="Y/Y-M/Y-M-D"/>
+                            <input type="text" name="FilterType" class="field small-field" value=".suffix"/>
+							<input type="submit" class="button" value="filter" />
 						</div>
 					</div>
+                </form>
 					<!-- End Box Head -->	
                     <form action="{% url 'rule_generate' %}" method="post" >
-                    <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
 
 					<!-- Table -->
 					<div class="table">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr class="odd">
-								<th width="13"><input type="checkbox" class="checkbox" /></th>
+								<th width="13"><input type="checkbox"  class="checkbox" /></th>
 								<th>FileName</th>
 								<th>FileDate</th>
 								<th>FileType</th>
@@ -165,21 +307,31 @@
 							</tr>
                             {%for eachlist1 in TheTopList%}
 							<tr>
-								<td><input on="bb()" type="checkbox" class="checkbox" name="strName" id="{{ eachlist1.filename }}" checked={{ eachlist1.check }}/></td>
+								<td><input onclick="bb()" type="checkbox" class="checkbox" name="strName" id="{{ eachlist1.filename }}" /></td>
                                 <td><input type="hidden"  name="FileName" value="{{ eachlist1.filename }}"/>
 								<h3>{{ eachlist1.filename }}</h3></td>
 								<td>{{ eachlist1.filedate }}</td>
 								<td>{{ eachlist1.filetype }}</td>
-								<td><a href="#" class="ico del">Delete</a><a href="#" class="ico edit">Edit</a></td>
-							</tr>
+
+                                <td>
+                                <form action="{% url 'file_delete' CurrentPage %}" method="post">
+								<input type="hidden"  name="FileNameToDelete" value="{{ eachlist1.filename }}"/>
+                                    <input type="hidden"  name="FileCheckToDelete" checked="{{ eachlist1.check }}"/>
+                                    <input type="submit" name="deletedfile" class="ico del" value="Delete">
+                                    <a href="#" class="ico edit">Edit</a>
+                                </form>
+                                </td>
+
+                            </tr>
                             {%endfor%}
+
+
 							<tr class="odd">
 								<td><input type="hidden" class="checkbox" /></td>
 								<td><h3><a href="#">welcome to this system!</a></h3></td>
 								<td>2015-07-22</td>
 								<td><a href="#"></a></td>
                                 <td><a href="#">Administrator</a></td>
-
 							</tr>
 						</table>
 						
@@ -201,17 +353,32 @@
                                 {% endif %}
 
 								<a href="#">View all</a>
-                                {% if NextPage > 0%}
                                 <span>  </span>
-                                <input type="submit" onclick="aa()" class="button" value="Generate Rules">{% csrf_token %}
+                            {% if NextPage > 0%}
+                                <div class="right"><span>  </span><input type="submit" onclick="aa()" class="button" value="Generate Rules"></div>
                                 {% endif %}
+
+
 							</div>
 						</div>
 						<!-- End Pagging -->
-						
+
+
+
+
+						<div class="pagging">
+
+							<div class="left"> Pattern : <input type="text" class="field" name="strPattern"/> </div>
+                            <div class="left">  MinSupp: <span>      </span><input type="text"  class="field" name="paraMinSupp" value="0.7" /></div>
+                            <div class="left">  MinCond: <span>      </span><input type="text" name="paraMinCond" value="0.8"/></div>
+                            <div class="left">   MinLift    : <input type="text" name="paraMinLift" value="0.01"/></div>
+                            <div class="left">    MinKulc: <span>      </span><input type="text" name="paraMinKulc" value="0.01"/><span>      </span></div>
+                            <div class="left">     ThreshIR: <input type="text" name="paraThreshIR" value="100"/></div></div>
+
+
 					</div>
 					<!-- Table -->
-					</form>
+
 				</div>
 				<!-- End Box -->
 				
@@ -219,7 +386,7 @@
 				<div class="box">
 					<!-- Box Head -->
 					<div class="box-head">
-						<h2>Rule Display</h2>
+						<h2>Add New Router Files</h2>
 					</div>
 					<!-- End Box Head -->
 					
@@ -227,22 +394,31 @@
 						
 						<!-- Form -->
 						<div class="form">
+								<p>
+									<span class="req">max 100 symbols</span>
+									<label>Router Name <span>(Required Field)</span></label>
+									<input type="text" class="field size1" />
 
 
+
+								</p>	
+								<p class="inline-field">
+									<label>File Date</label>
+									<select class="field size2">
+										<option value="">23</option>
+									</select>
+									<select class="field size3">
+										<option value="">July</option>
+									</select>
+									<select class="field size3">
+										<option value="">2009</option>
+									</select>
+								</p>
 								
 								<p>
 									<span class="req">max 100 symbols</span>
-									<label>Rule List<span>(Required Field)</span></label>
-            <table width="100%" height="100%" border="1" align="center" cellpadding="0" cellspacing="0" class="field size1" >
-<tr><td width="200" height="50" align="left" valign="top"><div id="Layer1">
-{%for each in RulesList %}{{ each }}<br><br>{% endfor %}
-
-    </div></td></tr>
-
-
-</table>
-
-
+									<label>Content <span>(Required Field)</span></label>
+									<textarea class="field size1" rows="10" cols="30"></textarea>
 								</p>	
 							
 						</div>
@@ -263,26 +439,28 @@
 			
 			<!-- Sidebar -->
 			<div id="sidebar">
-				
+
 				<!-- Box -->
 				<div class="box">
-					
+
 					<!-- Box Head -->
 					<div class="box-head">
 						<h2>Management</h2>
 					</div>
 					<!-- End Box Head-->
-					
+
 					<div class="box-content">
 						<a href="#" class="add-button"><span>Add new </span></a>
 						<div class="cl">&nbsp;</div>
-						
+
 						<p class="select-all"><input type="checkbox" class="checkbox" /><label>select all</label></p>
 						<p><a href="#">Delete Selected</a></p>
-						
+
 						<!-- Sort -->
 						<div class="sort">
 							<label>Sort by</label>
+                           Pattern : <input type="text" class="field" name="strPattern"/>
+
 							<select class="field">
 								<option value="">RouterName</option>
 							</select>
@@ -294,13 +472,13 @@
 							</select>
 						</div>
 						<!-- End Sort -->
-						
+
 					</div>
 				</div>
 				<!-- End Box -->
 			</div>
 			<!-- End Sidebar -->
-			
+			</form>
 			<div class="cl">&nbsp;</div>			
 		</div>
 		<!-- Main -->
@@ -318,18 +496,6 @@
 	</div>
 </div>
 <!-- End Footer -->
-<style type="text/css">
-<!--
-#Layer1 {
-	position:static;
-	width:720px;
-	height:500px;
-	z-index:1;
-	overflow-x:scroll;
-	overflow-y:scroll
-}
--->
-</style>
 
 </body>
 </html>

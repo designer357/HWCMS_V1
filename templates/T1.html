@@ -293,7 +293,7 @@ function chooseFolder(){
 					</div>
                 </form>
 					<!-- End Box Head -->	
-                    <form action="{% url 'rule_generate' %}" method="post" >
+                <form action="{% url 'rule_generate' %}" method="post" >
 
 					<!-- Table -->
 					<div class="table">
@@ -360,132 +360,56 @@ function chooseFolder(){
 
 
 							</div>
-						</div>
+
 						<!-- End Pagging -->
 
+                    </div>
+                    <!-- End Table -->
 
+                <!-- End Box -->
 
-
-						<div class="pagging">
-							<div class="left"> Pattern : <input type="text" name="strPattern"/> </div>
-
-
-
-
-
-
-
-                        <div class="left">  MinSupp: <span>      </span><input type="text" name="paraMinSupp" value="0.7" /></div>
-                        <div class="left">  MinCond: <span>      </span><input type="text" name="paraMinCond" value="0.8"/></div>
-
-                            <div class="left">   MinLift    : <input type="text" name="paraMinLift" value="0.01"/></div>
-
-                        <div class="left">    MinKulc: <span>      </span><input type="text" name="paraMinKulc" value="0.01"/><span>      </span></div>
-                        <div class="left">     ThreshIR: <input type="text" name="paraThreshIR" value="100"/></div>
-
-
-
-							</div>
-
-
-					</div>
-					<!-- Table -->
-					</form>
-				</div>
-				<!-- End Box -->
-				
 				<!-- Box -->
-				<div class="box">
-					<!-- Box Head -->
-					<div class="box-head">
-						<h2>Add New Router Files</h2>
-					</div>
-					<!-- End Box Head -->
-					
-					<form action="" method="post">
-						
-						<!-- Form -->
-						<div class="form">
-								<p>
-									<span class="req">max 100 symbols</span>
-									<label>Router Name <span>(Required Field)</span></label>
-									<input type="text" class="field size1" />
-								</p>	
-								<p class="inline-field">
-									<label>File Date</label>
-									<select class="field size2">
-										<option value="">23</option>
-									</select>
-									<select class="field size3">
-										<option value="">July</option>
-									</select>
-									<select class="field size3">
-										<option value="">2009</option>
-									</select>
-								</p>
-								
-								<p>
-									<span class="req">max 100 symbols</span>
-									<label>Content <span>(Required Field)</span></label>
-									<textarea class="field size1" rows="10" cols="30"></textarea>
-								</p>	
-							
-						</div>
-						<!-- End Form -->
-						
-						<!-- Form Buttons -->
-						<div class="buttons">
-							<input type="button" class="button" value="save" />
-							<input type="submit" class="button" value="detect" />
-						</div>
-						<!-- End Form Buttons -->
-					</form>
-				</div>
+
 				<!-- End Box -->
 
-			</div>
 			<!-- End Content -->
-			
+			</div>
 			<!-- Sidebar -->
-			<div id="sidebar">
-				
+			<div id="content">
+
 				<!-- Box -->
 				<div class="box">
-					
+
 					<!-- Box Head -->
 					<div class="box-head">
 						<h2>Management</h2>
 					</div>
 					<!-- End Box Head-->
-					
+
 					<div class="box-content">
-						<a href="#" class="add-button"><span>Add new </span></a>
-						<div class="cl">&nbsp;</div>
-						
-						<p class="select-all"><input type="checkbox" class="checkbox" /><label>select all</label></p>
-						<p><a href="#">Delete Selected</a></p>
-						
+						<a href="#" class="add-button"><span>Input Parameters</span></a>
+
+
 						<!-- Sort -->
-						<div class="sort">
-							<label>Sort by</label>
-							<select class="field">
-								<option value="">RouterName</option>
-							</select>
-							<select class="field">
-								<option value="">Date</option>
-							</select>
-							<select class="field">
-								<option value="">RouterType</option>
-							</select>
+						<div class="sort" >
+	<div class="left111111"> <label>Pattern:</label> <input type="text" class="field" name="strPattern"/> </div>
+    <div class="left111111"> <label>MinSupp:</label> <input type="text" class="field" name="paraMinSupp" value="0.7" /></div>
+    <div class="left111111"> <label>MinCond:</label> <input type="text" class="field" name="paraMinCond" value="0.8"/></div>
+    <div class="left111111"> <label>MinLift:</label> <input type="text" class="field" name="paraMinLift" value="0.01"/></div>
+    <div class="left111111"> <label>MinKulc:</label> <input type="text" class="field" name="paraMinKulc" value="0.01"/><span>      </span></div>
+    <div class="left111111"> <label>ThreshIR:</label><input type="text" class="field" name="paraThreshIR" value="100"/></div>
+
+
+
 						</div>
 						<!-- End Sort -->
-						
+
 					</div>
 				</div>
 				<!-- End Box -->
 			</div>
 			<!-- End Sidebar -->
-			
+			</form>
 			<div class="cl">&nbsp;</div>			
 		</div>
 		<!-- Main -->
@@ -498,7 +422,7 @@ function chooseFolder(){
 	<div class="shell">
 		<span class="left">&copy; 2015 - Django Framwork For HuaWei Configuration</span>
 		<span class="right">
-			Design by <a href="http://www.mycodes.net" target="_blank" title="The Sweetest CSS Templates WorldWide">City University of Hong Kong</a>
+			Design by <a href="www.cityu.edu.hk" target="_blank" title="The Sweetest CSS Templates WorldWide">City University of Hong Kong</a>
 		</span>
 	</div>
 </div>
