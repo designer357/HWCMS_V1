@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls import patterns, include, url
-from HWCMS.views import current_datetime,hours_ahead,index_page,file_show,rule_generate,file_upload,send_message,file_delete,JumpToIndex
+from HWCMS.views import current_datetime,hours_ahead,index_page,file_show,rule_generate,file_upload,send_message,file_delete,JumpToIndex,file_upload_for_detection
 from HWCMS_V1 import settings
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
@@ -29,6 +29,7 @@ urlpatterns = patterns('',
 
     url(r'^index_filedeleted/(\d)/$',file_delete,name='file_delete'),
     url(r'^index/(\d)/$',file_show,name='file_show'),
+    url(r'^index/rule_show/$',file_upload_for_detection,name='file_upload_for_detection'),
     url(r'^rule_generate/$',rule_generate,name='rule_generate'),
     ('^send_message/$', send_message),
 

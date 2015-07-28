@@ -1,0 +1,915 @@
+    bgp {
+        log-updown;
+        family inet {
+            unicast {
+                rib-group bgp-rg;
+            }
+        }
+        family inet6 {
+            unicast {
+                rib-group bgp6-rg;
+            }
+        }
+        group INTERNET2 {
+            type internal;
+            local-address 64.57.28.247;
+            family inet {
+                any;
+            }
+            family inet-vpn {
+                unicast;
+            }
+            family inet6-vpn {
+                unicast;
+            }
+            family l2vpn {
+                signaling;
+            }
+            export NEXT-HOP-SELF;
+            peer-as 11537;
+            neighbor 64.57.28.241 {
+                description CHIC;
+            }
+            neighbor 64.57.28.242 {
+                description NEWY;
+            }
+            neighbor 64.57.28.243 {
+                description ATLA;
+            }
+            neighbor 64.57.28.244 {
+                description HOUS;
+            }
+            neighbor 64.57.28.245 {
+                description KANS;
+            }
+            neighbor 64.57.28.246 {
+                description SALT;
+            }
+            neighbor 64.57.28.248 {
+                description LOSA;
+            }
+            neighbor 64.57.28.249 {
+                description WASH;
+            }
+            neighbor 64.57.28.250 {
+                description CLEV;
+            }
+            neighbor 64.57.28.251 {
+                description PAIX;
+            }
+            neighbor 64.57.28.252 {
+                description WILC;
+            }
+        }
+        group INTERNET2-IPv6 {
+            type internal;
+            local-address 2001:468:08::1;
+            family inet6 {
+                any;
+            }
+            export NEXT-HOP-SELF;
+            peer-as 11537;
+            neighbor 2001:468:1::1 {
+                description ATLA;
+            }
+            neighbor 2001:468:2::1 {
+                description CHIC;
+            }
+            neighbor 2001:468:3::1 {
+                description HOUS;
+            }
+            neighbor 2001:468:4::1 {
+                description KANS;
+            }
+            neighbor 2001:468:5::1 {
+                description LOSA;
+            }
+            neighbor 2001:468:6::1 {
+                description NEWY;
+            }
+            neighbor 2001:468:7::1 {
+                description SALT;
+            }
+            neighbor 2001:468:9::1 {
+                description WASH;
+            }
+            neighbor 2001:468:a::1 {
+                description CLEV;
+            }
+            neighbor 2001:468:c::1 {
+                description PAIX;
+            }
+            neighbor 2001:468:d::1 {
+                description WILC;
+            }
+        }
+        group CONNECTOR {
+            type external;
+            metric-out igp;
+            /* Multihop needs to be enabled to support discard routing */
+            multihop {
+                ttl 1;
+            }
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ];
+            remove-private;
+            multipath;
+            neighbor 137.164.26.141 {
+                description "[RE] CENIC via LAX-DC | I2-S12514";
+                import [ SANITY-IN CUDI-PREF SET-PREF CALREN-IN CONNECTOR-IN ];
+                peer-as 2153;
+                multipath;
+            }
+            neighbor 207.231.240.7 {
+                description "[RE] Microsoft via PAC Wave vlan706 | I2-S12951";
+                import [ SANITY-IN SET-PREF FROM-MICROSOFT ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 MICROSOFT-OUT ];
+                peer-as 8075;
+            }
+            neighbor 207.231.241.7 {
+                description "[RE] Microsoft via Pac Wave vlan776 | I2-S12951";
+                import [ SANITY-IN SET-PREF FROM-MICROSOFT ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 MICROSOFT-OUT ];
+                peer-as 8075;
+            }
+            neighbor 64.57.28.54 {
+                description "[RE] PNWGP | I2-S12536";
+                import [ SANITY-IN SET-PREF PNWG-IN CONNECTOR-IN ];
+                peer-as 101;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 198.32.163.69 {
+                description "[RE] Oregon Gigapop via SEAT via Internet DWS I2-PORT-SEAT-I2-05681 | I2-S12535";
+                import [ SANITY-IN SET-PREF OREGON-IN CONNECTOR-IN ];
+                peer-as 4600;
+            }
+            neighbor 205.166.205.10 {
+                description "[RE] U of Hawaii (Layer 2) via PNWGP | I2-S12948";
+                import [ SANITY-IN SET-PREF HAWAII-IN CONNECTOR-IN ];
+                peer-as 6360;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 198.71.46.165 {
+                description "[RE]Layer 2 Participant UW Science DMZ v4 via PNWGP AL2S/SEAT | I2-S14320";
+                import [ SANITY-IN SET-PREF UWSCIENCE-IN CONNECTOR-IN ];
+                peer-as 73;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 192.73.48.17 {
+                description "[RE] UMontana via AL2S/MISS2 | I2-S12952";
+                multihop {
+                    ttl 4;
+                }
+                import [ SANITY-IN SET-PREF MONTANA-IN CONNECTOR-IN ];
+                peer-as 3807;
+            }
+            neighbor 198.71.46.246 {
+                description "[RE] FRGP via AL2S/SEAT | I2-S12852";
+                import [ SANITY-IN SET-PREF FRGP-IN CONNECTOR-IN ];
+                peer-as 14041;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+        }
+        group CONNECTOR6 {
+            type external;
+            metric-out igp;
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 ];
+            remove-private;
+            multipath;
+            neighbor 2001:468:ff:16c2::2 {
+                description "[RE] PNWGP | I2-S12536";
+                import [ SANITY6 SET-PREF PNWG-IN6 ];
+                family inet6 {
+                    any;
+                }
+                peer-as 101;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 2001:468:e00:fc0::1 {
+                description "[RE] CENIC via LAX-DC | I2-S12514";
+                import [ SANITY6 SET-PREF CALREN-IN6 ];
+                family inet6 {
+                    any;
+                }
+                peer-as 2153;
+                multipath;
+            }
+            neighbor 2001:468:8:15::2 {
+                description "[RE] Oregon Gigapop via SEAT via DWS | I2-S12535";
+                import [ SANITY6 SET-PREF OREGON-IN6 ];
+                peer-as 4600;
+            }
+            neighbor 2001:468:ff:8c0::1 {
+                description "[RE] U of Hawaii Layer2 via PNWGP | I2-S12948";
+                import [ SANITY6 SET-PREF HAWAII-IN6 ];
+                peer-as 6360;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 2001:468:ff:8c1::2 {
+                description "[RE]Layer 2 Participant UW Science DMZ v6 via PNWGP AL2S/SEAT | I2-S14320";
+                import [ SANITY6 SET-PREF UWSCIENCE-IN6 ];
+                peer-as 73;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 2620:104:8000:1000::17 {
+                description "[RE] UMontana via AL2S/MISS2 | I2-S12952";
+                multihop {
+                    ttl 4;
+                }
+                import [ SANITY6 SET-PREF MONTANA-IN6 ];
+                peer-as 3807;
+            }
+            neighbor 2001:468:2300:9::4 {
+                description "[RE] FRGP via AL2S/SEAT | I2-S12852";
+                import [ SANITY6 SET-PREF FRGP-IN6 ];
+                peer-as 14041;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+        }
+        group FEDNET {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER FEDNET-IN ];
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 FEDNET-OUT ];
+            remove-private;
+            neighbor 207.231.245.131 {
+                description "NREN AS24 | I2-S13130";
+                hold-time 30;
+                peer-as 24;
+            }
+            neighbor 207.231.240.13 {
+                description "ESNET Seattle via Pacific Wave | I2-S13075";
+                peer-as 293;
+            }
+            neighbor 207.231.240.23 {
+                description "DREN AS668 via Pacific Wave Vlan706 | I2-S13077";
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 GEANT-TO-DREN FEDNET-OUT ];
+                peer-as 668;
+            }
+        }
+        group FEDNET6 {
+            type external;
+            metric-out igp;
+            import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER FEDNET-IN6 ];
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 FEDNET-OUT6 ];
+            remove-private;
+            neighbor 2001:504:b:88::131 {
+                description "NREN AS24 | I2-S13130";
+                family inet6 {
+                    any {
+                        prefix-limit {
+                            maximum 100;
+                            teardown;
+                        }
+                    }
+                }
+                peer-as 24;
+            }
+            neighbor 2001:504:b:10::13 {
+                description "ESNET Seattle via Pacific Wave | I2-S13075";
+                peer-as 293;
+            }
+            neighbor 2001:504:b:10::23 {
+                description "DREN AS668 via Pacific Wave Vlan706 | I2-S13077";
+                peer-as 668;
+            }
+        }
+        group ISP-MCAST {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER ISP-MCAST-IN ];
+            family inet {
+                multicast {
+                    prefix-limit {
+                        maximum 10000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ISP-MCAST-OUT ];
+            remove-private;
+            neighbor 64.57.20.189 {
+                description "TR-CPS, multicast-only | I2-S13078";
+                peer-as 11164;
+            }
+        }
+        group ISP-V6 {
+            type external;
+            metric-out igp;
+            import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER ISP-V6-IN ];
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 ISP-V6-OUT ];
+            remove-private;
+            neighbor 2001:504:b:10::4 {
+                description "AARNET IPv6 T320 via PacWave | I2-S13135";
+                peer-as 7575;
+            }
+            neighbor 2001:504:b:11::2 {
+                description "AARNet Cisco VXR via Pacific Wave | I2-S13135";
+                import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER AARNET-V6-IN ];
+                export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 AARNET-V6-OUT ];
+                peer-as 7575;
+            }
+        }
+        group ITN {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER ITN-IN ];
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 4000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ITN-PEERCONTROLS-OUT ITN-OUT ];
+            remove-private;
+            inactive: neighbor 198.32.170.47 {
+                description "National Univ of Singapore via PacWave";
+                peer-as 7610;
+            }
+            /* TANET2 and ASNET back each other up */
+            inactive: neighbor 198.32.170.34 {
+                description "TANET2 via Pacific Wave";
+                peer-as 7539;
+            }
+            neighbor 207.231.240.4 {
+                description "AARNet T320 via Pacific Wave | I2-S13135";
+                import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER AARNET-ITN-IN CONNECTOR-IN ];
+                peer-as 7575;
+            }
+            neighbor 207.231.240.10 {
+                description "GEMnet 9K-MTU via Pacific Wave | I2-S13175";
+                peer-as 23796;
+            }
+            neighbor 207.231.241.136 {
+                description "TransPAC2 Los Angeles via PacWave (tertiary)| I2-S13134";
+                peer-as 22388;
+            }
+            neighbor 207.231.240.2 {
+                description "AARNet M120 via Pacific Wave 9K | I2-S13135";
+                import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER AARNET-ITN-IN CONNECTOR-IN ];
+                peer-as 7575;
+            }
+            neighbor 207.231.240.6 {
+                description "KREONET2 via Pacific Wave Vlan706 | I2-S13059";
+                peer-as 17579;
+            }
+            neighbor 207.231.241.149 {
+                description "AARnet 1Gbps backup via Pacific Wave and Equinix | I2-S13135";
+                import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER AARNET-ITN-IN CONNECTOR-IN ];
+                peer-as 7575;
+            }
+            neighbor 207.231.240.21 {
+                description "CA*Net4 via PacWave 9K MTU: VLAN706 | I2-S13058";
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 BOXNET-TO-CANET ITN-OUT ];
+                peer-as 6509;
+            }
+            neighbor 207.231.240.22 {
+                description "Peer Gloriad via Pacific Wave | I2-S13061";
+                peer-as 20388;
+            }
+        }
+        group ITN6 {
+            type external;
+            metric-out igp;
+            import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER ITN-IN6 ];
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 ITN-PEERCONTROLS-OUT ITN-OUT6 ];
+            remove-private;
+            inactive: neighbor 2001:468:ff:16c1::4 {
+                description "TANET2 IPv6 via Pacific Wave";
+                family inet6 {
+                    unicast;
+                }
+                peer-as 7539;
+            }
+            inactive: neighbor 2001:504:b:10::4 {
+                description "AARNET IPv6 T320 via PacWave";
+                peer-as 7575;
+            }
+            inactive: neighbor 2001:504:b:11::2 {
+                description "AARNet Cisco VXR via Pacific Wave";
+                peer-as 7575;
+            }
+            neighbor 2001:504:b:10::6 {
+                description "KREOnet2 IPv6 via Pacific Wave vial Vlan706 | I2-S13059";
+                family inet6 {
+                    unicast;
+                }
+                peer-as 17579;
+            }
+            neighbor 2001:504:b:80::149 {
+                description "AARnet 1Gbps backup via Pacific Wave and Equinix | I2-S13135";
+                peer-as 7575;
+            }
+            neighbor 2001:504:b:10::21 {
+                description "CA*net via Pacific Wave vlan706 | I2-S13058";
+                family inet6 {
+                    any;
+                }
+                peer-as 6509;
+            }
+            neighbor 2001:504:b:10::10 {
+                description "GEMnet IPv6 via Pacific Wave via Vlan706";
+                family inet6 {
+                    unicast;
+                }
+                peer-as 23796;
+            }
+            neighbor 2001:504:b:10::22 {
+                description "GLORIAD IPv6 via Pacific Wave via Vlan706 | I2-S13061";
+                peer-as 20388;
+            }
+        }
+        inactive: group NONITN {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER NONITN-IN ];
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 NONITN-OUT ];
+            remove-private;
+        }
+        inactive: group NONITN6 {
+            type external;
+            metric-out igp;
+            import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER ];
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 NONITN-OUT6 ];
+            remove-private;
+        }
+        /*  Use OTHER group for sessions to route-servers, monitoring hosts, etc */
+        group OTHER {
+            metric-out igp;
+            import REJECT-ALL;
+        }
+        group OTHER-INTERNAL {
+            type internal;
+            import REJECT-ALL;
+            peer-as 11537;
+            neighbor 64.57.19.2 {
+                description "V4 peering to NMS-rpsv | [NO-MONITOR]";
+                local-address 64.57.19.1;
+                family inet {
+                    unicast;
+                    multicast;
+                }
+                cluster 64.57.19.1;
+            }
+            neighbor 2001:468:8:11::19:2 {
+                description "V6 peering to NMS-rpsv | [NO-MONITOR]";
+                family inet6 {
+                    unicast;
+                    multicast;
+                }
+            }
+        }
+        group AL2S_MGMT {
+            type external;
+            metric-out igp;
+            log-updown;
+            import REJECT-ALL;
+            family inet {
+                unicast {
+                    prefix-limit {
+                        maximum 20;
+                        teardown;
+                    }
+                }
+            }
+            export REJECT-ALL;
+            remove-private;
+            peer-as 65532;
+            inactive: bfd-liveness-detection {
+                minimum-interval 1000;
+            }
+            neighbor 64.57.25.180 {
+                description "[AL2S-WSC-MGMT] oob2.sunn";
+                local-preference 280;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.25.181 {
+                description "[AL2S-WSC-MGMT] oob.port";
+                local-preference 300;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+        }
+        group PACWAVE-TEST {
+            type internal;
+            local-address 207.231.241.8;
+            import REJECT-ALL;
+            family inet {
+                unicast;
+            }
+            export REJECT-ALL;
+            peer-as 11537;
+            neighbor 207.231.241.131 {
+                description "pacwave test [NO-MONITOR] | I2-S11962";
+                hold-time 300;
+            }
+        }
+        group NETPLUS {
+            type external;
+            metric-out igp;
+            multihop {
+                ttl 1;
+            }
+            import REJECT-ALL;
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export REJECT-ALL;
+            remove-private;
+            neighbor 64.57.30.43 {
+                description "[NETPLUS][SINGLEHOMED] Amazon Peering 1 | I2-S09152";
+                import [ SANITY-IN SET-PREF AMAZON-IN NETPLUS-CLOUD-IN ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 NETPLUS-AMAZON-OUT NETPLUS-CLOUD-OUT ];
+                peer-as 16509;
+                multipath;
+            }
+            neighbor 64.57.30.45 {
+                description "[NETPLUS][SINGLEHOMED] Amazon Peering 2 | I2-S09152";
+                import [ SANITY-IN SET-PREF AMAZON-IN NETPLUS-CLOUD-IN ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 NETPLUS-AMAZON-OUT NETPLUS-CLOUD-OUT ];
+                peer-as 16509;
+                multipath;
+            }
+            neighbor 198.71.45.149 {
+                description "[NETPLUS] Code42 | I2-S10564";
+                import [ SANITY-IN SET-PREF NETPLUS-CODE42-IN NETPLUS-CLOUD-IN ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 NETPLUS-CODE42-OUT NETPLUS-CLOUD-OUT ];
+                peer-as 62715;
+                bfd-liveness-detection {
+                    minimum-interval 600;
+                    multiplier 3;
+                }
+                multipath;
+            }
+            neighbor 198.71.45.151 {
+                description "[NETPLUS] Code42 #2 | I2-S10564";
+                import [ SANITY-IN SET-PREF NETPLUS-CODE42-IN NETPLUS-CLOUD-IN ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 NETPLUS-CODE42-OUT NETPLUS-CLOUD-OUT ];
+                peer-as 62715;
+                bfd-liveness-detection {
+                    minimum-interval 600;
+                    multiplier 3;
+                }
+                multipath;
+            }
+            neighbor 206.81.83.25 {
+                description "[NETPLUS] Code42 via SIX 9k MTU | I2-S10564";
+                import [ SANITY-IN SET-PREF NETPLUS-CODE42-IN NETPLUS-CLOUD-IN ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 NETPLUS-CODE42-OUT NETPLUS-CLOUD-OUT ];
+                peer-as 62715;
+                bfd-liveness-detection {
+                    minimum-interval 600;
+                    multiplier 3;
+                }
+                multipath;
+            }
+        }
+    }
+            bgp {
+                log-updown;
+                local-as 11537;
+                group CONNECTORS {
+                    type external;
+                    metric-out igp;
+                    multihop {
+                        ttl 1;
+                    }
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export CPS-CONNECTOR-OUT;
+                    remove-private;
+                    neighbor 64.57.29.4 {
+                        description "[CPS] Customer TransitRail";
+                        import [ CPS-TR-IN SET-TR-PREF CPS-TR-CONNECTOR-IN ];
+                        family inet {
+                            unicast {
+                                prefix-limit {
+                                    maximum 400000;
+                                    teardown 100;
+                                }
+                            }
+                        }
+                        export [ CPS-TR-CONNECTOR-OUT CPS-AS11164-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 11164;
+                    }
+                }
+                group PEERS {
+                    type external;
+                    import CPS-PEERS-IN;
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 5000;
+                                teardown 95;
+                            }
+                        }
+                    }
+                    remove-private;
+                }
+                group CONNECTORS6 {
+                    type external;
+                    metric-out igp;
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 50;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ SANITY6 CPS-CONNECTOR-OUT6 ];
+                    remove-private;
+                    local-as 11537;
+                    inactive: neighbor 2607:f380::1:89a4:1a88 {
+                        description "[CPS] Customer6 CENIC via LAX-DC  [NO-MONITOR]";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-CENIC-IN6 ];
+                        peer-as 2153;
+                        multipath;
+                    }
+                    neighbor 2607:f380::4:0:5 {
+                        description "[CPS] Customer6 CENIC via LAX-DC ";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-CENIC-IN6 ];
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 60;
+                                    teardown 90;
+                                }
+                            }
+                        }
+                        peer-as 2153;
+                        multipath;
+                    }
+                    neighbor 2001:468:8:16::2 {
+                        description "[CPS] Customer6 Oregon GigaPOP via SEAT";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-OREGON-IN6 ];
+                        peer-as 4600;
+                    }
+                    neighbor 2001:468:f000:102::1 {
+                        description "[CPS] Customer6 TransitRail";
+                        import [ SANITY6 SET-PREF-CPS-TR-V6 CPS-TR-IN6 ];
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 15000;
+                                    teardown 100;
+                                }
+                            }
+                        }
+                        export [ CPS-TR-CONNECTOR-OUT6 CPS-AS11164-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 11164;
+                    }
+                }
+                group PEERS6 {
+                    type external;
+                    import [ SANITY6 CPS-PEER6-IN ];
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    remove-private;
+                    neighbor 2001:504:16::1b1b {
+                        description "[CPS] Peer Hurricane Electric via SIX";
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 25000;
+                                    teardown 90;
+                                }
+                            }
+                        }
+                        export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS6939-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 6939;
+                    }
+                }
+                group OTHER {
+                    type internal;
+                    import REJECT-ALL;
+                    neighbor 64.57.29.58 {
+                        description "[CPS] nms-rpsv.seat zebra bgpd [NO-MONITOR]";
+                        local-address 64.57.29.57;
+                        family inet {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                    neighbor 2001:468:08:60::29:58 {
+                        description "[CPS] nms-rpsv.seat zebra bgpd [NO-MONITOR]";
+                        local-address 2001:468:08:60::1;
+                        family inet6 {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+            }
+            bgp {
+                log-updown;
+                local-as 11537;
+                inactive: group CONNECTORS {
+                    import [ LHCONE-SANITY-IN SET-PREF LHCONE-CONNECTOR-IN ];
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-CONNECTOR-OUT ];
+                    remove-private;
+                }
+                group PEERS {
+                    import [ LHCONE-SANITY-IN SET-PREF LHCONE-PEER-IN ];
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-PEER-OUT ];
+                    remove-private;
+                    neighbor 64.57.30.139 {
+                        description "[LHCONE] Canarie via PacWave | I2-S13540 [NO-NOTIFY]";
+                        import [ LHCONE-SANITY-IN SET-PREF LHCONE-PEER-IN ];
+                        export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-CANARIE-OUT LHCONE-PEER-OUT ];
+                        peer-as 6509;
+                    }
+                }
+                inactive: group CONNECTORS6 {
+                    import [ LHCONE-SANITY6-IN SET-PREF LHCONE-CONNECTOR-IN ];
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY6-OUT LHCONE-REMOVE-COMMS LHCONE-CONNECTOR-OUT ];
+                    remove-private;
+                }
+                inactive: group PEERS6 {
+                    import [ LHCONE-SANITY6-IN SET-PREF LHCONE-PEER-IN ];
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY6-OUT LHCONE-REMOVE-COMMS LHCONE-PEER-OUT ];
+                    remove-private;
+                }
+                group OTHER-INTERNAL {
+                    type internal;
+                    import REJECT-ALL;
+                    peer-as 11537;
+                    neighbor 10.10.10.189 {
+                        description "[LHCONE] nms-rpsv.seat [NO-MONITOR]";
+                        local-address 10.10.10.188;
+                        family inet {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+            }
+            bgp {
+                log-updown;
+                local-as 11537;
+                group OTHER-INTERNAL {
+                    type internal;
+                    import REJECT-ALL;
+                    peer-as 11537;
+                    neighbor 10.10.10.241 {
+                        description "nms-rspv.seat (transit vrf) [PENDING]";
+                        local-address 10.10.10.240;
+                        family inet {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+                group OTHER-INTERNAL6 {
+                    type internal;
+                    import REJECT-ALL;
+                    peer-as 11537;
+                    neighbor 2001:468:ef01:200::13 {
+                        description "nms-rspv.seat (transit vrf) [PENDING]";
+                        local-address 2001:468:ef01:200::12;
+                        family inet6 {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+            }

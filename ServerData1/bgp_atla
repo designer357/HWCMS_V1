@@ -1,0 +1,627 @@
+    bgp {
+        log-updown;
+        family inet {
+            unicast {
+                rib-group bgp-rg;
+            }
+        }
+        family inet6 {
+            unicast {
+                rib-group bgp6-rg;
+            }
+        }
+        group INTERNET2 {
+            type internal;
+            local-address 64.57.28.243;
+            family inet {
+                any;
+            }
+            family inet-vpn {
+                unicast;
+            }
+            family inet6-vpn {
+                unicast;
+            }
+            family l2vpn {
+                signaling;
+            }
+            export NEXT-HOP-SELF;
+            peer-as 11537;
+            neighbor 64.57.28.241 {
+                description CHIC;
+            }
+            neighbor 64.57.28.242 {
+                description NEWY;
+            }
+            neighbor 64.57.28.244 {
+                description HOUS;
+            }
+            neighbor 64.57.28.245 {
+                description KANS;
+            }
+            neighbor 64.57.28.246 {
+                description SALT;
+            }
+            neighbor 64.57.28.247 {
+                description SEAT;
+            }
+            neighbor 64.57.28.248 {
+                description LOSA;
+            }
+            neighbor 64.57.28.249 {
+                description WASH;
+            }
+            neighbor 64.57.28.250 {
+                description CLEV;
+            }
+            neighbor 64.57.28.251 {
+                description PAIX;
+            }
+            neighbor 64.57.28.252 {
+                description WILC;
+            }
+        }
+        group INTERNET2-IPv6 {
+            type internal;
+            local-address 2001:468:1::1;
+            family inet6 {
+                any;
+            }
+            export NEXT-HOP-SELF;
+            peer-as 11537;
+            neighbor 2001:468:2::1 {
+                description CHIC;
+            }
+            neighbor 2001:468:3::1 {
+                description HOUS;
+            }
+            neighbor 2001:468:4::1 {
+                description KANS;
+            }
+            neighbor 2001:468:5::1 {
+                description LOSA;
+            }
+            neighbor 2001:468:6::1 {
+                description NEWY;
+            }
+            neighbor 2001:468:7::1 {
+                description SALT;
+            }
+            neighbor 2001:468:8::1 {
+                description SEAT;
+            }
+            neighbor 2001:468:9::1 {
+                description WASH;
+            }
+            neighbor 2001:468:a::1 {
+                description CLEV;
+            }
+            neighbor 2001:468:c::1 {
+                description PAIX;
+            }
+            neighbor 2001:468:d::1 {
+                description WILC;
+            }
+        }
+        /*  Use OTHER group for sessions to route-servers, monitoring hosts, etc */
+        inactive: group OTHER {
+            metric-out igp;
+            import REJECT-ALL;
+            remove-private;
+        }
+        group OTHER-INTERNAL {
+            type internal;
+            import REJECT-ALL;
+            peer-as 11537;
+            neighbor 64.57.16.68 {
+                description "nms-rpsv.atla zebra bgpd | [NO-MONITOR]";
+                local-address 64.57.16.65;
+                family inet {
+                    unicast;
+                    multicast;
+                }
+                cluster 64.57.16.65;
+            }
+            neighbor 2001:468:1:11::16:68 {
+                description "nms-rpsv.atla zebra bgpd | [NO-MONITOR]";
+                local-address 2001:468:1:11::1;
+                family inet6 {
+                    unicast;
+                    multicast;
+                }
+            }
+        }
+        group CONNECTOR {
+            type external;
+            metric-out igp;
+            /* Multihop needs to be enabled to support discard routing */
+            multihop {
+                ttl 1;
+            }
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ];
+            remove-private;
+            neighbor 149.165.254.20 {
+                description "[RE] Indiana Gigapop | I2-S12522";
+                import [ SANITY-IN SET-PREF INTERNET2-MOSS INTERNET2-BROCADE-FMS INDIANAGIGAPOP-IN CONNECTOR-IN ];
+                peer-as 19782;
+            }
+            neighbor 198.32.252.237 {
+                description "[RE] FIU/AMPATH via SOX | I2-S12836";
+                import [ SANITY-IN SET-PREF SFGP-IN CONNECTOR-IN ];
+                peer-as 20080;
+            }
+            neighbor 216.249.136.197 {
+                description "[RE] KyRON | I2-S09372";
+                local-address 216.249.136.198;
+                import [ SANITY-IN SET-PREF KyRON-IN CONNECTOR-IN ];
+                peer-as 30700;
+            }
+            neighbor 205.233.255.36 {
+                description "[RE] MissION | I2-S12530";
+                import [ SANITY-IN SET-PREF MISSION-IN CONNECTOR-IN ];
+                peer-as 54234;
+            }
+            neighbor 143.215.193.3 {
+                description "[RE] SoX via AL2S/ATLA | I2-S12541";
+                import [ SANITY-IN SET-PREF SOX-IN CONNECTOR-IN ];
+                peer-as 10490;
+            }
+            neighbor 108.59.25.20 {
+                description "[RE] FLR via AL2S/JACK | I2-S12519";
+                import [ SANITY-IN SET-PREF FLR-IN CONNECTOR-IN ];
+                peer-as 11096;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 198.71.46.170 {
+                description "[RE] MCNC R&E via AL2S | I2-S12527";
+                import [ SANITY-IN SET-PREF MCNC-IN CONNECTOR-IN ];
+                peer-as 81;
+            }
+            neighbor 149.165.128.12 {
+                description "[RE] Indiana Gigapop via AL2S | I2-S12522";
+                import [ SANITY-IN SET-PREF INTERNET2-MOSS INTERNET2-BROCADE-FMS INDIANAGIGAPOP-IN CONNECTOR-IN ];
+                peer-as 19782;
+            }
+        }
+        group CONNECTOR6 {
+            type external;
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 ];
+            remove-private;
+            neighbor 2001:468:ff:144::2 {
+                description "[RE] Indiana Gigapop | I2-S12522";
+                import [ SANITY6 SET-PREF INDIANAGIGAPOP-IN6 ];
+                peer-as 19782;
+            }
+            neighbor 2001:468:ff:e47::2 {
+                description "[RE] AMPATH/SFGP | I2-S12837";
+                import [ SANITY6 SET-PREF SFGP-IN6 ];
+                peer-as 20080;
+            }
+            neighbor 2610:01e0:1000:6010::1 {
+                description "[RE] KyRON | I2-S09372";
+                local-address 2610:01e0:1000:6010::2;
+                import [ SANITY6 SET-PREF KyRON-IN6 ];
+                peer-as 30700;
+            }
+            neighbor 2001:468:00ff:0140::2 {
+                description "[RE] MissION | I2-S12530";
+                import [ SANITY6 SET-PREF MISSION-IN6 ];
+                peer-as 54234;
+            }
+            neighbor 2607:f7b8:1f02:c102::2 {
+                description "[RE] SoX via AL2S/ATLA | I2-S12541";
+                import [ SANITY6 SET-PREF SOX-IN6 ];
+                peer-as 10490;
+            }
+            neighbor 2607:f5d8:2:d100::1 {
+                description "[RE] FLR via AL2S/JACK | I2-S12519";
+                import [ SANITY6 SET-PREF FLR-IN6 ];
+                peer-as 11096;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 2001:468:1:201::2 {
+                description "[RE] MCNC R&E via AL2S | I2-S12527";
+                import [ SANITY6 SET-PREF MCNC-IN6 ];
+                peer-as 81;
+            }
+            neighbor 2001:18e8:ff00:1d::1 {
+                description "[RE] Indiana Gigapop via AL2S | I2-S12522";
+                import [ SANITY6 SET-PREF INDIANAGIGAPOP-IN6 ];
+                peer-as 19782;
+            }
+        }
+        inactive: group FEDNET {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER FEDNET-IN ];
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ESNET-MEDS ORIGINATE4 FEDNET-OUT ];
+            remove-private;
+        }
+        inactive: group NONITN {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER NONITN-IN ];
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 NONITN-OUT ];
+            remove-private;
+        }
+        inactive: group NONITN6-NEW {
+            type external;
+            metric-out igp;
+            import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER ];
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 ];
+            remove-private;
+        }
+        group ITN {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER ITN-IN ];
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ESNET-TO-AMPATH ITN-PEERCONTROLS-OUT ITN-OUT ];
+            remove-private;
+            neighbor 198.32.252.230 {
+                description "ANSP (Brazil) via AMPATH | I2-S13046";
+                multihop {
+                    ttl 2;
+                }
+                peer-as 1251;
+            }
+            neighbor 200.0.207.9 {
+                description "RedCLARA via AtlanticWave/AL2S | I2-S13057";
+                import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER REDCLARA-IN ITN-IN ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ESNET-TO-AMPATH ITN-OUT ];
+                peer-as 27750;
+            }
+            neighbor 190.103.185.144 {
+                description "[RE] AMPATH | I2-S12837 [NO-MONITOR] 400:144";
+                peer-as 20080;
+            }
+        }
+        group ITN6 {
+            type external;
+            metric-out igp;
+            import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER ITN-IN6 ];
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 ITN-PEERCONTROLS-OUT ITN-OUT6 ];
+            remove-private;
+            neighbor 2001:1348:4:3::1 {
+                description "RedCLARA via AtlanticWave/AL2S | I2-S13057";
+                import REJECT-ALL;
+                peer-as 27750;
+            }
+        }
+        group AL2S_MGMT {
+            type external;
+            metric-out igp;
+            log-updown;
+            import REJECT-ALL;
+            family inet {
+                unicast {
+                    prefix-limit {
+                        maximum 20;
+                        teardown;
+                    }
+                }
+            }
+            export REJECT-ALL;
+            remove-private;
+            peer-as 65532;
+            inactive: bfd-liveness-detection {
+                minimum-interval 1000;
+            }
+            neighbor 64.57.25.164 {
+                description "[AL2S-WSC-MGMT] oob.rale";
+                local-preference 300;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.25.116 {
+                description "[AL2S-WSC-MGMT] oob.houh";
+                local-preference 280;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.24.217 {
+                description "[AL2S-WSC-MGMT] oob.jcsn";
+                local-preference 280;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.24.197 {
+                description "[AL2S-WSC-MGMT] oob.bato";
+                local-preference 280;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.24.196 {
+                description "[AL2S-WSC-MGMT] oob.jack";
+                local-preference 300;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.25.165 {
+                description "[AL2S-WSC-MGMT] oob.char ";
+                local-preference 300;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.25.108 {
+                description "[AL2S-WSC-MGMT] oob.cinc";
+                local-preference 300;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.25.110 {
+                description "[AL2S-WSC-MGMT] oob.indi";
+                local-preference 300;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+        }
+    }
+            bgp {
+                log-updown;
+                local-as 11537;
+                group CONNECTORS {
+                    type external;
+                    metric-out igp;
+                    multihop {
+                        ttl 1;
+                    }
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export CPS-CONNECTOR-OUT;
+                    remove-private;
+                }
+                group CONNECTORS6 {
+                    type external;
+                    metric-out igp;
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 50;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ SANITY6 CPS-CONNECTOR-OUT6 ];
+                    remove-private;
+                    local-as 11537;
+                    neighbor 2001:468:ffff:144::2 {
+                        description "[CPS] Customer6 Indiana GigaPoP TEST [NO-MONITOR]";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-INDIANAGIGAPOP-IN6 ];
+                        peer-as 19782;
+                    }
+                    neighbor 2001:468:ffff:e47::2 {
+                        description "[CPS] Customer6 SFGP/AMPATH";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-SFGP-IN6 ];
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 150;
+                                    teardown 90;
+                                }
+                            }
+                        }
+                        peer-as 20080;
+                    }
+                    neighbor 2610:01e0:1000:4010::1 {
+                        description "[CPS] Customer6 KyRON [NO-MONITOR]";
+                        local-address 2610:01e0:1000:4010::2;
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-KyRON-IN6 ];
+                        peer-as 30700;
+                    }
+                    neighbor 2001:468:ffff:1c1::2 {
+                        description "[CPS] Customer6 USF/FLR";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-FLR-IN6 ];
+                        peer-as 11096;
+                    }
+                    neighbor 2607:f7b8:1d00:a000::2 {
+                        description "[CPS] Customer6 SoX via AL2S/ATLA";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-SOX-IN6 ];
+                        peer-as 10490;
+                    }
+                }
+                group OTHER {
+                    type internal;
+                    import REJECT-ALL;
+                    neighbor 64.57.29.30 {
+                        description "[CPS] nms-rpsv.atla zebra bgpd [NO-MONITOR]";
+                        local-address 64.57.29.29;
+                        family inet {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                    neighbor 2001:468:1:60::29:30 {
+                        description "[CPS] nms-rpsv.atla zebra bgpd [NO-MONITOR]";
+                        local-address 2001:468:1:60::1;
+                        family inet6 {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+                group rrcluster-iBGPPlay {
+                    type internal;
+                    import REJECT-ALL;
+                    cluster 64.57.29.243;
+                    peer-as 11537;
+                }
+            }
+            bgp {
+                log-updown;
+                local-as 11537;
+                group CONNECTORS {
+                    import [ LHCONE-SANITY-IN SET-PREF LHCONE-CONNECTOR-IN ];
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-CONNECTOR-OUT ];
+                    remove-private;
+                    neighbor 64.57.30.153 {
+                        description "[LHCONE] FLR | I2-S13513 [NO-NOTIFY]";
+                        import [ LHCONE-SANITY-IN SET-PREF LHCONE-FLR-IN LHCONE-CONNECTOR-IN ];
+                        export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-FLR-OUT LHCONE-CONNECTOR-OUT ];
+                        peer-as 6356;
+                    }
+                    neighbor 192.111.110.61 {
+                        description "[LHCONE] Vanderbilt via SOX | I2-S13527 [PENDING] | 2171:144";
+                        import [ LHCONE-SANITY-IN SET-PREF LHCONE-VANDERBILT-IN LHCONE-CONNECTOR-IN ];
+                        export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-VANDERBILT-OUT LHCONE-CONNECTOR-OUT ];
+                        peer-as 7212;
+                    }
+                }
+                inactive: group PEERS {
+                    import [ LHCONE-SANITY-IN SET-PREF LHCONE-PEER-IN ];
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-PEER-OUT ];
+                    remove-private;
+                }
+                inactive: group CONNECTORS6 {
+                    import [ LHCONE-SANITY6-IN SET-PREF LHCONE-CONNECTOR-IN ];
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY6-OUT LHCONE-REMOVE-COMMS LHCONE-CONNECTOR-OUT ];
+                    remove-private;
+                }
+                inactive: group PEERS6 {
+                    import [ LHCONE-SANITY6-IN SET-PREF LHCONE-PEER-IN ];
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY6-OUT LHCONE-REMOVE-COMMS LHCONE-PEER-OUT ];
+                    remove-private;
+                }
+                group OTHER-INTERNAL {
+                    type internal;
+                    import REJECT-ALL;
+                    peer-as 11537;
+                    neighbor 10.10.10.173 {
+                        description "[LHCONE] nms-rpsv.atla | [NO-MONITOR]";
+                        local-address 10.10.10.172;
+                        family inet {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+            }
+            bgp {
+                log-updown;
+                local-as 11537;
+                group OTHER-INTERNAL {
+                    type internal;
+                    import REJECT-ALL;
+                    peer-as 11537;
+                    neighbor 10.10.10.225 {
+                        description "nms-rspv.atla (transit vrf) [PENDING]";
+                        local-address 10.10.10.224;
+                        family inet {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+                group OTHER-INTERNAL6 {
+                    type internal;
+                    import REJECT-ALL;
+                    peer-as 11537;
+                    neighbor 2001:468:ef01:200::3 {
+                        description "nms-rspv.atla (transit vrf)";
+                        local-address 2001:468:ef01:200::2;
+                        family inet6 {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+            }

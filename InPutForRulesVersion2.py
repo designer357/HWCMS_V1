@@ -62,7 +62,13 @@ def MainFunc(filelist,filepath,linstr,outputfolder):
     for eachfile in filelist:
         if '.DS' in eachfile:
             continue
-        if '.cfg' in eachfile or not 'test' in eachfile :
+        with open(ProjectPath+"/"+outputfolder+"/input_"+linstr,"w")as fout:
+            pass
+
+    for eachfile in filelist:
+        if '.DS' in eachfile:
+            continue
+        if len(eachfile)>0:
             print(eachfile)
             linstr2=r'[\s]*'+linstr+'[\s]*$'
             parse_file = CiscoConfParse(str(filepath+'/'+eachfile))

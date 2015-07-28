@@ -1,0 +1,1940 @@
+    bgp {
+        log-updown;
+        family inet {
+            unicast {
+                rib-group bgp-rg;
+            }
+        }
+        family inet6 {
+            unicast {
+                rib-group bgp6-rg;
+            }
+        }
+        group INTERNET2 {
+            type internal;
+            local-address 64.57.28.248;
+            family inet {
+                any;
+            }
+            family inet-vpn {
+                unicast;
+            }
+            family inet6-vpn {
+                unicast;
+            }
+            family l2vpn {
+                signaling;
+            }
+            export NEXT-HOP-SELF;
+            peer-as 11537;
+            neighbor 64.57.28.241 {
+                description CHIC;
+            }
+            neighbor 64.57.28.242 {
+                description NEWY;
+            }
+            neighbor 64.57.28.243 {
+                description ATLA;
+            }
+            neighbor 64.57.28.244 {
+                description HOUS;
+            }
+            neighbor 64.57.28.245 {
+                description KANS;
+            }
+            neighbor 64.57.28.246 {
+                description SALT;
+            }
+            neighbor 64.57.28.247 {
+                description SEAT;
+            }
+            neighbor 64.57.28.249 {
+                description WASH;
+            }
+            neighbor 64.57.28.250 {
+                description CLEV;
+            }
+            neighbor 64.57.28.251 {
+                description PAIX;
+            }
+            neighbor 64.57.28.252 {
+                description WILC;
+            }
+        }
+        group INTERNET2-IPv6 {
+            type internal;
+            local-address 2001:468:05::1;
+            family inet6 {
+                any;
+            }
+            export NEXT-HOP-SELF;
+            peer-as 11537;
+            neighbor 2001:468:1::1 {
+                description ATLA;
+            }
+            neighbor 2001:468:2::1 {
+                description CHIC;
+            }
+            neighbor 2001:468:3::1 {
+                description HOUS;
+            }
+            neighbor 2001:468:4::1 {
+                description KANS;
+            }
+            neighbor 2001:468:6::1 {
+                description NEWY;
+            }
+            neighbor 2001:468:7::1 {
+                description SALT;
+            }
+            neighbor 2001:468:8::1 {
+                description SEAT;
+            }
+            neighbor 2001:468:9::1 {
+                description WASH;
+            }
+            neighbor 2001:468:a::1 {
+                description CLEV;
+            }
+            neighbor 2001:468:c::1 {
+                description PAIX;
+            }
+            neighbor 2001:468:d::1 {
+                description WILC;
+            }
+        }
+        /*  Use OTHER group for sessions to route-servers, monitoring hosts, etc */
+        group OTHER {
+            metric-out igp;
+            import REJECT-ALL;
+            remove-private;
+            neighbor 203.181.248.35 {
+                description "zebra.jp.apan.net | I2-S13129";
+                multihop {
+                    ttl 15;
+                }
+                local-address 64.57.28.248;
+                import REJECT-ALL;
+                peer-as 65432;
+            }
+        }
+        group OTHER-INTERNAL {
+            type internal;
+            import REJECT-ALL;
+            peer-as 11537;
+            neighbor 64.57.17.133 {
+                description "V4 peering to NMS-rpsv | [NO-MONITOR]";
+                local-address 64.57.17.129;
+                family inet {
+                    unicast;
+                    multicast;
+                }
+                cluster 64.57.17.129;
+            }
+            neighbor 2001:468:5:11::17:133 {
+                description "V6 peering to NMS-rpsv | [NO-MONITOR]";
+                family inet6 {
+                    unicast;
+                    multicast;
+                }
+            }
+        }
+        group CONNECTOR {
+            type external;
+            metric-out igp;
+            /* Multihop needs to be enabled to support discard routing */
+            multihop {
+                ttl 1;
+            }
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ];
+            remove-private;
+            neighbor 137.164.26.133 {
+                description "[RE] CENIC (CalREN-HPR) | I2-S12514";
+                import [ SANITY-IN CUDI-PREF SET-PREF CALREN-IN CONNECTOR-IN ];
+                peer-as 2153;
+                multipath;
+            }
+            neighbor 198.32.165.65 {
+                description "[RE] Oregon Gigapop via DWS | I2-S12535";
+                import [ SANITY-IN SET-PREF OREGON-IN CONNECTOR-IN ];
+                peer-as 4600;
+            }
+            neighbor 205.166.205.12 {
+                description "[RE] U of Hawaii Layer 2 | I2-S12948";
+                import [ SANITY-IN SET-PREF HAWAII-IN CONNECTOR-IN ];
+                peer-as 6360;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 137.164.26.200 {
+                description "[RE] CENIC (CalREN-HPR) via AL2S | I2-S12514";
+                import [ SANITY-IN CUDI-PREF SET-PREF CALREN-IN CONNECTOR-IN ];
+                peer-as 2153;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+                multipath;
+            }
+            neighbor 140.197.253.143 {
+                description "[RE] UEN via AL2S/SALT | I2-S12705";
+                import [ SANITY-IN SET-PREF UEN-IN CONNECTOR-IN ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT NLR-TP ORIGINATE4 ];
+                peer-as 210;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 198.71.46.73 {
+                description "[RE] Sun Corridor via AL2S/TUCS | I2-S12543";
+                import [ SUNCORRIDOR-TP-EXC SANITY-IN SET-PREF SUNCORRIDOR-IN CONNECTOR-IN ];
+                peer-as 62600;
+            }
+            neighbor 198.71.46.160 {
+                description "[RE] Sun Corridor via AL2S/PHOE | I2-S12543";
+                import [ SUNCORRIDOR-TP-EXC SANITY-IN SET-PREF SUNCORRIDOR-IN CONNECTOR-IN ];
+                peer-as 62600;
+            }
+            neighbor 192.133.159.149 {
+                description "[RE] CSN via PacWave | [PENDING][3803:144]";
+                import [ SANITY-IN SET-PREF CSN-IN CONNECTOR-IN ];
+                peer-as 11017;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+        }
+        group CONNECTOR6 {
+            type external;
+            metric-out igp;
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 ];
+            remove-private;
+            neighbor 2607:f380:1::108:9a42:a850 {
+                description "[RE] CENIC CalREN-HPR | I2-S12514";
+                import [ SANITY6 SET-PREF CALREN-IN6 ];
+                family inet6 {
+                    any;
+                }
+                peer-as 2153;
+                multipath;
+            }
+            neighbor 2001:468:ff:054d::2 {
+                description "[RE] Oregon Gigapop via DWS | I2-S12535";
+                import [ SANITY6 SET-PREF OREGON-IN6 ];
+                peer-as 4600;
+            }
+            neighbor 2001:468:ff:5c1::1 {
+                description "[RE] U of Hawaii Layer 2 | I2-S12948";
+                import [ SANITY6 SET-PREF HAWAII-IN6 ];
+                peer-as 6360;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 2607:f380:1::108:9a41:ac81 {
+                description "[RE] CENIC (CalREN-HPR) via AL2S | I2-S12514";
+                import [ SANITY6 SET-PREF CALREN-IN6 ];
+                family inet6 {
+                    any;
+                }
+                peer-as 2153;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+                multipath;
+            }
+            neighbor 2001:1948:0:1::2 {
+                description "[RE] UEN via AL2S/SALT | I2-S12705";
+                import [ SANITY6 SET-PREF UEN-IN6 ];
+                peer-as 210;
+                bfd-liveness-detection {
+                    minimum-interval 500;
+                    multiplier 3;
+                }
+            }
+            neighbor 2001:468:5::2 {
+                description "[RE] Sun Corridor via AL2S/TUCS | I2-S12543";
+                import [ SANITY6 SET-PREF SUNCORRIDOR-IN6 ];
+                peer-as 62600;
+            }
+            neighbor 2001:468:2300:2::2 {
+                description "[RE] Sun Corridor via AL2S/PHOE | I2-S12543";
+                import [ SANITY6 SET-PREF SUNCORRIDOR-IN6 ];
+                peer-as 62600;
+            }
+        }
+        group FEDNET {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER FEDNET-IN ];
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 FEDNET-OUT ];
+            remove-private;
+            neighbor 207.231.246.3 {
+                description "NREN | I2-S13130";
+                hold-time 30;
+                peer-as 24;
+            }
+            neighbor 198.129.48.1 {
+                description "ESnet Sunnyvale via AL2s | I2-S13075";
+                peer-as 293;
+            }
+            neighbor 207.231.240.155 {
+                description "DREN AS668 via Pacific Wave Vlan702 | I2-S13077";
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 GEANT-TO-DREN FEDNET-OUT ];
+                peer-as 668;
+            }
+        }
+        group FEDNET6 {
+            type external;
+            metric-out igp;
+            import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER FEDNET-IN6 ];
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 FEDNET-OUT6 ];
+            remove-private;
+            neighbor 2001:504:b:90::3 {
+                description "NREN AS24 | I2-S13130";
+                family inet6 {
+                    any {
+                        prefix-limit {
+                            maximum 100;
+                            teardown;
+                        }
+                    }
+                }
+                peer-as 24;
+            }
+            neighbor 2001:400:107:10::2 {
+                description "ESnet Sunnyvale via AL2S | I2-S13075";
+                peer-as 293;
+            }
+            neighbor 2001:504:b:20::155 {
+                description "DREN AS668 via Pacific Wave Vlan702 | I2-S13077";
+                peer-as 668;
+            }
+        }
+        group ISP-MCAST {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER ISP-MCAST-IN ];
+            family inet {
+                multicast {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ISP-MCAST-OUT ];
+            remove-private;
+            neighbor 198.32.177.14 {
+                description "Commercial NTT via PAIX (Multicast Only) | I2-S13132 [NO-MONITOR]";
+                peer-as 2914;
+            }
+            neighbor 64.57.20.193 {
+                description "TR-CPS, multicast-only | I2-S13078 [NO-MONITOR]";
+                peer-as 11164;
+            }
+        }
+        group ITN {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER ITN-IN ];
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 4000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ITN-PEERCONTROLS-OUT ITN-OUT ];
+            remove-private;
+            neighbor 150.99.199.93 {
+                description "SINET via PacWave South | I2-S13133";
+                peer-as 2907;
+            }
+            neighbor 207.231.240.133 {
+                description "TWAREN via PacWave jumbo vlan 702 | I2-S13060";
+                peer-as 7539;
+            }
+            neighbor 207.231.240.136 {
+                description "TransPAC2 | AS22388 | I2-S13134";
+                import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER TRANSPAC2-IN ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 TRANSPAC2-OUT ];
+                peer-as 22388;
+            }
+            neighbor 207.231.240.142 {
+                description "CUDI via PacWave | I2-S13082";
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 FROM-NISN ITN-OUT ];
+                peer-as 18592;
+            }
+            neighbor 207.231.241.4 {
+                description "AARnet-sttl via pacwave intersite vlan | I2-S13135";
+                import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER AARNET-ITN-IN CONNECTOR-IN ];
+                peer-as 7575;
+            }
+            neighbor 207.231.240.149 {
+                description "AARnet 1Gbps backup via PacWave and Equinix | I2-S13135";
+                import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER AARNET-ITN-IN CONNECTOR-IN ];
+                peer-as 7575;
+            }
+            neighbor 207.231.242.136 {
+                description "Transpac via non jumbo | AS22388 | I2-S13134";
+                import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER TRANSPAC2-IN ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 TRANSPAC2-OUT ];
+                peer-as 22388;
+            }
+            neighbor 207.231.240.150 {
+                description "JGN-X via PacWave | I2-S13136";
+                import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER IFTN-IN ];
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 IFTN-OUT ];
+                peer-as 17934;
+            }
+            neighbor 207.231.242.152 {
+                description "Peer Qatar via PacWave (Connection #2) | I2-S13137";
+                peer-as 29384;
+            }
+            neighbor 203.181.248.142 {
+                description "APAN via PacWave | I2-S13138";
+                peer-as 7660;
+            }
+            neighbor 210.25.189.133 {
+                description "China Educational and Research Network (CERnet) | I2-S13139";
+                export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 USGS2-TO-CNGI ITN-PEERCONTROLS-OUT ITN-OUT ];
+                peer-as 23911;
+            }
+        }
+        group ITN6 {
+            type external;
+            metric-out igp;
+            import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER ITN-IN6 ];
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 ITN-PEERCONTROLS-OUT ITN-OUT6 ];
+            remove-private;
+            neighbor 2001:504:b:20::136 {
+                description "TransPAC2 IPv6 | I2-S13134";
+                peer-as 22388;
+            }
+            neighbor 2001:504:b:20::133 {
+                description "TWAREN via PacWave jumbo vlan 702 | I2-S13060";
+                peer-as 7539;
+            }
+            neighbor 2001:504:b:80::4 {
+                description "AARnet-sttl | I2-S13135";
+                import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER AARNET-V6-IN ];
+                export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 AARNET-V6-OUT ];
+                peer-as 7575;
+            }
+            neighbor 2001:504:b:20::149 {
+                description "AARnet 1Gbps backup via PacWave and Equinix | I2-S13135";
+                peer-as 7575;
+            }
+            neighbor 2001:02f8:0001:00ff::9 {
+                description "SINET V6 via PacWave South | I2-S13133";
+                peer-as 2907;
+            }
+            neighbor 2001:504:b:20::150 {
+                description "JGN-X via PacWave | I2-S13136";
+                peer-as 17934;
+            }
+            neighbor 2001:0200:e000:0853::2d11:2 {
+                description "APAN ipv6 via PacWave | I2-S13138";
+                peer-as 7660;
+            }
+            neighbor 2001:252:0:502::1 {
+                description "China Educational and Research Network (CERnet) | I2-S13139";
+                peer-as 23911;
+            }
+        }
+        group NONITN {
+            type external;
+            metric-out igp;
+            import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER NONITN-IN ];
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 NONITN-OUT ];
+            remove-private;
+            neighbor 207.231.242.146 {
+                description "National University of Singapore (NUS) | I2-S13143";
+                family inet {
+                    unicast;
+                }
+                peer-as 7610;
+            }
+        }
+        group NONITN6 {
+            type external;
+            metric-out igp;
+            import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER NONITN-IN6 ];
+            family inet6 {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 NONITN-OUT6 ];
+            remove-private;
+            neighbor 2001:504:b:21::146 {
+                description "National University of Singapore (NUS) | I2-S13143";
+                family inet6 {
+                    unicast;
+                }
+                peer-as 7610;
+            }
+        }
+        group NETPLUS {
+            type external;
+            metric-out igp;
+            multihop {
+                ttl 1;
+            }
+            import REJECT-ALL;
+            family inet {
+                any {
+                    prefix-limit {
+                        maximum 3000;
+                        teardown 90;
+                    }
+                }
+            }
+            export REJECT-ALL;
+            remove-private;
+        }
+        group AL2S_MGMT {
+            type external;
+            metric-out igp;
+            log-updown;
+            import REJECT-ALL;
+            family inet {
+                unicast {
+                    prefix-limit {
+                        maximum 20;
+                        teardown;
+                    }
+                }
+            }
+            export REJECT-ALL;
+            remove-private;
+            peer-as 65532;
+            inactive: bfd-liveness-detection {
+                minimum-interval 1000;
+            }
+            neighbor 64.57.25.189 {
+                description "[AL2S-WSC-MGMT] oob.elpa";
+                local-preference 280;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.25.180 {
+                description "[AL2S-WSC-MGMT] oob2.sunn";
+                local-preference 300;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.25.181 {
+                description "[AL2S-WSC-MGMT] oob.port";
+                local-preference 280;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.25.188 {
+                description "[AL2S-WSC-MGMT] oob.phoe";
+                local-preference 280;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+            neighbor 64.57.25.190 {
+                description "[AL2S-WSC-MGMT] oob.tucs";
+                local-preference 280;
+                hold-time 12;
+                import AL2S_MGMT-IN;
+            }
+        }
+        group PACWAVE-TEST {
+            type internal;
+            local-address 207.231.241.131;
+            import REJECT-ALL;
+            family inet {
+                unicast;
+            }
+            export REJECT-ALL;
+            peer-as 11537;
+            neighbor 207.231.241.8 {
+                description "pacwave test | I2-S11962";
+                hold-time 300;
+            }
+        }
+    }
+            bgp {
+                log-updown;
+                group CONNECTORS {
+                    type external;
+                    metric-out igp;
+                    multihop {
+                        ttl 1;
+                    }
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export CPS-CONNECTOR-OUT;
+                    remove-private;
+                    neighbor 198.71.47.235 {
+                        description "[CPS] Customer TransitRail | I2-S13078";
+                        import [ CPS-TR-IN SET-TR-PREF CPS-TR-CONNECTOR-IN ];
+                        family inet {
+                            unicast {
+                                prefix-limit {
+                                    maximum 400000;
+                                    teardown 100;
+                                }
+                                loops 2;
+                            }
+                        }
+                        export [ CPS-TR-CONNECTOR-OUT CPS-AS11164-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 11164;
+                    }
+                }
+                group PEERS {
+                    type external;
+                    import CPS-PEERS-IN;
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 5000;
+                                teardown 95;
+                            }
+                        }
+                    }
+                    remove-private;
+                }
+                group CONNECTORS6 {
+                    type external;
+                    metric-out igp;
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 50;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ SANITY6 CPS-CONNECTOR-OUT6 ];
+                    remove-private;
+                    neighbor 2001:468:ffff:054d::2 {
+                        description "[CPS] Customer6 Oregon GigaPOP";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-OREGON-IN6 ];
+                        peer-as 4600;
+                    }
+                    inactive: neighbor 2607:f380::1:89a4:1a86 {
+                        description "[CPS] Customer6 CENIC / CalREN-HPR South  [NO-MONITOR]";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-CALREN-IN6 ];
+                        peer-as 2153;
+                        multipath;
+                    }
+                    neighbor 2607:f380:1::108:9a42:a8a0 {
+                        description "[CPS] Customer6 CENIC / CalREN-HPR South";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-CALREN-IN6 ];
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 60;
+                                    teardown 90;
+                                }
+                            }
+                        }
+                        peer-as 2153;
+                        multipath;
+                    }
+                    neighbor 2001:1948:0:1703::2 {
+                        description "[CPS] Customer6 UEN via AL2S/SALT | I2-S12705";
+                        import [ SANITY6 SET-PREF-CPS-V6 CPS-UEN-IN6 ];
+                        peer-as 210;
+                    }
+                    neighbor 2001:468:f000:2705::2 {
+                        description "[CPS] Customer6 TransitRail";
+                        import [ SANITY6 SET-PREF-CPS-TR-V6 CPS-TR-IN6 ];
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 15000;
+                                    teardown 100;
+                                }
+                                loops 2;
+                            }
+                        }
+                        export [ CPS-TR-CONNECTOR-OUT6 CPS-AS11164-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 11164;
+                    }
+                }
+                group PEERS6 {
+                    type external;
+                    import [ SANITY6 CPS-PEER6-IN ];
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    remove-private;
+                    neighbor 3ffe:80a::c {
+                        description "[CPS] Peer Global Crossing via PAIX [NO-MONITOR]";
+                        import [ SANITY6 CPS-AS3549-V6-IN CPS-PEER6-IN ];
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 25000;
+                                    teardown 95;
+                                }
+                            }
+                        }
+                        export [ CPS-V6-REMOVE-COMMS CPS-TR-PEER6-OUT CPS-AS3549-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 3549;
+                        tcp-mss 1000;
+                    }
+                    neighbor 2001:504:d::d {
+                        description "[CPS] KDDI via PAIX [NO-MONITOR]";
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 400;
+                                    teardown 90;
+                                }
+                            }
+                        }
+                        export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS2516-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 2516;
+                    }
+                    neighbor 2001:504:d::b3 {
+                        description "[CPS] WIDE operated DNS M-Root [NO-MONITOR]";
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 10;
+                                    teardown 90;
+                                }
+                            }
+                        }
+                        export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS7500-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 7500;
+                    }
+                    neighbor 2001:504:d::89 {
+                        description "[CPS] Peer FLAG Telecom IPv6 via PAIX [NO-MONITOR]";
+                        export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS15412-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 15412;
+                    }
+                    neighbor 2001:504:d::6 {
+                        description "[CPS] Peer NTT via PAIX [NO-MONITOR]";
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 15000;
+                                }
+                            }
+                        }
+                        export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS2914-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 2914;
+                    }
+                    inactive: neighbor 2001:470:0:228::1 {
+                        description "[CPS] Peer IPv6 Hurricane Electric AS6939 via TR | [NO-MONITOR]";
+                        family inet6 {
+                            unicast {
+                                prefix-limit {
+                                    maximum 25000;
+                                    teardown 95;
+                                }
+                            }
+                        }
+                        export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS6939-OUT CPS-PEERCONTROLS-OUT ];
+                        peer-as 6939;
+                    }
+                }
+                group OTHER {
+                    type internal;
+                    import REJECT-ALL;
+                    neighbor 64.57.29.62 {
+                        description "[CPS] nms-rpsv.atla zebra bgpd [NO-MONITOR]";
+                        local-address 64.57.29.61;
+                        family inet {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                    neighbor 2001:468:5:60::29:62 {
+                        description "[CPS] nms-rpsv.atla zebra bgpd [NO-MONITOR]";
+                        local-address 2001:468:5:60::1;
+                        family inet6 {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+            }
+            bgp {
+                log-updown;
+                group CONNECTORS {
+                    type external;
+                    metric-out igp;
+                    import [ LHCONE-SANITY-IN SET-PREF LHCONE-CONNECTOR-IN ];
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-CONNECTOR-OUT ];
+                    remove-private;
+                    neighbor 137.164.26.136 {
+                        description "[LHCONE] CALTECH | I2-S13537 [NO-NOTIFY]";
+                        import [ LHCONE-SANITY-IN SET-PREF LHCONE-CALTECH-IN LHCONE-CONNECTOR-IN ];
+                        export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-CALTECH-OUT LHCONE-CONNECTOR-OUT ];
+                        peer-as 2153;
+                        multipath;
+                    }
+                    neighbor 64.57.30.150 {
+                        description "[LHCONE] CALTECH via CENIC via AL2S | I2-S13538 [NO-NOTIFY]";
+                        import [ LHCONE-SANITY-IN SET-PREF LHCONE-CALTECH-IN LHCONE-CONNECTOR-IN ];
+                        export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-CALTECH-OUT LHCONE-CONNECTOR-OUT ];
+                        peer-as 32361;
+                    }
+                }
+                inactive: group PEERS {
+                    type external;
+                    metric-out igp;
+                    import [ LHCONE-SANITY-IN SET-PREF LHCONE-PEER-IN ];
+                    family inet {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-PEER-OUT ];
+                    remove-private;
+                }
+                inactive: group CONNECTORS6 {
+                    import [ LHCONE-SANITY6-IN SET-PREF LHCONE-CONNECTOR-IN ];
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY6-OUT LHCONE-REMOVE-COMMS LHCONE-CONNECTOR-OUT ];
+                    remove-private;
+                }
+                inactive: group PEERS6 {
+                    import [ LHCONE-SANITY6-IN SET-PREF LHCONE-PEER-IN ];
+                    family inet6 {
+                        unicast {
+                            prefix-limit {
+                                maximum 3000;
+                                teardown 90;
+                            }
+                        }
+                    }
+                    export [ LHCONE-SANITY6-OUT LHCONE-REMOVE-COMMS LHCONE-PEER-OUT ];
+                    remove-private;
+                }
+                group OTHER-INTERNAL {
+                    type internal;
+                    import REJECT-ALL;
+                    peer-as 11537;
+                    neighbor 10.10.10.183 {
+                        description "[LHCONE] nms-rpsv.losa | [NO-MONITOR]";
+                        local-address 10.10.10.182;
+                        family inet {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+            }
+            bgp {
+                log-updown;
+                group OTHER-INTERNAL {
+                    type internal;
+                    import REJECT-ALL;
+                    peer-as 11537;
+                    neighbor 10.10.10.235 {
+                        description "nms-rspv.losa (transit vrf) [PENDING]";
+                        local-address 10.10.10.234;
+                        family inet {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+                group OTHER-INTERNAL6 {
+                    type internal;
+                    import REJECT-ALL;
+                    peer-as 11537;
+                    neighbor 2001:468:ef01:200::d {
+                        description "nms-rspv.losa (transit vrf) [PENDING]";
+                        local-address 2001:468:ef01:200::c;
+                        family inet6 {
+                            unicast;
+                            multicast;
+                        }
+                    }
+                }
+            }
+            bgp {
+                log-updown;
+                group TRCPS-BB-IBGP {
+                    type internal;
+                    local-address 64.57.20.255;
+                    family inet {
+                        any {
+                            loops 2;
+                        }
+                    }
+                    export TRCPS-NEXT-HOP-SELF;
+                    peer-as 11164;
+                    neighbor 64.57.29.129;
+                    neighbor 64.57.29.130;
+                    neighbor 64.57.29.131;
+                    neighbor 64.57.29.134;
+                    neighbor 64.57.29.135;
+                    neighbor 64.57.20.243;
+                    neighbor 64.57.20.254;
+                }
+                group TRCPS-BB-V6IBGP {
+                    type internal;
+                    local-address 2001:468:f000::18;
+                    family inet6 {
+                        unicast {
+                            loops 2;
+                        }
+                    }
+                    export TRCPS-NEXT-HOP-SELF;
+                    peer-as 11164;
+                    neighbor 2001:468:f000:0000::10;
+                    neighbor 2001:468:f000:0000::11;
+                    neighbor 2001:468:f000:0000::12;
+                    neighbor 2001:468:f000:0000::15;
+                    neighbor 2001:468:f000:0000::16;
+                    neighbor 2001:468:f000:0000::17;
+                    neighbor 2001:468:f000:0000::19;
+                }
+                group EBGP-CUST-FULL {
+                    type external;
+                    hold-time 90;
+                    import EBGP_CUST_FULL_IN;
+                    family inet {
+                        unicast {
+                            accepted-prefix-limit {
+                                maximum 500;
+                                teardown 75 idle-timeout forever;
+                            }
+                        }
+                    }
+                    export EBGP_CUST_FULL_NOCUST_OUT;
+                    remove-private;
+                    neighbor 198.71.47.210 {
+                        description "[trcpscust] U Oregon - PNI Equinix Los Angeles (LA1-LA2)";
+                        import [ TRCPS-SANITY-IN EBGP_CUST_FULL_IN EBGP-CUST-AS4600-IN ];
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 150;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        peer-as 4600;
+                    }
+                    neighbor 64.57.21.135 {
+                        description "[trcpscust] Internet/Denver - PNI Equinix Los Angeles";
+                        import [ TRCPS-SANITY-IN EBGP_CUST_FULL_IN EBGP-CUST-AS65512-IN ];
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 15;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        peer-as 64537;
+                    }
+                    neighbor 198.71.47.179 {
+                        description "[trcpscust] Sun Corridor - PNI Equinix Los Angeles";
+                        metric-out igp;
+                        import [ TRCPS-SANITY-IN EBGP_CUST_FULL_IN EBGP-CUST-AS62600-IN ];
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 400;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        peer-as 62600;
+                    }
+                    neighbor 198.71.47.234 {
+                        description "[trcpspeer] CPS - PNI Equinix Los Angeles";
+                        hold-time 90;
+                        import [ SANITY-PEER EBGP-PEER-AS11537-V4-IN ];
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 220000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                                loops 2;
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS11537-V4-OUT ];
+                        remove-private;
+                        peer-as 11537;
+                    }
+                    neighbor 64.57.20.81 {
+                        description "[trcpscust] CENIC/CalREN - PNI Equinix Los Angeles";
+                        passive;
+                        import [ TRCPS-SANITY-IN EBGP_CUST_FULL_IN EBGP-CUST-AS2152-IN ];
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 100000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        peer-as 2152;
+                        multipath;
+                    }
+                    neighbor 64.57.20.83 {
+                        description "[trcpscust] CENIC/CalREN - PNI Equinix Los Angeles";
+                        passive;
+                        import [ TRCPS-SANITY-IN EBGP_CUST_FULL_IN EBGP-CUST-AS2152-IN ];
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 100000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        peer-as 2152;
+                        multipath;
+                    }
+                }
+                group EBGP6-CUST-FULL {
+                    type external;
+                    hold-time 90;
+                    import EBGP6_CUST_FULL_IN;
+                    family inet6 {
+                        unicast {
+                            accepted-prefix-limit {
+                                maximum 50;
+                                teardown 75 idle-timeout forever;
+                            }
+                        }
+                    }
+                    export EBGP_CUST_FULL_NOCUST_OUT;
+                    remove-private;
+                    neighbor 2001:468:f000:2704::2 {
+                        description "[trcpscust] U Oregon - PNI Equinix Los Angeles (LA1-LA2)";
+                        import [ TRCPS-SANITY-IN EBGP6_CUST_FULL_IN EBGP6-CUST-AS4600-IN ];
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 10;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        peer-as 4600;
+                    }
+                    neighbor 2001:468:f000:23fa::2 {
+                        description "[trcpscust] Internet2/Denver - PNI Equinix Los Angeles";
+                        import [ TRCPS-SANITY-IN EBGP6_CUST_FULL_IN EBGP6-CUST-AS65512-IN ];
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 10;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        peer-as 64537;
+                    }
+                    neighbor 2001:468:f000:2301::2 {
+                        description "[trcpscust] Sun Corridor - PNI Equinix Los Angeles";
+                        metric-out igp;
+                        import [ TRCPS-SANITY-IN EBGP6_CUST_FULL_IN EBGP6-CUST-AS62600-IN ];
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 30;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        peer-as 62600;
+                    }
+                    neighbor 2001:468:f000:2705::1 {
+                        description "[trcpspeer] CPS - PNI Equinix Los Angeles";
+                        hold-time 90;
+                        import [ TRCPS-SANITY6-INTERNAL EBGP-PEER-AS11537-V6-IN ];
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 25000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                                loops 2;
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS11537-V6-OUT ];
+                        remove-private;
+                        peer-as 11537;
+                    }
+                    neighbor 2001:468:f000:2303::2 {
+                        description "[trcpscust] CENIC/CalREN - PNI -  Equinix Los Angeles";
+                        import [ TRCPS-SANITY-IN EBGP6_CUST_FULL_IN EBGP6-CUST-AS2152-IN ];
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 500;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        peer-as 2152;
+                        multipath;
+                    }
+                    neighbor 2001:468:f000:2304::2 {
+                        description "[trcpscust] CENIC/CalREN - PNI -  Equinix Los Angeles";
+                        passive;
+                        import [ TRCPS-SANITY-IN EBGP6_CUST_FULL_IN EBGP6-CUST-AS2152-IN ];
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 500;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        peer-as 2152;
+                        multipath;
+                    }
+                }
+                group EBGP6-PEER-EQXLSAN {
+                    type external;
+                    hold-time 90;
+                    import [ SANITY6-PEER EBGP6_PEER_EQXLSAN_IN ];
+                    family inet6 {
+                        unicast {
+                            accepted-prefix-limit {
+                                maximum 500;
+                                teardown 75 idle-timeout forever;
+                            }
+                        }
+                    }
+                    export [ SANITY6-PEER DENY-ALL ];
+                    remove-private;
+                    neighbor 2001:504:0:3:0:6:5517:1 {
+                        description "[trcpspeer] Equinix LA2 IXP Route Collector [NO-NOTIFY] - Equinix LA2";
+                        passive;
+                        import REJECT-ALL;
+                        export REJECT-ALL;
+                        peer-as 65517;
+                    }
+                    neighbor 2001:504:0:3::4637:1 {
+                        description "[trcpspeer] REACH - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 1000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS4637-OUT ];
+                        peer-as 4637;
+                    }
+                    neighbor 2001:504:0:3::8075:1 {
+                        description "[trcpspeer] Microsoft/MSN - Equinix Los Angeles | I2-S53170";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 30;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS8075-OUT ];
+                        peer-as 8075;
+                    }
+                    neighbor 2001:504:0:3::4323:1 {
+                        description "[trcpspeer] tw telecom - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 500;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS4323-OUT ];
+                        peer-as 4323;
+                    }
+                    neighbor 2001:504:0:3::9680:1 {
+                        description "[trcpspeer] HiNet - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 100;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS9680-OUT ];
+                        peer-as 9680;
+                    }
+                    neighbor 2001:504:0:3:0:1:2989:1 {
+                        description "[trcpspeer] Highwinds - Equinix Los Angeles";
+                        passive;
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 1500;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS12989-OUT ];
+                        peer-as 12989;
+                    }
+                    neighbor 2001:504:0:3::3491:1 {
+                        description "[trcpspeer] PCCW - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 1500;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS3491-OUT ];
+                        peer-as 3491;
+                    }
+                    neighbor 2001:504:0:3::4739:1 {
+                        description "[trcpspeer] Internode - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 100;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS4739-OUT ];
+                        peer-as 4739;
+                    }
+                    neighbor 2001:504:0:3::2497:1 {
+                        description "[trcpspeer] IIJ - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 1500;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS2497-OUT ];
+                        peer-as 2497;
+                    }
+                    neighbor 2001:504:0:3:0:2:2822:1 {
+                        description "[trcpspeer] Limelight - Equinix Los Angeles";
+                        passive;
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 50;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS22822-OUT ];
+                        peer-as 22822;
+                    }
+                    neighbor 2001:504:0:3::4648:1 {
+                        description "[trcpspeer] Telecom New Zealand - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 1000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS4648-OUT ];
+                        peer-as 4648;
+                    }
+                    neighbor 2001:504:0:3:0:1:26:1 {
+                        description "[trcpspeer] Pacnet - Equinix Los Angeles | [6555:121] | [PENDING]";
+                        passive;
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 1000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS10026-OUT ];
+                        peer-as 10026;
+                    }
+                    neighbor 2001:504:0:3::3:6692:1 {
+                        description "[trcpspeer] OpenDNS - Equinix Los Angeles | I2-S53171";
+                        passive;
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 20;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS36692-OUT ];
+                        peer-as 36692;
+                    }
+                    neighbor 2001:504:0:3:0:4:528:1 {
+                        description "[trcpspeer] ICANN DC - Equinix Los Angeles [PENDING]";
+                        passive;
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 20;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS40528-OUT ];
+                        peer-as 40528;
+                    }
+                    neighbor 2001:504:0:3::4788:1 {
+                        description "[trcpspeer] Telekom Malaysia - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 1000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS4788-OUT ];
+                        peer-as 4788;
+                    }
+                    neighbor 2001:504:0:3::42:1 {
+                        description "[trcpspeer] PCH - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 300;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS42-OUT ];
+                        peer-as 42;
+                    }
+                    neighbor 2001:504:0:3::3856:1 {
+                        description "[trcpspeer] PCH-LG - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 100;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS3856-OUT ];
+                        peer-as 3856;
+                    }
+                    neighbor 2001:504:0:3::4589:1 {
+                        description "[trcpspeer] Easynet - Equinix Los Angeles [PENDING] 6576:121 | TRCPS-S02424";
+                        passive;
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 100;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS4589-OUT ];
+                        peer-as 4589;
+                    }
+                    neighbor 2001:504:0:3:0:2:115:1 {
+                        description "[trcpspeer] Charter - Equinix Los Angeles [PENDING] 6449:121";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 100;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS20115-OUT ];
+                        peer-as 20115;
+                    }
+                    neighbor 2001:504:0:3:0:2:2773:1 {
+                        description "[trcpspeer] Cox - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 300;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS22773-OUT ];
+                        peer-as 22773;
+                    }
+                    neighbor 2001:504:0:3::6939:1 {
+                        description "[trcpspeer] Hurricane Electric - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 20000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS6939-OUT ];
+                        peer-as 6939;
+                    }
+                    neighbor 2001:504:0:3::7342:1 {
+                        description "[trcpspeer] Verisign - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 60;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS7342-OUT ];
+                        peer-as 7342;
+                    }
+                    neighbor 2001:504:0:3::1:310:1 {
+                        description "[trcpspeer] Yahoo - Equinix Los Angeles";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 100;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS10310-OUT ];
+                        peer-as 10310;
+                    }
+                    neighbor 2001:504:0:3::9505:1 {
+                        description "[trcpspeer] TWGate - Equinix Los Angeles [PENDING]";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 150;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS9505-OUT ];
+                        peer-as 9505;
+                    }
+                    neighbor 2001:504:0:3::6461:1 {
+                        description "[trcpspeer] Abovenet - Equinix Los Angeles [PENDING][6411:121]";
+                        family inet6 {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 2000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY6-PEER EBGP-PEER-AS6461-OUT ];
+                        peer-as 6461;
+                    }
+                }
+                group EBGP-PEER-EQXLSAN {
+                    type external;
+                    hold-time 90;
+                    import [ SANITY-PEER EBGP_PEER_EQXLSAN_IN ];
+                    family inet {
+                        unicast {
+                            accepted-prefix-limit {
+                                maximum 10000;
+                                teardown 75 idle-timeout forever;
+                            }
+                        }
+                    }
+                    export [ SANITY-PEER DENY-ALL ];
+                    remove-private;
+                    neighbor 206.223.123.125 {
+                        description "[trcpspeer] Equinix LA2 IXP Route Collector [NO-NOTIFY] - Equinix LA2";
+                        import REJECT-ALL;
+                        export REJECT-ALL;
+                        peer-as 65517;
+                    }
+                    neighbor 206.223.123.8 {
+                        description "[trcpspeer] SK Broadband - Equinix Los Angeles";
+                        damping;
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 20000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS9318-OUT ];
+                        peer-as 9318;
+                        multipath;
+                    }
+                    neighbor 206.223.123.11 {
+                        description "[trcpspeer] REACH - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 20000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS4637-OUT ];
+                        peer-as 4637;
+                    }
+                    neighbor 206.223.123.14 {
+                        description "[trcpspeer] Edgecast - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 50;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS15133-OUT ];
+                        peer-as 15133;
+                    }
+                    neighbor 206.223.123.17 {
+                        description "[trcpspeer] Microsoft/MSN - Equinix Los Angeles | I2-S53170";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 500;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS8075-OUT ];
+                        peer-as 8075;
+                    }
+                    neighbor 206.223.123.35 {
+                        description "[trcpspeer] Amazon - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 200;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS16509-OUT ];
+                        peer-as 16509;
+                    }
+                    neighbor 206.223.123.36 {
+                        description "[trcpspeer] tw telecom - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 20000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS4323-OUT ];
+                        peer-as 4323;
+                    }
+                    neighbor 206.223.123.39 {
+                        description "[trcpspeer] HiNet - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 10000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS9680-OUT ];
+                        peer-as 9680;
+                    }
+                    neighbor 206.223.123.75 {
+                        description "[trcpspeer] Highwinds - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 10000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS12989-OUT ];
+                        peer-as 12989;
+                    }
+                    neighbor 206.223.123.93 {
+                        description "[trcpspeer] PCCW - Equinix Los Angeles";
+                        import [ SANITY-PEER EBGP_PEER_EQXLSAN_IN EBGP-PEER-IN-DEPREF1 ];
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 90000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS3491-OUT ];
+                        peer-as 3491;
+                        multipath;
+                    }
+                    neighbor 206.223.123.116 {
+                        description "[trcpspeer] SK Broadband - Equinix Los Angeles";
+                        damping;
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 20000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS9318-OUT ];
+                        peer-as 9318;
+                        multipath;
+                    }
+                    neighbor 206.223.123.118 {
+                        description "[trcpspeer] Internode - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 3000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS4739-OUT ];
+                        peer-as 4739;
+                    }
+                    neighbor 206.223.123.23 {
+                        description "[trcpspeer] IIJ - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 8000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS2497-OUT ];
+                        peer-as 2497;
+                    }
+                    neighbor 206.223.123.123 {
+                        description "[trcpspeer] Limelight - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 120000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS22822-OUT ];
+                        peer-as 22822;
+                    }
+                    neighbor 206.223.123.4 {
+                        description "[trcpspeer] Xeex - Equinix Los Angeles [PENDING]";
+                        passive;
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 5000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS27524-OUT ];
+                        peer-as 27524;
+                        multipath;
+                    }
+                    neighbor 206.223.123.6 {
+                        description "[trcpspeer] Telecom New Zealand - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 15000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS4648-OUT ];
+                        peer-as 4648;
+                    }
+                    neighbor 206.223.123.51 {
+                        description "[trcpspeer] TWGate - Equinix Los Angeles";
+                        import [ SANITY-PEER EBGP_PEER_EQXLSAN_IN EBGP-PEER-IN-DEPREF1 ];
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 7500;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS9505-OUT ];
+                        peer-as 9505;
+                    }
+                    neighbor 206.223.123.64 {
+                        description "[trcpspeer] VeriSign - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 1000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS7342-OUT ];
+                        peer-as 7342;
+                        multipath;
+                    }
+                    neighbor 206.223.123.82 {
+                        description "[trcpspeer] Pacnet - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 25000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS10026-OUT ];
+                        peer-as 10026;
+                    }
+                    neighbor 206.223.123.85 {
+                        description "[trcpspeer] OpenDNS - Equinix Los Angeles | I2-S53171";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 150;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS36692-OUT ];
+                        peer-as 36692;
+                    }
+                    neighbor 206.223.123.86 {
+                        description "[trcpspeer] ICANN DC - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 20;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS40528-OUT ];
+                        peer-as 40528;
+                        multipath;
+                    }
+                    neighbor 206.223.123.94 {
+                        description "[trcpspeer] Telekom Malaysia - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 10000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS4788-OUT ];
+                        peer-as 4788;
+                    }
+                    neighbor 206.223.123.110 {
+                        description "[trcpspeer] PCH-DNS - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 300;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS42-OUT ];
+                        peer-as 42;
+                    }
+                    neighbor 206.223.123.111 {
+                        description "[trcpspeer] PCH-LG [NO-MONITOR] - Equinix Los Angeles";
+                        import DENY-ALL;
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 100;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export DENY-ALL;
+                        peer-as 3856;
+                    }
+                    neighbor 206.223.123.113 {
+                        description "[trcpspeer] Easynet - Equinix Los Angeles [PENDING] 6576:121 | TRCPS-S02424";
+                        multihop {
+                            ttl 255;
+                        }
+                        passive;
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 1200;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS4589-OUT ];
+                        peer-as 4589;
+                    }
+                    neighbor 206.223.123.141 {
+                        description "[trcpspeer] Charter - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 10000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS20115-OUT ];
+                        peer-as 20115;
+                    }
+                    neighbor 206.223.123.42 {
+                        description "[trcpspeer] Cox - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 15000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS22773-OUT ];
+                        peer-as 22773;
+                    }
+                    neighbor 206.223.123.37 {
+                        description "[trcpspeer] Hurricane Electric - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 100000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS6939-OUT ];
+                        peer-as 6939;
+                    }
+                    neighbor 206.223.123.16 {
+                        description "[trcpspeer] Yahoo - Equinix Los Angeles";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 1000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS10310-OUT ];
+                        peer-as 10310;
+                    }
+                    neighbor 206.223.123.71 {
+                        description "[trcpspeer] Abovenet - Equinix Los Angeles [PENDING][6411:121]";
+                        family inet {
+                            unicast {
+                                accepted-prefix-limit {
+                                    maximum 40000;
+                                    teardown 75 idle-timeout forever;
+                                }
+                            }
+                        }
+                        export [ SANITY-PEER EBGP-PEER-AS6461-OUT ];
+                        peer-as 6461;
+                    }
+                }
+            }
