@@ -26,7 +26,7 @@ excludelist=[]
 mylist=[]
 gloffset=-1
 datagridpagesize=5
-FilesStoreFolder="ServerData1"
+FilesStoreFolder="ServerData2"
 TotalFileList=[]
 TotalFileNameList=[]
 for eachfile in os.listdir(os.path.join(ProjectPath,FilesStoreFolder)):

@@ -112,9 +112,10 @@ def MainFunc(filelist,filepath,linstr,outputfolder):
             #print("success")
             #print(val3)
 
-
-
-#MainFunc(ProjectPath+'/data2',"group CONNECTOR {","inputrules")
+mylist=["atla","chic","clev","hous","kans","losa","newy32aoa","salt","seat","wash"]
+filelist=list(filter(lambda a: a in mylist,os.listdir(ProjectPath+'/ServerData2')))
+print(filelist)
+MainFunc(filelist,ProjectPath+'/ServerData2',"group CONNECTOR {","inputrules")
 
 
 
