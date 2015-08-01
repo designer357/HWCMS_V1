@@ -25,7 +25,7 @@ ProjectPath="/Library/WebServer/Documents/HWCMS_V1"
 excludelist=[]
 mylist=[]
 gloffset=-1
-datagridpagesize=5
+datagridpagesize=50
 FilesStoreFolder="ServerData2"
 TotalFileList=[]
 TotalFileNameList=[]
@@ -309,6 +309,9 @@ def rule_show(request):
 
 
 
+
+
+
 def rule_generate(request):
     global datagridpagesize
     global TotalFileList,TotalFileNameList
@@ -363,6 +366,10 @@ def rule_generate(request):
     for each in interests:
         print(each+" is processing......")
         InPutForRulesVersion2.MainFunc(templist,os.path.join(ProjectPath,FilesStoreFolder),each.strip(),rulesfolder)
+
+
+
+
         a = Apriori(para.min_supp,ProjectPath+'/'+rulesfolder+"/input_"+each)
         ls = a.do()
         rules = a.ralationRules(ls.get(ls.size()).items,para.min_cond,para.min_lift,para.min_kulc,para.thresh_ir)
@@ -497,8 +504,8 @@ def file_show(request,offset):
         previouspage=0
     for tab in range(pages):
         pagelist.append(str(tab+1))
-    if os.path.isfile(ProjectPath+"/templates/T1.html"):
-        fp = open(ProjectPath+"/templates/T1.html")
+    if os.path.isfile(ProjectPath+"/templates/table.html"):
+        fp = open(ProjectPath+"/templates/table.html")
         t = Template(fp.read())
         fp.close()
     else:
@@ -542,8 +549,8 @@ def index_page(request):
         checklist.append("")
     for tab in range(pages):
         pagelist.append(str(tab+1))
-    if os.path.isfile(ProjectPath+"/templates/T1.html"):
-        fp = open(ProjectPath+"/templates/T1.html")
+    if os.path.isfile(ProjectPath+"/templates/table.html"):
+        fp = open(ProjectPath+"/templates/table.html")
         t = Template(fp.read())
         fp.close()
     else:
@@ -556,10 +563,11 @@ def index_page(request):
 
     #return render_to_response('T1.html',locals())
 def send_message(request):
-    name = "Joe Lennon"
-    sent_date = datetime.datetime.now()
+    pass
+    #name = "Joe Lennon"
+    #sent_date = datetime.datetime.now()
     #return render_to_response(ProjectPath+'/templates/U1.html', locals())
-    return render_to_response('U1.html', locals())
+    #return render_to_response('table.html', locals())
 
 def file_delete(request,offset):
     print(request.POST)
