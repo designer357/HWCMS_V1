@@ -328,7 +328,6 @@ def rule_show(request):
 
 
 def rule_generate(request):
-    print("fafafafafafdfafafaffafafdasfadfaffafasfafasfafdfa")
     operationtype=str(request.POST.get("OperationType"))
     global datagridpagesize
     global TotalFileList
@@ -386,7 +385,7 @@ def rule_generate(request):
 
 
         for each in interests:
-            print(each+" is processing......")
+            #print(each+" is processing......")
             InPutForRulesVersion2.MainFunc(templist,os.path.join(ProjectPath,FilesStoreFolder),each.strip(),rulesfolder)
             a = Apriori(para.min_supp,ProjectPath+'/'+rulesfolder+"/input_"+each.strip())
             ls = a.do()
@@ -401,6 +400,7 @@ def rule_generate(request):
                     fout.write(str(rule)+'\n')
                 fout.write("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n")
     elif operationtype=="Bayes":
+
         return file_show(request,1)
 
 
@@ -452,13 +452,13 @@ def file_show(request,offset):
 
     currentpage=myoffset
 
-    print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    #print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     filtername=str(request.POST.get("FilterName"))
     filterdate=str(request.POST.get("FilterDate"))
     filtertype=str(request.POST.get("FilterType"))
     TotalFileList2=[]
     for eachitem in TotalFileList:
-        print(eachitem.filename+" is ..................processing"+"***************"+str(len(eachitem.filetype)))
+        #print(eachitem.filename+" is ..................processing"+"***************"+str(len(eachitem.filetype)))
         try:
             if filtername=="Filename" or filtername=="None":
                 pass
@@ -526,10 +526,10 @@ def file_show(request,offset):
         fp.close()
     else:
         print("Template Does Not Exist!")
-    print(len(TopList))
-    print("------------------------------->")
-    for e in TopList:
-        print(e.filename)
+    #print(len(TopList))
+    #print("------------------------------->")
+    #for e in TopList:
+        #print(e.filename)
     html = t.render(Context({'CurrentPage':currentpage,'Pages':pages,'NextPage':nextpage,'PreviousPage':previouspage,\
                              'list':TotalFileList,'TheTopList':TopList,'DataGridPageSize':datagridpagesize,\
                              'lengthofmylist':lengthofmylist,"PagesList":pagelist}))
