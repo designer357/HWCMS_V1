@@ -71,9 +71,9 @@
         </div>
         <div class="clear">
         </div>
-        <div class="grid_12">
+         <div class="grid_12">
             <ul class="nav main">
-                <li class="ic-dashboard"><a href="{% url 'JumpToIndex' %}"><span>Index</span></a> </li>
+                <li class="ic-dashboard"><a href="{% url 'JumpToIndex' %}"><span>Home Page</span></a> </li>
                 <li class="ic-form-style"><a href="javascript:"><span>File Management</span></a>
                     <ul>
                         <li><a href="{% url 'file_show' '1' %}">Show Files</a> </li>
@@ -82,13 +82,11 @@
                         <li><a href="table.html">Page with Sidebar Example</a> </li>
                     </ul>
                 </li>
-				<li class="ic-typography"><a href="typography.html"><span>Typography</span></a></li>
-                <li class="ic-charts"><a href="charts.html"><span>Charts & Graphs</span></a></li>
-                <li class="ic-grid-tables"><a href="table.html"><span>Data Table</span></a></li>
+                <li class="ic-grid-tables"><a href="{% url 'file_show' '1' %}"><span>Data Table</span></a></li>
                 <li class="ic-gallery dd"><a href="javascript:"><span>Image Galleries</span></a>
                		 <ul>
-                        <li><a href="/static/image-gallery.html">Pretty Photo</a> </li>
-                        <li><a href="/static/gallery-with-filter.html">Gallery with Filter</a> </li>
+                        <li><a href="image-gallery.html">Pretty Photo</a> </li>
+                        <li><a href="gallery-with-filter.html">Gallery with Filter</a> </li>
                     </ul>
                 </li>
                 <li class="ic-notifications"><a href="notifications.html"><span>Notifications</span></a></li>
@@ -103,26 +101,15 @@
                     <ul class="section menu">
                         <li><a class="menuitem">Menu 1</a>
                             <ul class="submenu">
-                            <form action="{% url 'file_upload_for_detection' %}" enctype="multipart/form-data" method="post" class="add-button">
-                            <input type='hidden' name='textfield' id='textfield' class='txt' />
-<!--<div class="file-box">-->
-                            <!--<input type='button' class='btn' value='浏览...' /> -->
-<!--<input type="file" name="fileField" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />-->
-<!--<input type="submit" name="submit" class="btn" value="上传" /> -->
-<!--</div>-->
-
-                            <input type="file" class="" name="multifile" id="multifile" style="width:127px;" title="Add new router file"/>
-
-                            <input type="submit" name="submit" class="btn btn-blue btn-plus" value="Add" />
-						</form>
+                                <li><a>Submenu 1</a> </li>
+                                <li><a>Submenu 2</a> </li>
+                                <li><a>Submenu 3</a> </li>
 
                             </ul>
                         </li>
                         <li><a class="menuitem">Menu 2</a>
                             <ul class="submenu">
-                                <li><a>Submenu 1</a> </li>
-                                <li><a>Submenu 2</a> </li>
-                                <li><a>Submenu 3</a> </li>
+
                                 <li><a>Submenu 4</a> </li>
                                 <li><a>Submenu 5</a> </li>
                             </ul>
@@ -138,7 +125,7 @@
         
         <div class="grid_10">
         	<div class="box round first">
-        		 <h2> Charts</h2>
+        		 <h2> Detection Result</h2>
                   <div id="bar-chart">
                     </div>
             </div>     
@@ -152,10 +139,7 @@
 				<!-- Box -->
 
 				<div class="box">
-					<!-- Box Head -->
-					<div class="box-head">
-						<h2>Rule Display</h2>
-					</div>
+
 					<!-- End Box Head -->
 
 					<form action="" method="post">

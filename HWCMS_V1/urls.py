@@ -31,6 +31,8 @@ urlpatterns = patterns('',
     url(r'^index/(\d)/$',file_show,name='file_show'),
     url(r'^index/rule_show/$',file_upload_for_detection,name='file_upload_for_detection'),
     url(r'^rule_generate/$',rule_generate,name='rule_generate'),
+    url(r'^rule_generate/$',rule_generate,name='rule_generate2'),
+
     ('^send_message/$', send_message),
 
 

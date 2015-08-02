@@ -312,8 +312,8 @@ def rule_show(request):
     global patterns
     global lengthofmylist,pages,nextpage,previouspage,pagelist,ruleslist,TopList,interests
 
-    if os.path.isfile(ProjectPath+"/templates/charts.html"):
-        fp = open(ProjectPath+"/templates/charts.html")
+    if os.path.isfile(ProjectPath+"/templates/Rule_Show.html"):
+        fp = open(ProjectPath+"/templates/Rule_Show.html")
         t = Template(fp.read())
         fp.close()
     else:
@@ -328,6 +328,8 @@ def rule_show(request):
 
 
 def rule_generate(request):
+    print("fafafafafafdfafafaffafafdasfadfaffafasfafasfafdfa")
+    operationtype=str(request.POST.get("OperationType"))
     global datagridpagesize
     global TotalFileList
     global mylist
@@ -356,10 +358,8 @@ def rule_generate(request):
 
 
 
-    para=Parameter(float(request.POST.get("paraMinSupp")),float(request.POST.get("paraMinCond"))\
-                   ,float(request.POST.get("paraMinLift")),float(request.POST.get("paraMinKulc")),float(request.POST.get("paraThreshIR")))
-    patterns=str(request.POST.get("strPattern"))
-    interests.append(patterns)
+
+
     rulesfolder="inputrules"
 
     #starttime = time.time()
@@ -378,25 +378,34 @@ def rule_generate(request):
             pass
     for each in TotalFileList:
         templist.append(each.filename)
-    for each in interests:
-        print(each+" is processing......")
-        InPutForRulesVersion2.MainFunc(templist,os.path.join(ProjectPath,FilesStoreFolder),each.strip(),rulesfolder)
+    if operationtype=="Association Rule":
+        para=Parameter(float(request.POST.get("paraMinSupp")),float(request.POST.get("paraMinCond"))\
+                   ,float(request.POST.get("paraMinLift")),float(request.POST.get("paraMinKulc")),float(request.POST.get("paraThreshIR")))
+        patterns=str(request.POST.get("strPattern"))
+        interests.append(patterns)
 
 
-
-
-        a = Apriori(para.min_supp,ProjectPath+'/'+rulesfolder+"/input_"+each)
-        ls = a.do()
-        rules = a.ralationRules(ls.get(ls.size()).items,para.min_cond,para.min_lift,para.min_kulc,para.thresh_ir)
-        rule_count=0
-        for rule in rules:
-            rule_count += 1
-            ruleslist.append(str(rule_count)+'th'+str(rule))
-        with open(ProjectPath+"/results/RulesFor_"+each,"a")as fout:
-            fout.write("min_support is "+str(para.min_supp)+".  min_confidence is "+str(para.min_cond)+"\n")
+        for each in interests:
+            print(each+" is processing......")
+            InPutForRulesVersion2.MainFunc(templist,os.path.join(ProjectPath,FilesStoreFolder),each.strip(),rulesfolder)
+            a = Apriori(para.min_supp,ProjectPath+'/'+rulesfolder+"/input_"+each.strip())
+            ls = a.do()
+            rules = a.ralationRules(ls.get(ls.size()).items,para.min_cond,para.min_lift,para.min_kulc,para.thresh_ir)
+            rule_count=0
             for rule in rules:
-                fout.write(str(rule)+'\n')
-            fout.write("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n")
+                rule_count += 1
+                ruleslist.append(str(rule_count)+'th'+str(rule))
+            with open(ProjectPath+"/results/RulesFor_"+each,"a")as fout:
+                fout.write("min_support is "+str(para.min_supp)+".  min_confidence is "+str(para.min_cond)+"\n")
+                for rule in rules:
+                    fout.write(str(rule)+'\n')
+                fout.write("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n")
+    elif operationtype=="Bayes":
+        return file_show(request,1)
+
+
+
+
     #endtime =  time.time()
     #time_elapsed = time.clock() - timestart
     #time_2=endtime-starttime
@@ -511,8 +520,8 @@ def file_show(request,offset):
         previouspage=0
     for tab in range(pages):
         pagelist.append(str(tab+1))
-    if os.path.isfile(ProjectPath+"/templates/table.html"):
-        fp = open(ProjectPath+"/templates/table.html")
+    if os.path.isfile(ProjectPath+"/templates/DataTable.html"):
+        fp = open(ProjectPath+"/templates/DataTable.html")
         t = Template(fp.read())
         fp.close()
     else:
@@ -557,8 +566,8 @@ def index_page(request):
         checklist.append("")
     for tab in range(pages):
         pagelist.append(str(tab+1))
-    if os.path.isfile(ProjectPath+"/templates/table.html"):
-        fp = open(ProjectPath+"/templates/table.html")
+    if os.path.isfile(ProjectPath+"/templates/DataTable.html"):
+        fp = open(ProjectPath+"/templates/DataTable.html")
         t = Template(fp.read())
         fp.close()
     else:
@@ -575,7 +584,7 @@ def send_message(request):
     #name = "Joe Lennon"
     #sent_date = datetime.datetime.now()
     #return render_to_response(ProjectPath+'/templates/U1.html', locals())
-    #return render_to_response('table.html', locals())
+    #return render_to_response('DataTable.html', locals())
 
 def file_delete(request,offset):
     global TotalFileList

@@ -65,7 +65,7 @@
         </div>
         <div class="grid_12">
             <ul class="nav main">
-                <li class="ic-dashboard"><a href="{% url 'JumpToIndex' %}"><span>Index</span></a> </li>
+                <li class="ic-dashboard"><a href="{% url 'JumpToIndex' %}"><span>Home Page</span></a> </li>
                 <li class="ic-form-style"><a href="javascript:"><span>File Management</span></a>
                     <ul>
                         <li><a href="{% url 'file_show' '1' %}">Show Files</a> </li>
@@ -74,9 +74,7 @@
                         <li><a href="table.html">Page with Sidebar Example</a> </li>
                     </ul>
                 </li>
-				<li class="ic-typography"><a href="typography.html"><span>Typography</span></a></li>
-                <li class="ic-charts"><a href="charts.html"><span>Charts & Graphs</span></a></li>
-                <li class="ic-grid-tables"><a href="table.html"><span>Data Table</span></a></li>
+                <li class="ic-grid-tables"><a href="{% url 'file_show' '1' %}"><span>Data Table</span></a></li>
                 <li class="ic-gallery dd"><a href="javascript:"><span>Image Galleries</span></a>
                		 <ul>
                         <li><a href="image-gallery.html">Pretty Photo</a> </li>
@@ -98,7 +96,6 @@
                 <div class="block" id="section-menu">
                     <ul class="section menu">
 
-                                                  <form action="{% url 'rule_generate' %}" method="post" >
 
 
 
@@ -108,27 +105,35 @@
 
                             </ul>
                         </li>
+                        <form action="{% url 'rule_generate' %}" method="post" >
+
 
                         <li><a class="menuitem" >Association Rules Input</a>
                             <ul class="submenu">
-
+                                 <li class="right"><input type="hidden" name="OperationType" value="Association Rule"></li>
                                  <li class="right">Pattern:<input type="text"  class="success" name="strPattern" value="input patterns" size="20" ></li>
                                  <li class="right">MinSupp:<input type="text"  class="success" name="paraMinSupp" value="0.7"  ></li>
                                  <li class="right">MinCond:<input type="text"  class="success" name="paraMinCond" value="0.8"  ></li>
                                  <li class="right">MinLift:<input type="text"  class="success" name="paraMinLift" value="0.01"  ></li>
                                  <li class="right">MinKulc:<input type="text"  class="success" name="paraMinKulc" value="0.01"  ></li>
-                                 <li class="left">ThreshIR:<input type="text"  class="success" name="paraThreshIR" value="100" size="6" ></li>
+                                 <li class="left">ThreshIR:<input type="text"  class="success" name="paraThreshIR" value="100" size="5" ></li>
                                  <li class="right"><input type="submit"  class=""  size="5" value="Compute"  ></li>
 
                             </ul>
-                        </li>
+                        </li></form>
+
+                        <form action="{% url 'rule_generate' %}" method="post" >
                         <li><a class="menuitem">Bayes Detection</a>
                             <ul class="submenu">
+                                <li class="right"><input type="hidden" name="OperationType" value="Bayes"></li>
+
+
                                  <li class="left">Thresh:<input type="text"  class="success" name="paraMinSupp" value="0.7"  size="6"></li>
 <li class="right"><input type="submit"  class=""  size="5" value="Compute"  ></li>
                             </ul>
                         </li>
-</form>
+                            </form>
+
 
                     </ul>
 
