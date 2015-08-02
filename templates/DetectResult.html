@@ -151,22 +151,31 @@
 
 				<!-- Box -->
 
+				<div class="box">
+					<!-- Box Head -->
+					<div class="box-head">
+						<h2>Rule Display</h2>
+					</div>
+					<!-- End Box Head -->
 
 					<form action="" method="post">
 
 						<!-- Form -->
-						<div class="box round first grid">
+						<div class="form">
 
 
 
 								<p>
 									<span class="req">max 100 symbols</span>
 									<label>Rule List<span>(Required Field)</span></label>
-            <table width="100%" height="100%" border="1" align="center" cellpadding="0" cellspacing="0" class="warning" >
+            <table width="100%" height="100%" border="1" align="center" cellpadding="0" cellspacing="0" class="field size1" >
 <tr><td width="200" height="50" align="left" valign="top"><div id="Layer1">
-{%for each in RulesList %}{{ each }}<br><br>{% endfor %}
+{%for each in DetectedRuleList %}{{ each }}<br><br>{% endfor %}
 
-    </div></td></tr></table>
+    </div></td></tr>
+
+
+</table>
 
 
 								</p>
@@ -176,12 +185,12 @@
 
 						<!-- Form Buttons -->
 						<div class="buttons">
-							<input type="button" class="" value="save" />
-							<input type="submit" class="" value="detect" />
+							<input type="button" class="button" value="save" />
+							<input type="submit" class="button" value="detect" />
 						</div>
 						<!-- End Form Buttons -->
 					</form>
-				<!-- End Box -->
+				</div>
 
 			<!-- End Content -->
 </div></div>

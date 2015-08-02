@@ -18,7 +18,7 @@ global excludelist
 global gloffset
 global mylist
 global datagridpagesize
-global TotalFileList,TotalFileNameList
+global TotalFileList
 global FilesStoreFolder
 
 ProjectPath="/Library/WebServer/Documents/HWCMS_V1"
@@ -28,7 +28,6 @@ gloffset=-1
 datagridpagesize=50
 FilesStoreFolder="ServerData2"
 TotalFileList=[]
-TotalFileNameList=[]
 for eachfile in os.listdir(os.path.join(ProjectPath,FilesStoreFolder)):
     if '.' in eachfile:
         suffix=eachfile.split('.')[1]
@@ -39,7 +38,6 @@ for eachfile in os.listdir(os.path.join(ProjectPath,FilesStoreFolder)):
     timestr=time.strftime('%Y-%m-%d',timeTuple)
     check=""
     TotalFileList.append(FileList(eachfile,timestr,suffix,check))
-    TotalFileNameList.append(eachfile)
 
 class Rule:
     def __init__(self,rule):
@@ -108,7 +106,11 @@ def replacerightbyerror(mylist,mystr):
 
 def file_upload(request):
     global datagridpagesize
-    global TotalFileList,TotalFileNameList
+    global TotalFileList
+
+    TotalFileNameList=[]
+    for e in TotalFileList:
+        TotalFileNameList.append(e.filename)
 
     tempfullfilelist=[]
     tempfilenamelist=[]
@@ -145,11 +147,9 @@ def file_upload(request):
         check=""
         if not eachfile in TotalFileNameList:
             TotalFileList.append(FileList(eachfile,timestr,suffix,check))
-            TotalFileNameList.append(eachfile)
         else:
             eachfile = eachfile.split('.')[0] + '_copy.' + eachfile.split('.')[1]
             TotalFileList.append(FileList(eachfile,timestr,suffix,check))
-            TotalFileNameList.append(eachfile)
     result=file_show(request,1)
     return result
 def LoadRules(group):
@@ -193,7 +193,10 @@ def LoadRules(group):
     return Rules
 def file_upload_for_detection(request):
     global datagridpagesize
-    global TotalFileList,TotalFileNameList
+    global TotalFileList
+    TotalFileNameList=[]
+    for e in TotalFileList:
+        TotalFileNameList.append(e.filename)
     global mylist
     global patterns
     global lengthofmylist,pages,nextpage,previouspage,pagelist,ruleslist,TopList,interests
@@ -271,18 +274,30 @@ def file_upload_for_detection(request):
 
                 print("--------------------------"+str(count)+" rules detected.")
             if flag3==-1:
-                TotalFileList.append(os.getcwd()+'/'+FilesStoreFolder+'/'+f.name)
-                TotalFileNameList.append(f.name)
-                Nondetectedrule="+++++++++++++++++++++++"+str(f.name)+"+++++++++++++++++++++No Violations."
-                detectedrulelist.append(Nondetectedrule)
+
+
+
+
+                Time=os.stat(os.getcwd()+'/'+FilesStoreFolder+'/'+f.name)[ST_MTIME]
+                timeTuple = time.localtime(Time)
+                timestr=time.strftime('%Y-%m-%d',timeTuple)
+                check=""
+                if not eachfile in TotalFileNameList:
+                    TotalFileList.append(FileList(eachfile,timestr,suffix,check))
+
+                    Nondetectedrule="+++++++++++++++++++++++"+str(f.name)+"+++++++++++++++++++++No Violations."
+                    detectedrulelist.append(Nondetectedrule)
+                else:
+                    Nondetectedrule="+++++++++++++++++++++++"+str(f.name)+"+++++++++++++++++++++No Violations.But the file has exist in DataSet!"
+                    detectedrulelist.append(Nondetectedrule)
         print("-----------------------------------------------------------------------"+str(patterns))
-    if os.path.isfile(ProjectPath+"/templates/T3.html"):
-        fp = open(ProjectPath+"/templates/T3.html")
+    if os.path.isfile(ProjectPath+"/templates/DetectResult.html"):
+        fp = open(ProjectPath+"/templates/DetectResult.html")
         t = Template(fp.read())
         fp.close()
     else:
         print("Template Does Not Exist!!!")
-    html = t.render(Context({'DetectedRuleList':detectedrulelist,'Pages':pages,'NextPage':nextpage,'PreviousPage':previouspage,'list':TotalFileList,'TheTopList':TopList,'DataGridPageSize':datagridpagesize,'lengthofmylist':lengthofmylist,"PagesList":pagelist}))
+    html = t.render(Context({'DetectedRuleList':detectedrulelist}))
 
     return HttpResponse(html)
 
@@ -292,7 +307,7 @@ def file_upload_for_detection(request):
 @csrf_exempt
 def rule_show(request):
     global datagridpagesize
-    global TotalFileList,TotalFileNameList
+    global TotalFileList
     global mylist
     global patterns
     global lengthofmylist,pages,nextpage,previouspage,pagelist,ruleslist,TopList,interests
@@ -314,7 +329,7 @@ def rule_show(request):
 
 def rule_generate(request):
     global datagridpagesize
-    global TotalFileList,TotalFileNameList
+    global TotalFileList
     global mylist
     global patterns
     global lengthofmylist,pages,nextpage,previouspage,pagelist,ruleslist,TopList,interests
@@ -421,7 +436,6 @@ def my_cmp_py3(v1):
 
 def file_show(request,offset):
     global TotalFileList
-    global TotalFileNameList
     myoffset=int(offset)
 
     global gloffset
@@ -433,10 +447,9 @@ def file_show(request,offset):
     filtername=str(request.POST.get("FilterName"))
     filterdate=str(request.POST.get("FilterDate"))
     filtertype=str(request.POST.get("FilterType"))
-    TotalFileNameList2=[]
     TotalFileList2=[]
     for eachitem in TotalFileList:
-        #print(eachitem.filename+" is ..................processing"+"***************"+str(len(eachitem.filetype)))
+        print(eachitem.filename+" is ..................processing"+"***************"+str(len(eachitem.filetype)))
         try:
             if filtername=="Filename" or filtername=="None":
                 pass
@@ -444,7 +457,6 @@ def file_show(request,offset):
                 if filtername in eachitem.filename:
                     pass
                 else:
-                    TotalFileNameList2.append(eachitem.filename)
                     TotalFileList2.append(eachitem)
 
             if filterdate=="Y/Y-M/Y-M-D" or filterdate=="None":
@@ -453,7 +465,6 @@ def file_show(request,offset):
                 if filterdate in eachitem.filedate:
                     pass
                 else:
-                    TotalFileNameList2.append(eachitem.filename)
                     TotalFileList2.append(eachitem)
 
             if filtertype==".suffix" or filtertype=="None":
@@ -462,23 +473,19 @@ def file_show(request,offset):
                 if len(str(eachitem.filetype))==0:
                     pass
                 else:
-                    TotalFileNameList2.append(eachitem.filename)
                     TotalFileList2.append(eachitem)
             else:
                 if len(eachitem.filetype)>0 and eachitem.filetype in filtertype:
                     pass
                 else:
-                    TotalFileNameList2.append(eachitem.filename)
                     TotalFileList2.append(eachitem)
         except:
             pass
 
     TotalFileList=list(set(TotalFileList).difference(set(TotalFileList2)))
-    TotalFileNameList=list(set(TotalFileNameList).difference(set(TotalFileNameList2)))
 
 
     try:
-        TotalFileNameList.sort(my_cmp)
         TotalFileList.sort(my_cmp_filelist)
     except:
         pass
@@ -510,7 +517,10 @@ def file_show(request,offset):
         fp.close()
     else:
         print("Template Does Not Exist!")
-    print(TopList)
+    print(len(TopList))
+    print("------------------------------->")
+    for e in TopList:
+        print(e.filename)
     html = t.render(Context({'CurrentPage':currentpage,'Pages':pages,'NextPage':nextpage,'PreviousPage':previouspage,\
                              'list':TotalFileList,'TheTopList':TopList,'DataGridPageSize':datagridpagesize,\
                              'lengthofmylist':lengthofmylist,"PagesList":pagelist}))
@@ -519,9 +529,7 @@ def file_show(request,offset):
     return HttpResponse(html)
 def index_page(request):
     global TotalFileList
-    global TotalFileNameList
     TotalFileList=[]
-    TotalFileNameList=[]
     for eachfile in os.listdir(os.path.join(ProjectPath,FilesStoreFolder)):
         if '.' in eachfile:
             suffix=eachfile.split('.')[1]
@@ -532,7 +540,7 @@ def index_page(request):
         timestr=time.strftime('%Y-%m-%d',timeTuple)
         check=""
         TotalFileList.append(FileList(eachfile,timestr,suffix,check))
-        TotalFileNameList.append(eachfile)
+        #TotalFileNameList.append(eachfile)
     global excludelist
     excludelist=[]
 
@@ -570,17 +578,14 @@ def send_message(request):
     #return render_to_response('table.html', locals())
 
 def file_delete(request,offset):
-    print(request.POST)
+    global TotalFileList
     i_str=request.POST.get("FileNameToDelete")
-    print(i_str)
-    print(TotalFileNameList)
-    index=TotalFileNameList.index(i_str)
-    print(len(TotalFileNameList))
-    print(len(TotalFileList))
-    TotalFileNameList.pop(index)
-    TotalFileList.pop(index)
-    print("Delete@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@7")
-    print(len(TotalFileList))
-    print(len(TotalFileNameList))
+    TempTotalList=[]
+    for tab in range(len(TotalFileList)):
+        if TotalFileList[tab].filename==i_str:
+            TempTotalList.append(TotalFileList[tab])
+
+    TotalFileList=list(set(TotalFileList).difference(set(TempTotalList)))
+
     return file_show(request,offset)
 
