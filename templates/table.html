@@ -88,49 +88,52 @@
             </ul>
         </div>
         <div class="clear">
+
         </div>
+
+
+
         <div class="grid_2">
             <div class="box sidemenu">
                 <div class="block" id="section-menu">
                     <ul class="section menu">
-                        <li><a class="menuitem" >Input Para</a>
+
+                                                  <form action="{% url 'rule_generate' %}" method="post" >
+
+
+
+                       <li><a class="menuitem">Other Algorithm Input</a>
                             <ul class="submenu">
-                                 <li><div><label>Patterns:</label><input type="text" class="field" name="strPattern" value="Input Patterns" size="15" ></div></li>
-                                 <li><div><label>MinSupp:</label><input type="text" class="field" name="paraMinSupp" value="0.7" size="15" ></div></li>
-                                 <li><div><label>MinCond:</label><input type="text" class="field" name="paraMinCond" value="0.8" size="15" ></div></li>
-                                 <li><div><label>MinLift:</label><input type="text" class="field" name="paraMinLift" value="0.01" size="15" ></div></li>
-                                 <li><div><label>MinKulc:</label><input type="text" class="field" name="paraMinKulc" value="0.01" size="15" ></div></li>
-                                 <li><div><label>ThreshIR:</label><input type="text" class="field" name="paraThreshIR" value="100" size="15" ></div></li>
+                                 <li class="right">Input:  <input type="text"  class="warning" name="strPattern" value="" size="15" ></li>
+
                             </ul>
                         </li>
-                        <li><a class="menuitem">Menu 2</a>
+
+                        <li><a class="menuitem" >Association Rules Input</a>
                             <ul class="submenu">
-                                <li><a>Submenu 1</a> </li>
-                                <li><a>Submenu 2</a> </li>
-                                <li><a>Submenu 3</a> </li>
-                                <li><a>Submenu 4</a> </li>
-                                <li><a>Submenu 5</a> </li>
+
+                                 <li class="right">Pattern:<input type="text"  class="success" name="strPattern" value="input patterns" size="20" ></li>
+                                 <li class="right">MinSupp:<input type="text"  class="success" name="paraMinSupp" value="0.7"  ></li>
+                                 <li class="right">MinCond:<input type="text"  class="success" name="paraMinCond" value="0.8"  ></li>
+                                 <li class="right">MinLift:<input type="text"  class="success" name="paraMinLift" value="0.01"  ></li>
+                                 <li class="right">MinKulc:<input type="text"  class="success" name="paraMinKulc" value="0.01"  ></li>
+                                 <li class="left">ThreshIR:<input type="text"  class="success" name="paraThreshIR" value="100" size="10" ></li>
+                                 <li class="right"><input type="submit"  class=""  value="OK"  ></li>
+
                             </ul>
                         </li>
-                        <li><a class="menuitem">Menu 3</a>
+                        <li><a class="menuitem">Bayes Detection</a>
                             <ul class="submenu">
-                                <li><a>Submenu 1</a> </li>
-                                <li><a>Submenu 2</a> </li>
-                                <li><a>Submenu 3</a> </li>
-                                <li><a>Submenu 4</a> </li>
-                                <li><a>Submenu 5</a> </li>
+                                 <li class="right">Thresh:<input type="text"  class="success" name="paraMinSupp" value="0.7"  ></li>
+
                             </ul>
                         </li>
-                        <li><a class="menuitem">Menu 4</a>
-                            <ul class="submenu">
-                                <li><a>Submenu 1</a> </li>
-                                <li><a>Submenu 2</a> </li>
-                                <li><a>Submenu 3</a> </li>
-                                <li><a>Submenu 4</a> </li>
-                                <li><a>Submenu 5</a> </li>
-                            </ul>
-                        </li>
+</form>
+
                     </ul>
+
+
+
                 </div>
             </div>
         </div>
@@ -157,7 +160,7 @@
                 </form></div></h2>
                     
                     
-                    <form action="{% url 'rule_generate' %}" method="post" >
+                    <!--<form action="{% url 'rule_generate' %}" method="post" >-->
                     <table class="data display datatable" id="example">
 					<thead>
 						<tr class="odd">
@@ -218,7 +221,7 @@
 								<a href="#">View all</a>
                                 <span>  </span>
                             {% if NextPage > 0%}
-                                <div class="right"><span>  </span><input type="submit" onclick="aa()"  value="Generate Rules"></div>
+                                <!--<div class="right"><span>  </span><input type="submit" onclick="aa()"  value="Generate Rules"></div>-->
                                 {% endif %}
 
 
@@ -226,54 +229,21 @@
                         </div>
 
 
-                    			<div id="content">
-
-				<!-- Box -->
-				<div class="box">
-
-					<!-- Box Head -->
-					<div class="box-head">
-						<h2>Management</h2>
-					</div>
-					<!-- End Box Head-->
-
-					<div class="box-content">
-						<a href="#" class="add-button"><span>Input Parameters</span></a>
-
-
-						<!-- Sort -->
-						<div class="sort" >
-	<div class="left111111"> <label>Pattern:</label> <input type="text" class="field" name="strPattern"/> </div>
-    <div class="left111111"> <label>MinSupp:</label> <input type="text" class="field" name="paraMinSupp" value="0.7" /></div>
-    <div class="left111111"> <label>MinCond:</label> <input type="text" class="field" name="paraMinCond" value="0.8"/></div>
-    <div class="left111111"> <label>MinLift:</label> <input type="text" class="field" name="paraMinLift" value="0.01"/></div>
-    <div class="left111111"> <label>MinKulc:</label> <input type="text" class="field" name="paraMinKulc" value="0.01"/><span>      </span></div>
-    <div class="left111111"> <label>ThreshIR:</label><input type="text" class="field" name="paraThreshIR" value="100"/></div>
-
-
-
-						</div>
-						<!-- End Sort -->
-
-					</div>
-				</div>
-				<!-- End Box -->
-			</div>
                     
-                  </form>
-                    
-                </div>
+
             </div>
         </div>
-        <div class="clear">
-        </div>
+                <div class="clear"></div>
     </div>
-    <div class="clear">
-    </div>
+                <div class="clear"></div>
+
+
     <div id="site_info">
         <p>
             Copyright <a href="#">BlueWhale Admin</a>. All Rights Reserved.
         </p>
     </div>
+
+
 </body>
 </html>
