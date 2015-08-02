@@ -297,8 +297,8 @@ def rule_show(request):
     global patterns
     global lengthofmylist,pages,nextpage,previouspage,pagelist,ruleslist,TopList,interests
 
-    if os.path.isfile(ProjectPath+"/templates/T2.html"):
-        fp = open(ProjectPath+"/templates/T2.html")
+    if os.path.isfile(ProjectPath+"/templates/charts.html"):
+        fp = open(ProjectPath+"/templates/charts.html")
         t = Template(fp.read())
         fp.close()
     else:
