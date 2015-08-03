@@ -482,7 +482,6 @@ def file_show(request,offset):
 
     currentpage=myoffset
 
-    #print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     filtername=str(request.POST.get("FilterName"))
     filterdate=str(request.POST.get("FilterDate"))
     filtertype=str(request.POST.get("FilterType"))
