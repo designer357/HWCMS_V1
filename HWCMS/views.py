@@ -226,7 +226,6 @@ def file_upload_for_detection(request):
     detectedrulelist=[]
 
     #print("The number of total rules is "+str(len(rules[0]))+'\n')
-    #print(rules)
     #with open("Detected Log.txt","w")as fout:
         #pass
     tempfilenames=[]
