@@ -150,7 +150,18 @@ def file_upload(request):
         else:
             eachfile = eachfile.split('.')[0] + '_copy.' + eachfile.split('.')[1]
             TotalFileList.append(FileList(eachfile,timestr,suffix,check))
-    result=file_show(request,1)
+
+    if os.path.isfile(ProjectPath+"/templates/AddFiles.html"):
+        fp = open(ProjectPath+"/templates/AddFiles.html")
+        t = Template(fp.read())
+        fp.close()
+    else:
+        print("Template Does Not Exist!!!")
+    html = t.render(Context({}))
+
+    return HttpResponse(html)
+
+    #result=file_show(request,1)
     return result
 def LoadRules(group):
     with open(os.getcwd()+"/results/RulesFor_"+group)as fin:
