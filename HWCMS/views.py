@@ -340,8 +340,6 @@ def rule_show(request):
     return HttpResponse(html)
 
 
-#class OutPutForBayes:
-#    self.
 
 
 
