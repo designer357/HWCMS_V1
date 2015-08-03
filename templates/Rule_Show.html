@@ -132,7 +132,7 @@
         
         <div class="grid_10">
         	<div class="box round first">
-        		 <h2> Charts</h2>
+        		 <h2> Rules Show</h2>
                   <div id="bar-chart">
                     </div>
             </div>     
@@ -154,8 +154,8 @@
 
 
 								<p>
-									<span class="req">max 100 symbols</span>
-									<label>Rule List<span>(Required Field)</span></label>
+									<span class="req"></span>
+									<label style="font-size: 20px;color:red">The  {{ NumofFiles }} files are  processed!!!<span></span></label>
             <table width="100%" height="100%" border="1" align="center" cellpadding="0" cellspacing="0" class="warning" >
 <tr><td width="200" height="50" align="left" valign="top"><div id="Layer1">
 {%for each in RulesList %}{{ each }}<br><br>{% endfor %}
