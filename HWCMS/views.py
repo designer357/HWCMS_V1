@@ -609,12 +609,7 @@ def index_page(request):
     return HttpResponse(html)
 
     #return render_to_response('T1.html',locals())
-def send_message(request):
-    pass
-    #name = "Joe Lennon"
-    #sent_date = datetime.datetime.now()
-    #return render_to_response(ProjectPath+'/templates/U1.html', locals())
-    #return render_to_response('DataTable.html', locals())
+
 
 def file_delete(request,offset):
     global TotalFileList
