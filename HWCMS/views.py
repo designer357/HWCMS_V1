@@ -266,7 +266,6 @@ def file_upload_for_detection(request):
                     if flag1==1 and flag2==0:
                         count += 1
 
-                        #print(")
                         #print("The Left of this Error is: "+str(val.count(detected))+'\n')
                         with open(os.getcwd()+"/Log/Detected Log.txt","a")as fout:
                             fout.write("Violate the "+str(tab+1)+"th Rule.  The Right form should be :"+str(error_detail1)+"    "+str(error_detail2)+'\n')
