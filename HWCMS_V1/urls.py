@@ -21,8 +21,7 @@ from HWCMS.views import current_datetime,hours_ahead,index_page,file_show,rule_g
 from HWCMS_V1 import settings
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    (r'^time/$', current_datetime),
-    (r'^time/plus/(\d{1,2})/$', hours_ahead),
+
     url(r'^index/uploadedfiles',file_upload,name='file_upload'),
     url(r'^index/$',index_page),
     url(r'^index/$',index_page,name="JumpToIndex"),
