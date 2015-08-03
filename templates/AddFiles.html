@@ -42,7 +42,20 @@
     <script src="/static/js/setup.js" type="text/javascript"></script>
     <!-- Load TinyMCE -->
     <script src="/static/js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="/static/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="/static/bootstrap-3.3.5-dist/jquery-1.6.4.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="/static/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
     <script type="text/javascript">
+
+
         $(document).ready(function () {
             setupTinyMCE();
             setupProgressbar('progress-bar');
@@ -51,6 +64,28 @@
             $('input[type="checkbox"]').fancybutton();
             $('input[type="radio"]').fancybutton();
         });
+
+        function Progress() {
+            //alert("hrewr");
+
+            p = document.getElementById("progress1");
+            for (var i = 1; i <= 110; i = i + 10) {
+
+
+            p.innerHTML = i+'%';
+        }
+            //alert(p.value);
+
+        }
+        $('#progressbar').progressbar({
+
+    maximum: 100,
+    step: 5
+});
+        function aa(){
+            ;
+            //setInterval(Progress, 2000);
+        }
     </script>
     <!-- /TinyMCE -->
     <style type="text/css">
@@ -86,26 +121,22 @@
         <div class="clear">
         </div>
         <div class="grid_12">
-            <ul class="nav main">
-                <li class="ic-dashboard"><a href="dashboard.html"><span>Dashboard</span></a> </li>
-                <li class="ic-form-style"><a href="javascript:"><span>Controls</span></a>
+          <ul class="nav main">
+                <li class="ic-dashboard"><a href="{% url 'JumpToIndex' %}"><span>Home Page</span></a> </li>
+                <li class="ic-form-style"><a href="javascript:"><span>File Management</span></a>
                     <ul>
-                        <li><a href="form-controls.html">Forms</a> </li>
-                        <li><a href="buttons.html">Buttons</a> </li>
-                        <li><a href="form-controls.html">Full Page Example</a> </li>
-                        <li><a href="table.html">Page with Sidebar Example</a> </li>
+                        <li><a href="{% url 'file_show' '1' %}">Show Files</a> </li>
+                        <li><a href="{% url 'file_upload' %}">Add Files</a> </li>
                     </ul>
                 </li>
-				<li class="ic-typography"><a href="typography.html"><span>Typography</span></a></li>
-                <li class="ic-charts"><a href="charts.html"><span>Charts & Graphs</span></a></li>
-                <li class="ic-grid-tables"><a href="table.html"><span>Data Table</span></a></li>
-                <li class="ic-gallery dd"><a href="javascript:"><span>Image Galleries</span></a>
+                <li class="ic-grid-tables"><a href="{% url 'file_show' '1' %}"><span>Data Table</span></a></li>
+                <li class="ic-gallery dd"><a href="javascript:"><span>Router Management</span></a>
                		 <ul>
-                        <li><a href="image-gallery.html">Pretty Photo</a> </li>
-                        <li><a href="gallery-with-filter.html">Gallery with Filter</a> </li>
+                        <li><a href="image-gallery.html">Add New Router</a> </li>
+                        <li><a href="gallery-with-filter.html">Show Routers Infomation</a> </li>
                     </ul>
                 </li>
-                <li class="ic-notifications"><a href="notifications.html"><span>Notifications</span></a></li>
+                <li class="ic-notifications"><a href="notifications.html"><span>User Management</span></a></li>
 
             </ul>
         </div>
@@ -114,35 +145,41 @@
         <div class="grid_12">
             <div class="box round first fullpage">
                 <h2>
-                    Form Controls</h2>
+                    Files Adding</h2>
                 <div class="block ">
                        <form action="{% url 'file_upload' %}" enctype="multipart/form-data" method="post">
 			<p><strong>UpLoad Configuration Files：</strong><input type="file" class="" name="multifile" id="multifile" multiple size="80"/><span>                                          </span>
                 <input type="hidden"  id="MyFileList" name="MyFileList" value=""/>
-                <input type="hidden" class="" onclick="showFileName1()" value="OK" />
-                <input type="submit" class=""  value="upload" /></p>
+                <!--<input type="button" class="" onclick="$('#progressbar').progressbar('stepIt');$('#progressbar').progressbar('setPosition', 85);" value="OK" />-->
+                <input type="submit" class=""  onclick="Progress()" value="upload" /></p>
 
+
+
+                           {% if NumofFiles > 0 %}<span class="req">The {{ NumofFiles }} files</span>
+									<label>are uploaded successfully!<span>(The details are as follows:)</span></label>
+                              {% else %}<span class="req">Please Input the Files</span>
+
+
+                       {% endif %}
+            <table width="100%" height="100%" border="1" align="center" cellpadding="0" cellspacing="0" class="warning" >
+<tr><td width="200" height="50" align="left" valign="top"><div id="Layer1">
+{%for each in FileList %}{{ each }}<br><br>{% endfor %}
+
+    </div></td></tr></table>
 
                         <tr>
                             <td>
                                 <label>
                                     Progress Bar</label>
                             </td>
-                            <td>
-                                <div id="progress-bar">
-                                </div>
-                            </td>
                         </tr>
 
-                        <tr>
-                            <td>
-                                <label>
-                                    Date Picker</label>
-                            </td>
-                            <td>
-                                <input type="text" id="date-picker" />
-                            </td>
-                        </tr>
+ <div class="progress">
+    <div id="progressbar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70" style="width:10%">
+      10%
+    </div>
+  </div>
+
 
 
                     </form>
@@ -156,7 +193,7 @@
     </div>
     <div id="site_info">
         <p>
-            Copyright <a href="#">BlueWhale Admin</a>. All Rights Reserved.
+            <a href="#">HWCMS_V1</a>. All Rights Reserved.
         </p>
     </div>
 </body>
