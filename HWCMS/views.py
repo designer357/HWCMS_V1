@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import get_template
 import os,time,re
 from stat import *
-import InPutForRulesVersion2
+import InPutForRulesVersion2,BayesEntropy2
 from Apriori import *
 from HWCMS.models import Parameter,FileList
 
@@ -114,6 +114,7 @@ def file_upload(request):
 
     tempfullfilelist=[]
     tempfilenamelist=[]
+    #TFilest=[]
 
     if not os.path.isdir(os.path.join(ProjectPath,FilesStoreFolder)):
         os.makedirs(os.path.join(ProjectPath,FilesStoreFolder))
@@ -150,6 +151,7 @@ def file_upload(request):
         else:
             eachfile = eachfile.split('.')[0] + '_copy.' + eachfile.split('.')[1]
             TotalFileList.append(FileList(eachfile,timestr,suffix,check))
+            #TFilest.append(FileList(eachfile,timestr,suffix,check))
 
     if os.path.isfile(ProjectPath+"/templates/AddFiles.html"):
         fp = open(ProjectPath+"/templates/AddFiles.html")
@@ -157,7 +159,10 @@ def file_upload(request):
         fp.close()
     else:
         print("Template Does Not Exist!!!")
-    html = t.render(Context({}))
+
+    lenthofaddingfiles=len(tempfullfilelist)
+
+    html = t.render(Context({"FileList":tempfullfilelist,"NumofFiles":lenthofaddingfiles}))
 
     return HttpResponse(html)
 
@@ -329,12 +334,14 @@ def rule_show(request):
         fp.close()
     else:
         print("Template Does Not Exist!!!")
-    html = t.render(Context({'RulesList':ruleslist,'Pages':pages,'NextPage':nextpage,'PreviousPage':previouspage,'list':TotalFileList,'TheTopList':TopList,'DataGridPageSize':datagridpagesize,'lengthofmylist':lengthofmylist,"PagesList":pagelist}))
+    #html = t.render(Context({'RulesList':ruleslist,'Pages':pages,'NextPage':nextpage,'PreviousPage':previouspage,'list':TotalFileList,'TheTopList':TopList,'DataGridPageSize':datagridpagesize,'lengthofmylist':lengthofmylist,"PagesList":pagelist}))
+    html = t.render(Context({'NumofFiles':len(TotalFileList),'RulesList':ruleslist}))
 
     return HttpResponse(html)
 
 
-
+#class OutPutForBayes:
+#    self.
 
 
 
@@ -410,9 +417,21 @@ def rule_generate(request):
                 for rule in rules:
                     fout.write(str(rule)+'\n')
                 fout.write("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n")
+        return rule_show(request)
     elif operationtype=="Bayes":
+        O=[]
+        Result,TotalIdf,E,D1,D2=BayesEntropy2.Main(templist,os.path.join(ProjectPath,FilesStoreFolder))
+        for eachk,eachv in D1.items():
+            O.append("***********************************\nThe commander is *************************:    "+eachk+'\n')
+            O.append("The Entropy is    :    "+str(E[eachk])+'\n')
+            O.append("The Total appear times is       :   "+str(sum(D2[eachk]))+'.\n')
+            for e2,k2 in eachv.items():
+                O.append("The \""+ e2 + "\" appears "+ str(k2)+" times and appears in "+str(TotalIdf[e2])+" files. \n")
+                O.append("The result for \""+e2+"\"    is         :    "+str(Result[e2])+'!\n')
 
-        return file_show(request,1)
+        ruleslist=O
+
+        return rule_show(request)
 
 
 
@@ -429,15 +448,15 @@ def rule_generate(request):
 
 
 
-    for tab in range(len(request.POST.getlist("FileName"))):
-        if 'fsf' in request.POST.getlist("FileName")[tab]:
+    #for tab in range(len(request.POST.getlist("FileName"))):
+        #if 'fsf' in request.POST.getlist("FileName")[tab]:
             #print(request.POST.getlist("FileName")[tab])
-            excludelist.append(TopList[tab].filename)
+            #excludelist.append(TopList[tab].filename)
     #print("EXCLUDE!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     #print(gloffset)
     #print(list(set(excludelist)))
 
-    return rule_show(request)
+
 def my_cmp(v1,v2):
     p = re.compile("(\d+)")
     d1 = [int(i) for i in p.findall(v1)][0]
