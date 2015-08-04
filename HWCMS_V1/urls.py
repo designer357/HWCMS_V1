@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls import patterns, include, url
-from HWCMS.views import current_datetime,hours_ahead,index_page,file_show,rule_generate,file_upload,send_message,file_delete,JumpToIndex,file_upload_for_detection
+from HWCMS.views import current_datetime,hours_ahead,index_page,file_show,rule_generate,file_upload,file_delete,JumpToIndex,file_upload_for_detection
 from HWCMS_V1 import settings
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
@@ -32,7 +32,7 @@ urlpatterns = patterns('',
     url(r'^rule_generate/$',rule_generate,name='rule_generate'),
     url(r'^rule_generate/$',rule_generate,name='rule_generate2'),
 
-    ('^send_message/$', send_message),
+    #('^send_message/$', send_message),
 
 
 )
