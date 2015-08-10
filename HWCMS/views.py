@@ -376,6 +376,9 @@ def rule_generate(request):
 
 
     protocol=str(request.POST.get("strProtocol")).strip()
+    label_list=str(request.POST.get("strAtributes")).strip().split(',')
+    #print("@@@@@@@@@@@@@@@@@@@@@@@@@")
+    #print(label_list)
     rulesfolder="inputrules"
 
     #starttime = time.time()
@@ -403,7 +406,7 @@ def rule_generate(request):
 
         for each in interests:
             #print(each+" is processing......")
-            InPutForRulesVersion2.MainFunc(templist,os.path.join(ProjectPath,FilesStoreFolder),protocol,each.strip(),rulesfolder)
+            InPutForRulesVersion2.MainFunc(templist,os.path.join(ProjectPath,FilesStoreFolder),protocol,each.strip(),rulesfolder,label_list)
             a = Apriori(para.min_supp,ProjectPath+'/'+rulesfolder+"/input_"+each.strip())
             ls = a.do()
             rules = a.ralationRules(ls.get(ls.size()).items,para.min_cond,para.min_lift,para.min_kulc,para.thresh_ir)
@@ -419,7 +422,7 @@ def rule_generate(request):
         return rule_show(request)
     elif operationtype=="Bayes":
         O=[]
-        Result,TotalIdf,E,D1,D2=BayesEntropy2.Main(templist,os.path.join(ProjectPath,FilesStoreFolder),protocol)
+        Result,TotalIdf,E,D1,D2=BayesEntropy2.Main(templist,os.path.join(ProjectPath,FilesStoreFolder),protocol,label_list)
         for eachk,eachv in D1.items():
             O.append("***********************************\nThe commander is *************************:    "+eachk+'\n')
             O.append("The Entropy is    :    "+str(E[eachk])+'\n')
