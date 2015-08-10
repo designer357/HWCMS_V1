@@ -97,15 +97,15 @@
 
 
 
-                       <li><a class="menuitem">Other Algorithm Input</a>
+
+                        <form action="{% url 'rule_generate' %}" method="post" >
+
+            <li><a class="menuitem">Input Protocols</a>
                             <ul class="submenu">
-                                 <li class="right">Input:  <input type="text"  class="warning" name="strPattern" value="" size="15" ></li>
+                                 <li class="right">Input:  <input type="text"  class="warning" name="strProtocol" value="bgp" size="15" ></li>
 
                             </ul>
                         </li>
-                        <form action="{% url 'rule_generate' %}" method="post" >
-
-
                         <li><a class="menuitem" >Association Rules Input</a>
                             <ul class="submenu">
                                  <li class="right"><input type="hidden" name="OperationType" value="Association Rule"></li>
