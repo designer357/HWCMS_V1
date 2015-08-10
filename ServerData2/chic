@@ -218,7 +218,6 @@ system {
     authentication-order [ radius password ];
     location country-code US;
     root-authentication {
-Authentication Data Removed
     }
     name-server {
         134.68.1.9;
@@ -2772,7 +2771,6 @@ protocols {
             family l2vpn {
                 signaling;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 64.57.28.243 {
@@ -2815,7 +2813,6 @@ Authentication Data Removed
             family inet6 {
                 any;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 2001:468:1::1 {
@@ -2868,30 +2865,25 @@ Authentication Data Removed
             remove-private;
             neighbor 205.189.32.98 {
                 description "CA*net - Toronto | I2-S13058";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 BOXNET-TO-CANET ITN-OUT ];
                 peer-as 6509;
             }
             neighbor 134.75.108.45 {
                 description "KREONet2 | I2-S13059";
-Authentication Data Removed
                 peer-as 17579;
             }
             neighbor 211.79.48.177 {
                 description "TWAREN | I2-S13060";
-Authentication Data Removed
                 peer-as 7539;
             }
             neighbor 192.31.99.133 {
                 description "GLORIAD-new via Starlight | I2-S13061";
                 import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER NO-KREONET-VIA-GLORIAD ITN-IN ];
-Authentication Data Removed
                 peer-as 20388;
             }
             /* ASNet and TANET2 back each other up */
             neighbor 117.103.111.154 {
                 description "ASNet (Taiwan) | I2-S13062";
-Authentication Data Removed
                 peer-as 24167;
             }
             neighbor 198.71.46.34 {
@@ -2908,14 +2900,12 @@ Authentication Data Removed
             }
             neighbor 198.71.45.195 {
                 description "CA*net - Winnipeg | I2-S13058";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 BOXNET-TO-CANET ITN-OUT ];
                 peer-as 6509;
             }
             neighbor 192.91.246.126 {
                 description "CERN (1Gbps) | I2-S12854";
                 import [ SANITY-IN SET-PREF CERN-IN ITN-IN ];
-Authentication Data Removed
                 peer-as 513;
             }
         }
@@ -2939,27 +2929,22 @@ Authentication Data Removed
             }
             neighbor 2001:468:ff:12c2::2 {
                 description "Kreonet2 via Starlight | I2-S13059";
-Authentication Data Removed
                 peer-as 17579;
             }
             neighbor 2001:410:101:20::1 {
                 description "CA*net - Winnipeg | I2-S13058";
-Authentication Data Removed
                 peer-as 6509;
             }
             neighbor 2001:410:101:21::1 {
                 description "CA*net - Toronto | I2-S13058";
-Authentication Data Removed
                 peer-as 6509;
             }
             neighbor 2001:e10:ffff:304::1 {
                 description "TWAREN | I2-S13060";
-Authentication Data Removed
                 peer-as 7539;
             }
             neighbor 2620:94:8000:111::1 {
                 description "GLORIAD via Starlight | I2-S13061";
-Authentication Data Removed
                 peer-as 20388;
             }
         }
@@ -2983,7 +2968,6 @@ Authentication Data Removed
             neighbor 205.213.118.5 {
                 description "[RE] WiscRen | I2-S12838";
                 import [ SANITY-IN SET-PREF WISCREN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 2381;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2993,7 +2977,6 @@ Authentication Data Removed
             neighbor 192.122.183.29 {
                 description "[RE] Merit via MREN via CIC | I2-S12839";
                 import [ SANITY-IN SET-PREF MERIT-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 235;
                 bfd-liveness-detection {
                     minimum-interval 100;
@@ -3003,19 +2986,16 @@ Authentication Data Removed
             neighbor 198.49.182.4 {
                 description "[RE] U of Iowa via CIC | I2-S12840";
                 import [ SANITY-IN SET-PREF IOWA-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 3676;
             }
             neighbor 72.36.127.157 {
                 description "[RE] UIUC via CIC | I2-S12841";
                 import [ SANITY-IN SET-PREF UIUC-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 40387;
             }
             neighbor 205.213.119.9 {
                 description "[RE] WiscREN-EQCH 10G via CIC | I2-S12838";
                 import [ SANITY-IN SET-PREF WISCREN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 2381;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3030,19 +3010,16 @@ Authentication Data Removed
             neighbor 128.135.247.126 {
                 description "[RE] UOC via CIC | I2-S12847";
                 import [ SANITY-IN SET-PREF UOC-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 160;
             }
             neighbor 72.36.127.161 {
                 description "[RE] UIUC via CIC Backup | I2-S12841";
                 import [ SANITY-IN SET-PREF UIUC-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 40387;
             }
             neighbor 146.57.253.53 {
                 description "[RE] NorthernLights Gigapop via CIC, 10G | I2-S12848";
                 import [ SANITY-IN SET-PREF NORTHERNLIGHTS-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 57;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3052,7 +3029,6 @@ Authentication Data Removed
             neighbor 141.225.250.25 {
                 description "[RE] University of Memphis | I2-S12544";
                 import [ SANITY-IN SET-PREF MEMPHIS-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 14048;
             }
             neighbor 192.122.183.97 {
@@ -3063,13 +3039,11 @@ Authentication Data Removed
             neighbor 143.215.193.14 {
                 description "[RE] SOX | I2-S12541 | [PENDING][2171:144]";
                 import [ SANITY-IN SET-PREF SOX-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 10490;
             }
             neighbor 192.5.143.28 {
                 description "[RE] Northwestern U via CIC | I2-S12849";
                 import [ SANITY-IN SET-PREF NORTHWESTERN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 103;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3079,7 +3053,6 @@ Authentication Data Removed
             neighbor 149.165.254.185 {
                 description "[RE] Indiana Gigapop via AL2S | I2-S12522";
                 import [ SANITY-IN SET-PREF INTERNET2-MOSS INTERNET2-BROCADE-FMS INDIANAGIGAPOP-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 19782;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3089,7 +3062,6 @@ Authentication Data Removed
             neighbor 72.36.127.181 {
                 description "[RE] UIUC via AL2S | I2-S12850";
                 import [ SANITY-IN SET-PREF BLUEWATERS-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 38;
                 graceful-restart;
                 bfd-liveness-detection {
@@ -3100,7 +3072,6 @@ Authentication Data Removed
             neighbor 164.113.255.249 {
                 description "[RE] GPN back-up | I2-S12520";
                 import [ SANITY-IN SET-PREF GPN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 11317;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3110,7 +3081,6 @@ Authentication Data Removed
             neighbor 164.113.255.245 {
                 description "[RE] GPN back-up | I2-S12520";
                 import [ SANITY-IN SET-PREF GPN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 11317;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3129,7 +3099,6 @@ Authentication Data Removed
             neighbor 149.165.254.109 {
                 description "[RE] Indiana Gigapop via CIC | I2-S12522 | [NO-MONITOR] | [3546:144]";
                 import [ SANITY-IN SET-PREF INTERNET2-MOSS INTERNET2-BROCADE-FMS INDIANAGIGAPOP-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 19782;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3139,7 +3108,6 @@ Authentication Data Removed
             neighbor 137.164.26.48 {
                 description "[RE] CENIC via AL2S/STAR | I2-S12514";
                 import [ SANITY-IN CUDI-PREF SET-PREF CALREN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 2153;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3150,7 +3118,6 @@ Authentication Data Removed
             neighbor 192.43.217.221 {
                 description "[RE] FRGP multicast via AL2S/STAR | I2-S12852";
                 import [ SANITY-IN SET-PREF FRGP-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 14041;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3160,7 +3127,6 @@ Authentication Data Removed
             neighbor 192.43.217.223 {
                 description "[RE] FRGP unicast AL2S/STAR | I2-S12852";
                 import [ SANITY-IN SET-PREF FRGP-IN CONNECTOR-IN ];
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT NLR-TP ORIGINATE4 ];
                 peer-as 14041;
                 bfd-liveness-detection {
@@ -3171,7 +3137,6 @@ Authentication Data Removed
             neighbor 143.215.193.37 {
                 description "[RE] Sox via AL2S/ATLA | I2-S12541";
                 import [ SANITY-IN SET-PREF SOX-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 10490;
             }
             neighbor 192.170.225.5 {
@@ -3182,13 +3147,11 @@ Authentication Data Removed
             neighbor 198.71.45.232 {
                 description "[RE]University of Michigan via CIC/AL2S | I2-S12853";
                 import [ SANITY-IN SET-PREF CONNECTOR-IN UMICH-IN ];
-Authentication Data Removed
                 peer-as 36375;
             }
             neighbor 198.71.45.234 {
                 description "[RE] MREN via AL2S | I2-S12526";
                 import [ SANITY-IN SET-PREF MREN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 22335;
             }
             neighbor 198.71.46.183 {
@@ -3206,13 +3169,11 @@ Authentication Data Removed
                     ttl 4;
                 }
                 import [ SANITY-IN SET-PREF MONTANA-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 3807;
             }
             neighbor 146.57.253.41 {
                 description "[RE] NorthernLights Gigapop via CIC | I2-S12848";
                 import [ SANITY-IN SET-PREF NORTHERNLIGHTS-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 57;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3225,7 +3186,6 @@ Authentication Data Removed
                 family inet {
                     unicast;
                 }
-Authentication Data Removed
                 peer-as 3112;
             }
             neighbor 198.71.46.220 {
@@ -3275,7 +3235,6 @@ Authentication Data Removed
             neighbor 2001:1458:e100:1000::0005:0001 {
                 description "[RE] CERN Primary | I2-S12854";
                 import [ SANITY6 SET-PREF CERN-IN6 ];
-Authentication Data Removed
                 peer-as 513;
             }
             neighbor 2001:468:ff:1d4b::2 {
@@ -3284,13 +3243,11 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 3112;
             }
             neighbor 2001:468:ff:24f::2 {
                 description "[RE] Wiscren-1G via CIC | I2-S12838";
                 import [ SANITY6 SET-PREF WISCREN-IN6 ];
-Authentication Data Removed
                 peer-as 2381;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3305,7 +3262,6 @@ Authentication Data Removed
             neighbor 2001:468:ff:2c1::2 {
                 description "[RE] Wiscren-10G via CIC | I2-S12838";
                 import [ SANITY6 SET-PREF WISCREN-IN6 ];
-Authentication Data Removed
                 peer-as 2381;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3315,19 +3271,16 @@ Authentication Data Removed
             neighbor 2001:468:ff:2c2::2 {
                 description "[RE] UIowa 10G via CIC | I2-S12840";
                 import [ SANITY6 SET-PREF UIOWA-IN6 ];
-Authentication Data Removed
                 peer-as 3676;
             }
             neighbor 2620:0:e10:6013::1 {
                 description "[RE] UIUC backup via CIC | I2-S12841";
                 import [ SANITY6 SET-PREF UIUC-IN6 ];
-Authentication Data Removed
                 peer-as 40387;
             }
             neighbor 2001:468:1900:16::1 {
                 description "[RE] NorthernLights Gigapop - 10G via CIC | I2-S12848";
                 import [ SANITY6 SET-PREF NORTHERNLIGHTS-IN6 ];
-Authentication Data Removed
                 export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6-WITH-SPECIFICS ];
                 peer-as 57;
                 bfd-liveness-detection {
@@ -3338,7 +3291,6 @@ Authentication Data Removed
             neighbor 2001:468:ff:15b::2 {
                 description "[RE] University of Memphis | I2-S12544";
                 import [ SANITY6 SET-PREF MEMPHIS-IN6 ];
-Authentication Data Removed
                 peer-as 14048;
             }
             neighbor 2001:48a8:5fff:6::1 {
@@ -3349,7 +3301,6 @@ Authentication Data Removed
             neighbor 2001:468:1f0a::2 {
                 description "[RE] GPN via AL2S/KANS | I2-S12520";
                 import [ SANITY6 SET-PREF GPN-IN6 ];
-Authentication Data Removed
                 peer-as 11317;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3359,19 +3310,16 @@ Authentication Data Removed
             neighbor 2001:468:ff:e43::2 {
                 description "[RE] SOX | I2-S12541 | [PENDING][2171:144]";
                 import [ SANITY6 SET-PREF SOX-IN6 ];
-Authentication Data Removed
                 peer-as 10490;
             }
             neighbor 2001:468:ff:2c4::2 {
                 description "[RE] UIUC via CIC | I2-S12841";
                 import [ SANITY6 SET-PREF UIUC-IN6 ];
-Authentication Data Removed
                 peer-as 40387;
             }
             neighbor 2001:18e8:ff00::1 {
                 description "[RE] Indiana Gigapop via AL2S | I2-S12522";
                 import [ SANITY6 SET-PREF INDIANAGIGAPOP-IN6 ];
-Authentication Data Removed
                 peer-as 19782;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3381,7 +3329,6 @@ Authentication Data Removed
             neighbor 2620:0:e10:6018::1 {
                 description "[RE] UIUC via AL2S | I2-S12850";
                 import [ SANITY6 SET-PREF BLUEWATERS-IN6 ];
-Authentication Data Removed
                 peer-as 38;
                 graceful-restart;
                 bfd-liveness-detection {
@@ -3401,7 +3348,6 @@ Authentication Data Removed
             neighbor 2001:18e8:ff00:17::1 {
                 description "[RE] Indiana Gigapop via CIC | I2-S12522 | [NO-MONITOR] | [3546:144]";
                 import [ SANITY6 SET-PREF INDIANAGIGAPOP-IN6 ];
-Authentication Data Removed
                 peer-as 19782;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3414,7 +3360,6 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 2153;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3425,7 +3370,6 @@ Authentication Data Removed
             neighbor 2001:468:500:81::2 {
                 description "[RE] FRGP via AL2S/STAR | I2-S12852";
                 import [ SANITY6 SET-PREF FRGP-IN6 ];
-Authentication Data Removed
                 peer-as 14041;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3435,19 +3379,16 @@ Authentication Data Removed
             neighbor 2607:f7b8:1f02:c124::2 {
                 description "[RE] Sox via AL2S/ATLA | I2-S12541";
                 import [ SANITY6 SET-PREF SOX-IN6 ];
-Authentication Data Removed
                 peer-as 10490;
             }
             neighbor 2001:468:2:207::1 {
                 description "[RE] University of Michigan via CIC/AL2S | I2-S12853";
                 import [ SANITY6 SET-PREF UMICH-IN6 ];
-Authentication Data Removed
                 peer-as 36375;
             }
             neighbor 2001:468:2:208::0 {
                 description "[RE] MREN via AL2S | I2-S12526";
                 import [ SANITY6 SET-PREF MREN-IN6 ];
-Authentication Data Removed
                 peer-as 22335;
             }
             neighbor 2001:468:2:10::1 {
@@ -3465,13 +3406,11 @@ Authentication Data Removed
                     ttl 4;
                 }
                 import [ SANITY6 SET-PREF MONTANA-IN6 ];
-Authentication Data Removed
                 peer-as 3807;
             }
             neighbor 2607:ea00:0:4::1 {
                 description "[RE] NorthernLights Gigapop via CIC  | I2-S12848";
                 import [ SANITY6 SET-PREF NORTHERNLIGHTS-IN6 ];
-Authentication Data Removed
                 export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6-WITH-SPECIFICS ];
                 peer-as 57;
                 bfd-liveness-detection {
@@ -3557,7 +3496,6 @@ Authentication Data Removed
             remove-private;
             neighbor 192.150.29.5 {
                 description "NISN - Chicago | I2-S13072";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 FROM-CUDI FEDNET-OUT ];
                 peer-as 297;
             }
@@ -3574,7 +3512,6 @@ Authentication Data Removed
             }
             neighbor 143.56.242.33 {
                 description "DREN [PENDING] | I2-S13077";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 GEANT-TO-DREN FEDNET-OUT ];
                 peer-as 668;
             }
@@ -3612,12 +3549,10 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 668;
             }
             neighbor 2001:468:2:206::0 {
                 description "NISN via Starlight | I2-S13072";
-Authentication Data Removed
                 peer-as 297;
             }
         }
@@ -3641,7 +3576,6 @@ Authentication Data Removed
             }
             neighbor 198.71.46.41 {
                 description "France Telecom, multicast-only | I2-S13079";
-Authentication Data Removed
                 peer-as 5511;
             }
         }
@@ -3723,7 +3657,6 @@ Authentication Data Removed
             neighbor 64.57.28.185 {
                 description "[NETPLUS] Desire2Learn Cloud Service | I2-S07388";
                 import [ SANITY-IN SET-PREF DESIRE2LEARN-IN NETPLUS-CLOUD-IN ];
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 NETPLUS-DESIRE2LEARN-OUT NETPLUS-CLOUD-OUT ];
                 peer-as 21834;
             }
@@ -14716,13 +14649,11 @@ routing-instances {
                     neighbor 2620:0:e10:600e::1 {
                         description "[CPS] UIUC via CIC | [NO-MONITOR]";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-UIUC-IN6 ];
-Authentication Data Removed
                         peer-as 40387;
                     }
                     neighbor 2001:468:ffff:259::1 {
                         description "[CPS] Customer6 UMN/NothernLights";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-UMN-IN6 ];
-Authentication Data Removed
                         peer-as 57;
                     }
                     inactive: neighbor 2001:468:ffff:1342::2 {
@@ -14733,31 +14664,26 @@ Authentication Data Removed
                     inactive: neighbor 2607:f4f0:0:6012::2 {
                         description "[CPS] Customer6 AREON [NO-MONITOR]";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-AREON-IN6 ];
-Authentication Data Removed
                         peer-as 40581;
                     }
                     inactive: neighbor 2610:a8:1cab:7::1 {
                         description "[CPS] Customer6 OARnet via Merit | [NO-MONITOR]";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-OARNET-IN6 ];
-Authentication Data Removed
                         peer-as 600;
                     }
                     neighbor 2001:468:ffff:e43::2 {
                         description "[CPS] Customer6 Southern Crossroads (SOX)";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-SOX-IN6 ];
-Authentication Data Removed
                         peer-as 10490;
                     }
                     neighbor 2001:18e8:ffff::1 {
                         description "[CPS] Indiana GigaPoP via AL2S";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-INDIANAGIGAPOP-IN6 ];
-Authentication Data Removed
                         peer-as 19782;
                     }
                     neighbor 2607:f7b8:1d00:c000::2 {
                         description "[CPS] Customer6 SoX via AL2S/ATLA";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-SOX-IN6 ];
-Authentication Data Removed
                         peer-as 10490;
                     }
                     neighbor 2001:468:f000:101::1 {

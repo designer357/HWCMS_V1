@@ -256,7 +256,6 @@ system {
         auxiliary type vt100;
     }
     root-authentication {
-Authentication Data Removed
     }
     name-server {
         134.68.1.9;
@@ -2353,7 +2352,6 @@ protocols {
             family l2vpn {
                 signaling;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 64.57.28.241 {
@@ -2396,7 +2394,6 @@ Authentication Data Removed
             family inet6 {
                 any;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 2001:468:1::1 {
@@ -2480,7 +2477,6 @@ Authentication Data Removed
             neighbor 208.100.127.34 {
                 description "[RE] LONI | I2-S12524";
                 import [ SANITY-IN SET-PREF LONI-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 32440;
             }
             neighbor 205.233.255.32 {
@@ -2491,7 +2487,6 @@ Authentication Data Removed
             neighbor 164.58.245.245 {
                 description "[RE] OneNet via sdn-sw.tuls | I2-S12864";
                 import [ SANITY-IN SET-PREF ONENET-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 5078;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2501,7 +2496,6 @@ Authentication Data Removed
             neighbor 208.90.110.96 {
                 description "[RE] AREON via AL2S/TULS | I2-S12865";
                 import [ SANITY-IN SET-PREF AREON-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 40581;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2511,7 +2505,6 @@ Authentication Data Removed
             neighbor 74.200.187.10 {
                 description "[RE] LEARN via AL2S/HOUH | I2-S12523";
                 import [ SANITY-IN SET-PREF LEARN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 14085;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2521,7 +2514,6 @@ Authentication Data Removed
             neighbor 74.200.187.33 {
                 description "[RE] LEARN via AL2S/DALL | I2-S12523";
                 import [ SANITY-IN SET-PREF LEARN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 14085;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2531,7 +2523,6 @@ Authentication Data Removed
             neighbor 137.164.26.204 {
                 description "[RE] CENIC (CalREN-HPR) via AL2S/LOSA | I2-S12514";
                 import [ SANITY-IN CUDI-PREF SET-PREF CALREN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 2153;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2542,7 +2533,6 @@ Authentication Data Removed
             neighbor 108.59.26.20 {
                 description "[RE] FLR via AL2S/Jack | I2-S12519";
                 import [ SANITY-IN SET-PREF FLR-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 11096;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2552,19 +2542,16 @@ Authentication Data Removed
             neighbor 198.71.46.75 {
                 description "[RE] Sun Corridor via AL2S/TUCS | I2-S12543";
                 import [ SUNCORRIDOR-TP-EXC SANITY-IN SET-PREF SUNCORRIDOR-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 62600;
             }
             neighbor 208.100.127.1 {
                 description "[RE] LONI v4 via AL2S/BATO | I2-S12524";
                 import [ SANITY-IN SET-PREF LONI-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 32440;
             }
             neighbor 198.71.46.162 {
                 description "[RE] Sun Corridor via AL2S/PHOE | I2-S12543";
                 import [ SUNCORRIDOR-TP-EXC SANITY-IN SET-PREF SUNCORRIDOR-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 62600;
             }
         }
@@ -2584,7 +2571,6 @@ Authentication Data Removed
             neighbor 2607:f390:0001:1001::0002 {
                 description "[RE] LONI | I2-S12524";
                 import [ SANITY6 SET-PREF LONI-IN6 ];
-Authentication Data Removed
                 peer-as 32440;
             }
             neighbor 2001:468:ff:340::2 {
@@ -2595,7 +2581,6 @@ Authentication Data Removed
             neighbor 2607:f4f0:10:101::1 {
                 description "[RE] AREON via AL2S/TULS | I2-S12865";
                 import [ SANITY6 SET-PREF AREON-IN6 ];
-Authentication Data Removed
                 peer-as 40581;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2605,7 +2590,6 @@ Authentication Data Removed
             neighbor 2607:f928:2:7::2 {
                 description "[RE] LEARN via AL2S/HOUH | I2-S12523";
                 import [ SANITY6 SET-PREF LEARN-IN6 ];
-Authentication Data Removed
                 peer-as 14085;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2615,7 +2599,6 @@ Authentication Data Removed
             neighbor 2607:f928:2:10::1 {
                 description "[RE] LEARN via AL2S/DALL | I2-S12523";
                 import [ SANITY6 SET-PREF LEARN-IN6 ];
-Authentication Data Removed
                 peer-as 14085;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2628,7 +2611,6 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 2153;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2639,7 +2621,6 @@ Authentication Data Removed
             neighbor 2607:f5d8:2:e700::1 {
                 description "[RE] FLR via AL2S/JACK | I2-S12519";
                 import [ SANITY6 SET-PREF FLR-IN6 ];
-Authentication Data Removed
                 peer-as 11096;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2649,19 +2630,16 @@ Authentication Data Removed
             neighbor 2001:468:3::2 {
                 description "[RE] Sun Corridor via AL2S/TUCS | I2-S12543";
                 import [ SANITY6 SET-PREF SUNCORRIDOR-IN6 ];
-Authentication Data Removed
                 peer-as 62600;
             }
             inactive: neighbor 2607:f390:0:1001::6d {
                 description "[RE] LONI via AL2S/BATO | [912:135] | [PENDING] | I2-S12524";
                 import [ SANITY6 SET-PREF LONI-IN6 ];
-Authentication Data Removed
                 peer-as 32440;
             }
             neighbor 2001:468:2300::2 {
                 description "[RE] Sun Corridor via AL2S/PHOE | I2-S12543";
                 import [ SANITY6 SET-PREF SUNCORRIDOR-IN6 ];
-Authentication Data Removed
                 peer-as 62600;
             }
         }
@@ -2744,7 +2722,6 @@ Authentication Data Removed
                 family inet {
                     any;
                 }
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 FROM-NISN ITN-OUT ];
                 peer-as 18592;
             }
@@ -2771,7 +2748,6 @@ Authentication Data Removed
                 family inet6 {
                     unicast;
                 }
-Authentication Data Removed
                 export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 ITN-OUT6 ];
                 peer-as 18592;
             }
@@ -3048,7 +3024,6 @@ Authentication Data Removed
             /* AREON */
             peer 208.90.110.96 {
                 local-address 208.90.110.97;
-Authentication Data Removed
             }
             peer 74.200.187.10 {
                 local-address 74.200.187.9;

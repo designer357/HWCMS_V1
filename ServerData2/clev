@@ -215,7 +215,6 @@ system {
     authentication-order [ radius password ];
     location country-code US;
     root-authentication {
-Authentication Data Removed
     }
     name-server {
         134.68.1.9;
@@ -1576,7 +1575,6 @@ protocols {
             family l2vpn {
                 signaling;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 64.57.28.243 {
@@ -1619,7 +1617,6 @@ Authentication Data Removed
             family inet6 {
                 any;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 2001:468:1::1 {
@@ -1675,7 +1672,6 @@ Authentication Data Removed
             neighbor 192.5.89.17 {
                 description "[RE] NOX via AL2S/BOST | I2-S12532";
                 import [ SANITY-IN SET-PREF NOX-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 10578;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1685,14 +1681,12 @@ Authentication Data Removed
             neighbor 199.109.11.1 {
                 description "[RE] Nysernet via Buffalo | I2-S12533";
                 import [ SANITY-IN SET-PREF NYSERNET-IN CONNECTOR-IN ];
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 LEAK-NMS1 ];
                 peer-as 3754;
             }
             neighbor 192.88.115.24 {
                 description "[RE] 3ROX | I2-S12542";
                 import [ SANITY-IN SET-PREF PSC-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 5050;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1702,7 +1696,6 @@ Authentication Data Removed
             neighbor 192.88.115.80 {
                 description "[RE] 3ROX via AL2S/PITT | I2-S12542";
                 import [ SANITY-IN SET-PREF PSC-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 5050;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1736,19 +1729,16 @@ Authentication Data Removed
             neighbor 129.170.9.242 {
                 description "[RE] Dartmouth via AL2S | I2-S12862";
                 import [ SANITY-IN SET-PREF DARTMOUTH-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 10755;
             }
             neighbor 198.71.45.248 {
                 description "[RE] University of Michigan via CIC/AL2S | I2-S12853";
                 import [ SANITY-IN SET-PREF CONNECTOR-IN UMICH-IN ];
-Authentication Data Removed
                 peer-as 36375;
             }
             neighbor 198.71.46.152 {
                 description "[RE] NIH via AL2S/ASHB | I2-S50449";
                 import [ SANITY-IN SET-PREF NIH-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 3527;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1763,7 +1753,6 @@ Authentication Data Removed
             neighbor 198.71.46.156 {
                 description "[RE] NLM via AL2S/ASHB | I2-S50448";
                 import [ SANITY-IN SET-PREF NLM-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 393689;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1801,7 +1790,6 @@ Authentication Data Removed
             neighbor 130.111.0.84 {
                 description "[RE] UMS via AL2S/ALBA | I2-S53461";
                 import [ SANITY-IN SET-PREF UMS-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 557;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1811,7 +1799,6 @@ Authentication Data Removed
             neighbor 149.165.254.109 {
                 description "[RE] Indiana Gigapop via AL2S/STAR | I2-S12522";
                 import [ SANITY-IN SET-PREF INTERNET2-MOSS INTERNET2-BROCADE-FMS INDIANAGIGAPOP-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 19782;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1835,7 +1822,6 @@ Authentication Data Removed
             neighbor 2001:468:ff:1547::2 {
                 description "[RE] NOX via AL2S/BOST | I2-S12532";
                 inactive: import [ SANITY6 SET-PREF NOX-IN6 ];
-Authentication Data Removed
                 peer-as 10578;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1851,7 +1837,6 @@ Authentication Data Removed
             neighbor 2001:5e8:0:fffd:0:13:2:1 {
                 description "[RE] 3ROX/PSC via OARnet AL2S/CLEV | I2-S12542";
                 import [ SANITY6 SET-PREF PSC-IN6 ];
-Authentication Data Removed
                 peer-as 5050;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1861,7 +1846,6 @@ Authentication Data Removed
             neighbor 2001:5e8:0:fffd:0:1:2:1 {
                 description "[RE] 3ROX via AL2S/PITT | I2-S12542";
                 import [ SANITY6 SET-PREF PSC-IN6 ];
-Authentication Data Removed
                 peer-as 5050;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1895,19 +1879,16 @@ Authentication Data Removed
             neighbor 2604:5f00:ffff:ffff::2 {
                 description "[RE] Dartmouth via AL2S/ALBA | I2-S12862";
                 import [ SANITY6 SET-PREF DARTMOUTH-IN6 ];
-Authentication Data Removed
                 peer-as 10755;
             }
             neighbor 2001:468:a:100::1 {
                 description "[RE] University of Michigan via CIC/AL2S | I2-S12853";
                 import [ SANITY6 SET-PREF UMICH-IN6 ];
-Authentication Data Removed
                 peer-as 36375;
             }
             neighbor 2001:468:2300:5::3 {
                 description "[RE] NLM via AL2S/ASHB | I2-S50448";
                 import [ SANITY6 SET-PREF NLM-IN6 ];
-Authentication Data Removed
                 peer-as 393689;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1935,7 +1916,6 @@ Authentication Data Removed
             neighbor 2610:48:0:a::1 {
                 description "[RE] UMS via AL2S/ALBA | I2-S53461";
                 import [ SANITY6 SET-PREF UMS-IN6 ];
-Authentication Data Removed
                 peer-as 557;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1945,7 +1925,6 @@ Authentication Data Removed
             neighbor 2001:18e8:ff00:17::1 {
                 description "[RE] Indiana Gigapop via AL2S/STAR | I2-S12522";
                 import [ SANITY6 SET-PREF INDIANAGIGAPOP-IN6 ];
-Authentication Data Removed
                 peer-as 19782;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -6023,13 +6002,11 @@ routing-instances {
                     neighbor 2620:f:0:b04::2 {
                         description "[CPS] Customer6 NYSERNET";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-NYSERNET-IN6 ];
-Authentication Data Removed
                         peer-as 3754;
                     }
                     neighbor 2001:5e8:0:fffd:0:16:3:1 {
                         description "[CPS] Customer6 3ROX | [NO-MONITOR]";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-3ROX-IN6 ];
-Authentication Data Removed
                         peer-as 5050;
                         tcp-mss 1200;
                     }

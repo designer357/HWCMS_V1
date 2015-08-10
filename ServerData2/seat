@@ -255,7 +255,6 @@ system {
     authentication-order [ radius password ];
     location country-code US;
     root-authentication {
-Authentication Data Removed
     }
     name-server {
         134.68.1.9;
@@ -1696,7 +1695,6 @@ protocols {
             family l2vpn {
                 signaling;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 64.57.28.241 {
@@ -1739,7 +1737,6 @@ Authentication Data Removed
             family inet6 {
                 any;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 2001:468:1::1 {
@@ -1797,28 +1794,24 @@ Authentication Data Removed
             neighbor 137.164.26.141 {
                 description "[RE] CENIC via LAX-DC | I2-S12514";
                 import [ SANITY-IN CUDI-PREF SET-PREF CALREN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 2153;
                 multipath;
             }
             neighbor 207.231.240.7 {
                 description "[RE] Microsoft via PAC Wave vlan706 | I2-S12951";
                 import [ SANITY-IN SET-PREF FROM-MICROSOFT ];
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 MICROSOFT-OUT ];
                 peer-as 8075;
             }
             neighbor 207.231.241.7 {
                 description "[RE] Microsoft via Pac Wave vlan776 | I2-S12951";
                 import [ SANITY-IN SET-PREF FROM-MICROSOFT ];
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 MICROSOFT-OUT ];
                 peer-as 8075;
             }
             neighbor 64.57.28.54 {
                 description "[RE] PNWGP | I2-S12536";
                 import [ SANITY-IN SET-PREF PNWG-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 101;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1828,7 +1821,6 @@ Authentication Data Removed
             neighbor 198.32.163.69 {
                 description "[RE] Oregon Gigapop via SEAT via Internet DWS I2-PORT-SEAT-I2-05681 | I2-S12535";
                 import [ SANITY-IN SET-PREF OREGON-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 4600;
             }
             neighbor 205.166.205.10 {
@@ -1855,13 +1847,11 @@ Authentication Data Removed
                     ttl 4;
                 }
                 import [ SANITY-IN SET-PREF MONTANA-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 3807;
             }
             neighbor 198.71.46.246 {
                 description "[RE] FRGP via AL2S/SEAT | I2-S12852";
                 import [ SANITY-IN SET-PREF FRGP-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 14041;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1889,7 +1879,6 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 101;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1902,14 +1891,12 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 2153;
                 multipath;
             }
             neighbor 2001:468:8:15::2 {
                 description "[RE] Oregon Gigapop via SEAT via DWS | I2-S12535";
                 import [ SANITY6 SET-PREF OREGON-IN6 ];
-Authentication Data Removed
                 peer-as 4600;
             }
             neighbor 2001:468:ff:8c0::1 {
@@ -1936,13 +1923,11 @@ Authentication Data Removed
                     ttl 4;
                 }
                 import [ SANITY6 SET-PREF MONTANA-IN6 ];
-Authentication Data Removed
                 peer-as 3807;
             }
             neighbor 2001:468:2300:9::4 {
                 description "[RE] FRGP via AL2S/SEAT | I2-S12852";
                 import [ SANITY6 SET-PREF FRGP-IN6 ];
-Authentication Data Removed
                 peer-as 14041;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1967,17 +1952,14 @@ Authentication Data Removed
             neighbor 207.231.245.131 {
                 description "NREN AS24 | I2-S13130";
                 hold-time 30;
-Authentication Data Removed
                 peer-as 24;
             }
             neighbor 207.231.240.13 {
                 description "ESNET Seattle via Pacific Wave | I2-S13075";
-Authentication Data Removed
                 peer-as 293;
             }
             neighbor 207.231.240.23 {
                 description "DREN AS668 via Pacific Wave Vlan706 | I2-S13077";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 GEANT-TO-DREN FEDNET-OUT ];
                 peer-as 668;
             }
@@ -2006,17 +1988,14 @@ Authentication Data Removed
                         }
                     }
                 }
-Authentication Data Removed
                 peer-as 24;
             }
             neighbor 2001:504:b:10::13 {
                 description "ESNET Seattle via Pacific Wave | I2-S13075";
-Authentication Data Removed
                 peer-as 293;
             }
             neighbor 2001:504:b:10::23 {
                 description "DREN AS668 via Pacific Wave Vlan706 | I2-S13077";
-Authentication Data Removed
                 peer-as 668;
             }
         }
@@ -2055,13 +2034,11 @@ Authentication Data Removed
             remove-private;
             neighbor 2001:504:b:10::4 {
                 description "AARNET IPv6 T320 via PacWave | I2-S13135";
-Authentication Data Removed
                 peer-as 7575;
             }
             neighbor 2001:504:b:11::2 {
                 description "AARNet Cisco VXR via Pacific Wave | I2-S13135";
                 import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER AARNET-V6-IN ];
-Authentication Data Removed
                 export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 AARNET-V6-OUT ];
                 peer-as 7575;
             }
@@ -2082,24 +2059,20 @@ Authentication Data Removed
             remove-private;
             inactive: neighbor 198.32.170.47 {
                 description "National Univ of Singapore via PacWave";
-Authentication Data Removed
                 peer-as 7610;
             }
             /* TANET2 and ASNET back each other up */
             inactive: neighbor 198.32.170.34 {
                 description "TANET2 via Pacific Wave";
-Authentication Data Removed
                 peer-as 7539;
             }
             neighbor 207.231.240.4 {
                 description "AARNet T320 via Pacific Wave | I2-S13135";
                 import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER AARNET-ITN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 7575;
             }
             neighbor 207.231.240.10 {
                 description "GEMnet 9K-MTU via Pacific Wave | I2-S13175";
-Authentication Data Removed
                 peer-as 23796;
             }
             neighbor 207.231.241.136 {
@@ -2109,29 +2082,24 @@ Authentication Data Removed
             neighbor 207.231.240.2 {
                 description "AARNet M120 via Pacific Wave 9K | I2-S13135";
                 import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER AARNET-ITN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 7575;
             }
             neighbor 207.231.240.6 {
                 description "KREONET2 via Pacific Wave Vlan706 | I2-S13059";
-Authentication Data Removed
                 peer-as 17579;
             }
             neighbor 207.231.241.149 {
                 description "AARnet 1Gbps backup via Pacific Wave and Equinix | I2-S13135";
                 import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER AARNET-ITN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 7575;
             }
             neighbor 207.231.240.21 {
                 description "CA*Net4 via PacWave 9K MTU: VLAN706 | I2-S13058";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 BOXNET-TO-CANET ITN-OUT ];
                 peer-as 6509;
             }
             neighbor 207.231.240.22 {
                 description "Peer Gloriad via Pacific Wave | I2-S13061";
-Authentication Data Removed
                 peer-as 20388;
             }
         }
@@ -2154,17 +2122,14 @@ Authentication Data Removed
                 family inet6 {
                     unicast;
                 }
-Authentication Data Removed
                 peer-as 7539;
             }
             inactive: neighbor 2001:504:b:10::4 {
                 description "AARNET IPv6 T320 via PacWave";
-Authentication Data Removed
                 peer-as 7575;
             }
             inactive: neighbor 2001:504:b:11::2 {
                 description "AARNet Cisco VXR via Pacific Wave";
-Authentication Data Removed
                 peer-as 7575;
             }
             neighbor 2001:504:b:10::6 {
@@ -2172,12 +2137,10 @@ Authentication Data Removed
                 family inet6 {
                     unicast;
                 }
-Authentication Data Removed
                 peer-as 17579;
             }
             neighbor 2001:504:b:80::149 {
                 description "AARnet 1Gbps backup via Pacific Wave and Equinix | I2-S13135";
-Authentication Data Removed
                 peer-as 7575;
             }
             neighbor 2001:504:b:10::21 {
@@ -2185,7 +2148,6 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 6509;
             }
             neighbor 2001:504:b:10::10 {
@@ -2193,12 +2155,10 @@ Authentication Data Removed
                 family inet6 {
                     unicast;
                 }
-Authentication Data Removed
                 peer-as 23796;
             }
             neighbor 2001:504:b:10::22 {
                 description "GLORIAD IPv6 via Pacific Wave via Vlan706 | I2-S13061";
-Authentication Data Removed
                 peer-as 20388;
             }
         }
@@ -2360,7 +2320,6 @@ Authentication Data Removed
             neighbor 206.81.83.25 {
                 description "[NETPLUS] Code42 via SIX 9k MTU | I2-S10564";
                 import [ SANITY-IN SET-PREF NETPLUS-CODE42-IN NETPLUS-CLOUD-IN ];
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 NETPLUS-CODE42-OUT NETPLUS-CLOUD-OUT ];
                 peer-as 62715;
                 bfd-liveness-detection {
@@ -8819,7 +8778,6 @@ routing-instances {
                     inactive: neighbor 2607:f380::1:89a4:1a88 {
                         description "[CPS] Customer6 CENIC via LAX-DC  [NO-MONITOR]";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-CENIC-IN6 ];
-Authentication Data Removed
                         peer-as 2153;
                         multipath;
                     }
@@ -8834,14 +8792,12 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 2153;
                         multipath;
                     }
                     neighbor 2001:468:8:16::2 {
                         description "[CPS] Customer6 Oregon GigaPOP via SEAT";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-OREGON-IN6 ];
-Authentication Data Removed
                         peer-as 4600;
                     }
                     neighbor 2001:468:f000:102::1 {
@@ -8881,7 +8837,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS6939-OUT CPS-PEERCONTROLS-OUT ];
                         peer-as 6939;
                     }

@@ -254,7 +254,6 @@ system {
     authentication-order [ radius password ];
     location country-code US;
     root-authentication {
-Authentication Data Removed
     }
     name-server {
         134.68.1.9;
@@ -2170,7 +2169,6 @@ protocols {
             family l2vpn {
                 signaling;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 64.57.28.241 {
@@ -2213,7 +2211,6 @@ Authentication Data Removed
             family inet6 {
                 any;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 2001:468:1::1 {
@@ -2306,14 +2303,12 @@ Authentication Data Removed
             neighbor 137.164.26.133 {
                 description "[RE] CENIC (CalREN-HPR) | I2-S12514";
                 import [ SANITY-IN CUDI-PREF SET-PREF CALREN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 2153;
                 multipath;
             }
             neighbor 198.32.165.65 {
                 description "[RE] Oregon Gigapop via DWS | I2-S12535";
                 import [ SANITY-IN SET-PREF OREGON-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 4600;
             }
             neighbor 205.166.205.12 {
@@ -2328,7 +2323,6 @@ Authentication Data Removed
             neighbor 137.164.26.200 {
                 description "[RE] CENIC (CalREN-HPR) via AL2S | I2-S12514";
                 import [ SANITY-IN CUDI-PREF SET-PREF CALREN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 2153;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2349,13 +2343,11 @@ Authentication Data Removed
             neighbor 198.71.46.73 {
                 description "[RE] Sun Corridor via AL2S/TUCS | I2-S12543";
                 import [ SUNCORRIDOR-TP-EXC SANITY-IN SET-PREF SUNCORRIDOR-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 62600;
             }
             neighbor 198.71.46.160 {
                 description "[RE] Sun Corridor via AL2S/PHOE | I2-S12543";
                 import [ SUNCORRIDOR-TP-EXC SANITY-IN SET-PREF SUNCORRIDOR-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 62600;
             }
             neighbor 192.133.159.149 {
@@ -2387,14 +2379,12 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 2153;
                 multipath;
             }
             neighbor 2001:468:ff:054d::2 {
                 description "[RE] Oregon Gigapop via DWS | I2-S12535";
                 import [ SANITY6 SET-PREF OREGON-IN6 ];
-Authentication Data Removed
                 peer-as 4600;
             }
             neighbor 2001:468:ff:5c1::1 {
@@ -2412,7 +2402,6 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 2153;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2432,13 +2421,11 @@ Authentication Data Removed
             neighbor 2001:468:5::2 {
                 description "[RE] Sun Corridor via AL2S/TUCS | I2-S12543";
                 import [ SANITY6 SET-PREF SUNCORRIDOR-IN6 ];
-Authentication Data Removed
                 peer-as 62600;
             }
             neighbor 2001:468:2300:2::2 {
                 description "[RE] Sun Corridor via AL2S/PHOE | I2-S12543";
                 import [ SANITY6 SET-PREF SUNCORRIDOR-IN6 ];
-Authentication Data Removed
                 peer-as 62600;
             }
         }
@@ -2459,7 +2446,6 @@ Authentication Data Removed
             neighbor 207.231.246.3 {
                 description "NREN | I2-S13130";
                 hold-time 30;
-Authentication Data Removed
                 peer-as 24;
             }
             neighbor 198.129.48.1 {
@@ -2468,7 +2454,6 @@ Authentication Data Removed
             }
             neighbor 207.231.240.155 {
                 description "DREN AS668 via Pacific Wave Vlan702 | I2-S13077";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 GEANT-TO-DREN FEDNET-OUT ];
                 peer-as 668;
             }
@@ -2497,7 +2482,6 @@ Authentication Data Removed
                         }
                     }
                 }
-Authentication Data Removed
                 peer-as 24;
             }
             neighbor 2001:400:107:10::2 {
@@ -2506,7 +2490,6 @@ Authentication Data Removed
             }
             neighbor 2001:504:b:20::155 {
                 description "DREN AS668 via Pacific Wave Vlan702 | I2-S13077";
-Authentication Data Removed
                 peer-as 668;
             }
         }
@@ -2526,7 +2509,6 @@ Authentication Data Removed
             remove-private;
             neighbor 198.32.177.14 {
                 description "Commercial NTT via PAIX (Multicast Only) | I2-S13132 [NO-MONITOR]";
-Authentication Data Removed
                 peer-as 2914;
             }
             neighbor 64.57.20.193 {
@@ -2550,12 +2532,10 @@ Authentication Data Removed
             remove-private;
             neighbor 150.99.199.93 {
                 description "SINET via PacWave South | I2-S13133";
-Authentication Data Removed
                 peer-as 2907;
             }
             neighbor 207.231.240.133 {
                 description "TWAREN via PacWave jumbo vlan 702 | I2-S13060";
-Authentication Data Removed
                 peer-as 7539;
             }
             neighbor 207.231.240.136 {
@@ -2566,20 +2546,17 @@ Authentication Data Removed
             }
             neighbor 207.231.240.142 {
                 description "CUDI via PacWave | I2-S13082";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 FROM-NISN ITN-OUT ];
                 peer-as 18592;
             }
             neighbor 207.231.241.4 {
                 description "AARnet-sttl via pacwave intersite vlan | I2-S13135";
                 import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER AARNET-ITN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 7575;
             }
             neighbor 207.231.240.149 {
                 description "AARnet 1Gbps backup via PacWave and Equinix | I2-S13135";
                 import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER AARNET-ITN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 7575;
             }
             neighbor 207.231.242.136 {
@@ -2591,13 +2568,11 @@ Authentication Data Removed
             neighbor 207.231.240.150 {
                 description "JGN-X via PacWave | I2-S13136";
                 import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER IFTN-IN ];
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 IFTN-OUT ];
                 peer-as 17934;
             }
             neighbor 207.231.242.152 {
                 description "Peer Qatar via PacWave (Connection #2) | I2-S13137";
-Authentication Data Removed
                 peer-as 29384;
             }
             neighbor 203.181.248.142 {
@@ -2630,29 +2605,24 @@ Authentication Data Removed
             }
             neighbor 2001:504:b:20::133 {
                 description "TWAREN via PacWave jumbo vlan 702 | I2-S13060";
-Authentication Data Removed
                 peer-as 7539;
             }
             neighbor 2001:504:b:80::4 {
                 description "AARnet-sttl | I2-S13135";
                 import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER AARNET-V6-IN ];
-Authentication Data Removed
                 export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 AARNET-V6-OUT ];
                 peer-as 7575;
             }
             neighbor 2001:504:b:20::149 {
                 description "AARnet 1Gbps backup via PacWave and Equinix | I2-S13135";
-Authentication Data Removed
                 peer-as 7575;
             }
             neighbor 2001:02f8:0001:00ff::9 {
                 description "SINET V6 via PacWave South | I2-S13133";
-Authentication Data Removed
                 peer-as 2907;
             }
             neighbor 2001:504:b:20::150 {
                 description "JGN-X via PacWave | I2-S13136";
-Authentication Data Removed
                 peer-as 17934;
             }
             neighbor 2001:0200:e000:0853::2d11:2 {
@@ -2683,7 +2653,6 @@ Authentication Data Removed
                 family inet {
                     unicast;
                 }
-Authentication Data Removed
                 peer-as 7610;
             }
         }
@@ -2706,7 +2675,6 @@ Authentication Data Removed
                 family inet6 {
                     unicast;
                 }
-Authentication Data Removed
                 peer-as 7610;
             }
         }
@@ -13043,13 +13011,11 @@ routing-instances {
                     neighbor 2001:468:ffff:054d::2 {
                         description "[CPS] Customer6 Oregon GigaPOP";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-OREGON-IN6 ];
-Authentication Data Removed
                         peer-as 4600;
                     }
                     inactive: neighbor 2607:f380::1:89a4:1a86 {
                         description "[CPS] Customer6 CENIC / CalREN-HPR South  [NO-MONITOR]";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-CALREN-IN6 ];
-Authentication Data Removed
                         peer-as 2153;
                         multipath;
                     }
@@ -13064,7 +13030,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 2153;
                         multipath;
                     }
@@ -13112,7 +13077,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ CPS-V6-REMOVE-COMMS CPS-TR-PEER6-OUT CPS-AS3549-OUT CPS-PEERCONTROLS-OUT ];
                         peer-as 3549;
                         tcp-mss 1000;
@@ -13140,13 +13104,11 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS7500-OUT CPS-PEERCONTROLS-OUT ];
                         peer-as 7500;
                     }
                     neighbor 2001:504:d::89 {
                         description "[CPS] Peer FLAG Telecom IPv6 via PAIX [NO-MONITOR]";
-Authentication Data Removed
                         export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS15412-OUT CPS-PEERCONTROLS-OUT ];
                         peer-as 15412;
                     }
@@ -13159,7 +13121,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS2914-OUT CPS-PEERCONTROLS-OUT ];
                         peer-as 2914;
                     }
@@ -13249,7 +13210,6 @@ Authentication Data Removed
                     neighbor 137.164.26.136 {
                         description "[LHCONE] CALTECH | I2-S13537 [NO-NOTIFY]";
                         import [ LHCONE-SANITY-IN SET-PREF LHCONE-CALTECH-IN LHCONE-CONNECTOR-IN ];
-Authentication Data Removed
                         export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-CALTECH-OUT LHCONE-CONNECTOR-OUT ];
                         peer-as 2153;
                         multipath;
@@ -13257,7 +13217,6 @@ Authentication Data Removed
                     neighbor 64.57.30.150 {
                         description "[LHCONE] CALTECH via CENIC via AL2S | I2-S13538 [NO-NOTIFY]";
                         import [ LHCONE-SANITY-IN SET-PREF LHCONE-CALTECH-IN LHCONE-CONNECTOR-IN ];
-Authentication Data Removed
                         export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-CALTECH-OUT LHCONE-CONNECTOR-OUT ];
                         peer-as 32361;
                     }
@@ -13464,7 +13423,6 @@ Authentication Data Removed
                             loops 2;
                         }
                     }
-Authentication Data Removed
                     export TRCPS-NEXT-HOP-SELF;
                     peer-as 11164;
                     neighbor 64.57.29.129;
@@ -13518,7 +13476,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 4600;
                     }
                     neighbor 64.57.21.135 {
@@ -13546,7 +13503,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 62600;
                     }
                     neighbor 198.71.47.234 {
@@ -13578,7 +13534,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 2152;
                         multipath;
                     }
@@ -13594,7 +13549,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 2152;
                         multipath;
                     }
@@ -13624,7 +13578,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 4600;
                     }
                     neighbor 2001:468:f000:23fa::2 {
@@ -13652,7 +13605,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 62600;
                     }
                     neighbor 2001:468:f000:2705::1 {
@@ -13683,7 +13635,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 2152;
                         multipath;
                     }
@@ -13699,7 +13650,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 2152;
                         multipath;
                     }
@@ -13774,7 +13724,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY6-PEER EBGP-PEER-AS9680-OUT ];
                         peer-as 9680;
                     }
@@ -13802,7 +13751,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY6-PEER EBGP-PEER-AS3491-OUT ];
                         peer-as 3491;
                     }
@@ -13829,7 +13777,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY6-PEER EBGP-PEER-AS2497-OUT ];
                         peer-as 2497;
                     }
@@ -13857,7 +13804,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY6-PEER EBGP-PEER-AS4648-OUT ];
                         peer-as 4648;
                     }
@@ -13872,7 +13818,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY6-PEER EBGP-PEER-AS10026-OUT ];
                         peer-as 10026;
                     }
@@ -13914,7 +13859,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY6-PEER EBGP-PEER-AS4788-OUT ];
                         peer-as 4788;
                     }
@@ -13968,7 +13912,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY6-PEER EBGP-PEER-AS20115-OUT ];
                         peer-as 20115;
                     }
@@ -14008,7 +13951,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY6-PEER EBGP-PEER-AS7342-OUT ];
                         peer-as 7342;
                     }
@@ -14035,7 +13977,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY6-PEER EBGP-PEER-AS9505-OUT ];
                         peer-as 9505;
                     }
@@ -14084,7 +14025,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS9318-OUT ];
                         peer-as 9318;
                         multipath;
@@ -14151,7 +14091,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS4323-OUT ];
                         peer-as 4323;
                     }
@@ -14165,7 +14104,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS9680-OUT ];
                         peer-as 9680;
                     }
@@ -14193,7 +14131,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS3491-OUT ];
                         peer-as 3491;
                         multipath;
@@ -14209,7 +14146,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS9318-OUT ];
                         peer-as 9318;
                         multipath;
@@ -14224,7 +14160,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS4739-OUT ];
                         peer-as 4739;
                     }
@@ -14238,7 +14173,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS2497-OUT ];
                         peer-as 2497;
                     }
@@ -14266,7 +14200,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS27524-OUT ];
                         peer-as 27524;
                         multipath;
@@ -14281,7 +14214,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS4648-OUT ];
                         peer-as 4648;
                     }
@@ -14296,7 +14228,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS9505-OUT ];
                         peer-as 9505;
                     }
@@ -14310,7 +14241,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS7342-OUT ];
                         peer-as 7342;
                         multipath;
@@ -14325,7 +14255,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS10026-OUT ];
                         peer-as 10026;
                     }
@@ -14366,7 +14295,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS4788-OUT ];
                         peer-as 4788;
                     }
@@ -14424,7 +14352,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ SANITY-PEER EBGP-PEER-AS20115-OUT ];
                         peer-as 20115;
                     }

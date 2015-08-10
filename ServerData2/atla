@@ -256,7 +256,6 @@ system {
         auxiliary type vt100;
     }
     root-authentication {
-Authentication Data Removed
     }
     name-server {
         134.68.1.9;
@@ -2845,7 +2844,6 @@ protocols {
             family l2vpn {
                 signaling;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 64.57.28.241 {
@@ -2888,7 +2886,6 @@ Authentication Data Removed
             family inet6 {
                 any;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 2001:468:2::1 {
@@ -2973,20 +2970,17 @@ Authentication Data Removed
             neighbor 149.165.254.20 {
                 description "[RE] Indiana Gigapop | I2-S12522";
                 import [ SANITY-IN SET-PREF INTERNET2-MOSS INTERNET2-BROCADE-FMS INDIANAGIGAPOP-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 19782;
             }
             neighbor 198.32.252.237 {
                 description "[RE] FIU/AMPATH via SOX | I2-S12836";
                 import [ SANITY-IN SET-PREF SFGP-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 20080;
             }
             neighbor 216.249.136.197 {
                 description "[RE] KyRON | I2-S09372";
                 local-address 216.249.136.198;
                 import [ SANITY-IN SET-PREF KyRON-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 30700;
             }
             neighbor 205.233.255.36 {
@@ -2997,13 +2991,11 @@ Authentication Data Removed
             neighbor 143.215.193.3 {
                 description "[RE] SoX via AL2S/ATLA | I2-S12541";
                 import [ SANITY-IN SET-PREF SOX-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 10490;
             }
             neighbor 108.59.25.20 {
                 description "[RE] FLR via AL2S/JACK | I2-S12519";
                 import [ SANITY-IN SET-PREF FLR-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 11096;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3018,7 +3010,6 @@ Authentication Data Removed
             neighbor 149.165.128.12 {
                 description "[RE] Indiana Gigapop via AL2S | I2-S12522";
                 import [ SANITY-IN SET-PREF INTERNET2-MOSS INTERNET2-BROCADE-FMS INDIANAGIGAPOP-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 19782;
             }
         }
@@ -3037,20 +3028,17 @@ Authentication Data Removed
             neighbor 2001:468:ff:144::2 {
                 description "[RE] Indiana Gigapop | I2-S12522";
                 import [ SANITY6 SET-PREF INDIANAGIGAPOP-IN6 ];
-Authentication Data Removed
                 peer-as 19782;
             }
             neighbor 2001:468:ff:e47::2 {
                 description "[RE] AMPATH/SFGP | I2-S12837";
                 import [ SANITY6 SET-PREF SFGP-IN6 ];
-Authentication Data Removed
                 peer-as 20080;
             }
             neighbor 2610:01e0:1000:6010::1 {
                 description "[RE] KyRON | I2-S09372";
                 local-address 2610:01e0:1000:6010::2;
                 import [ SANITY6 SET-PREF KyRON-IN6 ];
-Authentication Data Removed
                 peer-as 30700;
             }
             neighbor 2001:468:00ff:0140::2 {
@@ -3061,13 +3049,11 @@ Authentication Data Removed
             neighbor 2607:f7b8:1f02:c102::2 {
                 description "[RE] SoX via AL2S/ATLA | I2-S12541";
                 import [ SANITY6 SET-PREF SOX-IN6 ];
-Authentication Data Removed
                 peer-as 10490;
             }
             neighbor 2607:f5d8:2:d100::1 {
                 description "[RE] FLR via AL2S/JACK | I2-S12519";
                 import [ SANITY6 SET-PREF FLR-IN6 ];
-Authentication Data Removed
                 peer-as 11096;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3082,7 +3068,6 @@ Authentication Data Removed
             neighbor 2001:18e8:ff00:1d::1 {
                 description "[RE] Indiana Gigapop via AL2S | I2-S12522";
                 import [ SANITY6 SET-PREF INDIANAGIGAPOP-IN6 ];
-Authentication Data Removed
                 peer-as 19782;
             }
         }
@@ -3150,13 +3135,11 @@ Authentication Data Removed
                 multihop {
                     ttl 2;
                 }
-Authentication Data Removed
                 peer-as 1251;
             }
             neighbor 200.0.207.9 {
                 description "RedCLARA via AtlanticWave/AL2S | I2-S13057";
                 import [ SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER REDCLARA-IN ITN-IN ];
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ESNET-TO-AMPATH ITN-OUT ];
                 peer-as 27750;
             }
@@ -3182,7 +3165,6 @@ Authentication Data Removed
             neighbor 2001:1348:4:3::1 {
                 description "RedCLARA via AtlanticWave/AL2S | I2-S13057";
                 import REJECT-ALL;
-Authentication Data Removed
                 peer-as 27750;
             }
         }
@@ -8084,26 +8066,22 @@ routing-instances {
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 20080;
                     }
                     neighbor 2610:01e0:1000:4010::1 {
                         description "[CPS] Customer6 KyRON [NO-MONITOR]";
                         local-address 2610:01e0:1000:4010::2;
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-KyRON-IN6 ];
-Authentication Data Removed
                         peer-as 30700;
                     }
                     neighbor 2001:468:ffff:1c1::2 {
                         description "[CPS] Customer6 USF/FLR";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-FLR-IN6 ];
-Authentication Data Removed
                         peer-as 11096;
                     }
                     neighbor 2607:f7b8:1d00:a000::2 {
                         description "[CPS] Customer6 SoX via AL2S/ATLA";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-SOX-IN6 ];
-Authentication Data Removed
                         peer-as 10490;
                     }
                 }
@@ -8188,7 +8166,6 @@ Authentication Data Removed
                     neighbor 192.111.110.61 {
                         description "[LHCONE] Vanderbilt via SOX | I2-S13527 [PENDING] | 2171:144";
                         import [ LHCONE-SANITY-IN SET-PREF LHCONE-VANDERBILT-IN LHCONE-CONNECTOR-IN ];
-Authentication Data Removed
                         export [ LHCONE-SANITY-OUT LHCONE-REMOVE-COMMS LHCONE-VANDERBILT-OUT LHCONE-CONNECTOR-OUT ];
                         peer-as 7212;
                     }

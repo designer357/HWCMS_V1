@@ -257,7 +257,6 @@ system {
         auxiliary type vt100;
     }
     root-authentication {
-Authentication Data Removed
     }
     name-server {
         134.68.1.9;
@@ -1832,7 +1831,6 @@ protocols {
             family l2vpn {
                 signaling;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 64.57.28.241 {
@@ -1875,7 +1873,6 @@ Authentication Data Removed
             family inet6 {
                 any;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 2001:468:1::1 {
@@ -1975,7 +1972,6 @@ Authentication Data Removed
             neighbor 146.57.253.57 {
                 description "[RE] UMN/NL via GPN | I2-S12870";
                 import [ SANITY-IN SET-PREF NORTHERNLIGHTS-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 57;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1985,7 +1981,6 @@ Authentication Data Removed
             neighbor 164.113.255.253 {
                 description "[RE] GPN via AL2S | I2-S12520";
                 import [ SANITY-IN SET-PREF GPN-IN GPN-CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 11317;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -1995,7 +1990,6 @@ Authentication Data Removed
             neighbor 164.58.7.49 {
                 description "[RE] OneNet via sdn-sw.tuls | I2-S12864";
                 import [ SANITY-IN SET-PREF ONENET-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 5078;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2005,7 +1999,6 @@ Authentication Data Removed
             neighbor 208.90.110.98 {
                 description "[RE] AREON via AL2S/TULS | I2-S12865";
                 import [ SANITY-IN SET-PREF AREON-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 40581;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2015,7 +2008,6 @@ Authentication Data Removed
             neighbor 74.200.187.37 {
                 description "[RE] LEARN via AL2S/DALL | I2-S12523";
                 import [ SANITY-IN SET-PREF LEARN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 14085;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2033,7 +2025,6 @@ Authentication Data Removed
             neighbor 74.200.187.54 {
                 description "[RE] LEARN via AL2S/HOUH | I2-S12523";
                 import [ SANITY-IN SET-PREF LEARN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 14085;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2057,7 +2048,6 @@ Authentication Data Removed
             neighbor 2001:468:ff:1341::2 {
                 description "[RE] GPN via AL2S | I2-S12520";
                 import [ SANITY6 SET-PREF GPN-IN6 ];
-Authentication Data Removed
                 peer-as 11317;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2077,7 +2067,6 @@ Authentication Data Removed
             neighbor 2001:468:1900:17::1 {
                 description "[RE] UMN/NL via GPN | I2-S12870";
                 import [ SANITY6 SET-PREF NORTHERNLIGHTS-IN6 ];
-Authentication Data Removed
                 export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6-WITH-SPECIFICS ];
                 peer-as 57;
                 bfd-liveness-detection {
@@ -2088,7 +2077,6 @@ Authentication Data Removed
             neighbor 2607:f4f0:10:100::1 {
                 description "[RE] AREON via AL2S/TULS | I2-S12865";
                 import [ SANITY6 SET-PREF AREON-IN6 ];
-Authentication Data Removed
                 peer-as 40581;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2098,7 +2086,6 @@ Authentication Data Removed
             neighbor 2607:f928:2:11::1 {
                 description "[RE] LEARN via AL2S/DALL | I2-S12523";
                 import [ SANITY6 SET-PREF LEARN-IN6 ];
-Authentication Data Removed
                 peer-as 14085;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2116,7 +2103,6 @@ Authentication Data Removed
             neighbor 2607:f928:2:12::1 {
                 description "[RE] LEARN via AL2S/HOUH | I2-S12523";
                 import [ SANITY6 SET-PREF LEARN-IN6 ];
-Authentication Data Removed
                 peer-as 14085;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2203,7 +2189,6 @@ Authentication Data Removed
                 family inet {
                     any;
                 }
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 FROM-NISN ITN-OUT ];
                 peer-as 18592;
             }
@@ -2441,7 +2426,6 @@ Authentication Data Removed
             /* AREON */
             inactive: peer 208.90.110.113 {
                 local-address 208.90.110.114;
-Authentication Data Removed
             }
             /* LEARN */
             peer 74.200.187.13 {
@@ -2458,7 +2442,6 @@ Authentication Data Removed
             /* AREON */
             peer 208.90.110.98 {
                 local-address 208.90.110.99;
-Authentication Data Removed
             }
             /* LEARN via AL2S/DALL */
             peer 74.200.187.37 {
@@ -8866,7 +8849,6 @@ routing-instances {
                     neighbor 146.57.253.113 {
                         description "[CPS] Customer UMN (GPN) [NO-MONITOR]";
                         import REJECT-ALL;
-Authentication Data Removed
                         export REJECT-ALL;
                         peer-as 57;
                     }
@@ -8896,13 +8878,11 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 11317;
                     }
                     neighbor 2607:f4f0:0:6012::2 {
                         description "[CPS] Customer6 AREON";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-AREON-IN6 ];
-Authentication Data Removed
                         peer-as 40581;
                     }
                 }
@@ -9103,7 +9083,6 @@ Authentication Data Removed
                     neighbor 4.53.32.125 {
                         description "Commodity internet via Level(3) | I2-S06900";
                         import DEFAULT-IN;
-Authentication Data Removed
                         export TRANSIT-UPSTREAM-OUT;
                         peer-as 3356;
                     }
@@ -9124,7 +9103,6 @@ Authentication Data Removed
                     neighbor 2001:1900:2100::1291 {
                         description "Commodity internet via Level(3) | I2-S06900";
                         import DEFAULT6-IN;
-Authentication Data Removed
                         export TRANSIT6-UPSTREAM-OUT;
                         peer-as 3356;
                     }

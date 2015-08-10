@@ -254,7 +254,6 @@ system {
     authentication-order [ radius password ];
     location country-code US;
     root-authentication {
-Authentication Data Removed
     }
     name-server {
         134.68.1.9;
@@ -1606,7 +1605,6 @@ protocols {
             family l2vpn {
                 signaling;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 64.57.28.241 {
@@ -1649,7 +1647,6 @@ Authentication Data Removed
             family inet6 {
                 any;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 2001:468:1::1 {
@@ -1803,21 +1800,18 @@ Authentication Data Removed
             remove-private;
             neighbor 198.32.153.3 {
                 description "NISN via NGIX | I2-S13072";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 FROM-CUDI FEDNET-OUT ];
                 peer-as 297;
             }
             neighbor 198.32.153.121 {
                 description "USGS via NGIX | I2-S13073";
                 import [ USGS-IN SANITY-IN REMOVE-COMMS-IN SET-PREF-PEER FEDNET-IN ];
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 USGS-OUT REDCLARA-TO-USGS FEDNET-OUT ];
                 peer-as 22284;
             }
             neighbor 198.71.45.239 {
                 description "NREN via NGIX vlan 166 | I2-S13130";
                 hold-time 30;
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 GEANT-TO-NREN CLARA-TO-NREN FEDNET-OUT ];
                 peer-as 24;
             }
@@ -1838,12 +1832,10 @@ Authentication Data Removed
             remove-private;
             neighbor 2001:468:ff:17c6::2 {
                 description "NREN/NGIX 166 | I2-S13130";
-Authentication Data Removed
                 peer-as 24;
             }
             neighbor 2001:468:7:200::0 {
                 description "NISN IPv6 via NGIX | I2-S13072";
-Authentication Data Removed
                 peer-as 297;
             }
         }

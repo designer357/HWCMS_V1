@@ -256,7 +256,6 @@ system {
         auxiliary type vt100;
     }
     root-authentication {
-Authentication Data Removed
     }
     name-server {
         134.68.1.9;
@@ -376,16 +375,13 @@ chassis {
     network-services ip;
 }
 security {
-Authentication Data Removed {
         key-chain BFD-BGP-MERIT {
             key 0 {
-Authentication Data Removed
                 start-time "2013-1-1.05:00:00 +0000";
             }
         }
         key-chain BFD-BGP-OARNET {
             key 0 {
-Authentication Data Removed
                 start-time "2013-1-1.05:00:00 +0000";
             }
         }
@@ -2810,7 +2806,6 @@ protocols {
             family l2vpn {
                 signaling;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 64.57.28.241 {
@@ -2853,7 +2848,6 @@ Authentication Data Removed
             family inet6 {
                 any;
             }
-Authentication Data Removed
             export NEXT-HOP-SELF;
             peer-as 11537;
             neighbor 2001:468:1::1 {
@@ -2932,13 +2926,11 @@ Authentication Data Removed
             neighbor 192.88.192.137 {
                 description "[RE] OARnet | I2-S12534";
                 import [ SANITY-IN SET-PREF OARNET-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 3112;
             }
             neighbor 206.196.177.105 {
                 description "[RE] MAX backup via NGIX-East | I2-S12528";
                 import [ SANITY-IN SET-PREF MAX-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 10886;
             }
             neighbor 199.18.156.241 {
@@ -2947,13 +2939,11 @@ Authentication Data Removed
                 family inet {
                     multicast;
                 }
-Authentication Data Removed
                 peer-as 600;
             }
             neighbor 204.238.76.65 {
                 description "[RE] Drexel University | I2-S12517 [NO-MONITOR][2665:144]";
                 import [ SANITY-IN SET-PREF DREXEL-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 36412;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -2969,7 +2959,6 @@ Authentication Data Removed
             neighbor 192.88.192.237 {
                 description "[RE] OARnet via AL2S | I2-S12534";
                 import [ SANITY-IN SET-PREF OARNET-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 3112;
                 bfd-liveness-detection {
                     minimum-interval 1000;
@@ -2985,7 +2974,6 @@ Authentication Data Removed
                 family inet {
                     multicast;
                 }
-Authentication Data Removed
                 peer-as 600;
                 bfd-liveness-detection {
                     minimum-interval 1000;
@@ -2998,7 +2986,6 @@ Authentication Data Removed
             neighbor 64.57.23.30 {
                 description "[RE] World Bank | I2-S12954";
                 import [ SANITY-IN SET-PREF WORLDBANK-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 10497;
             }
             neighbor 192.122.183.13 {
@@ -3012,7 +2999,6 @@ Authentication Data Removed
             neighbor 198.71.45.228 {
                 description "[RE] MAX (Mid Atlantic Crossroads) via AL2S/WASH | I2-S12528";
                 import [ SANITY-IN SET-PREF MAX-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 10886;
                 bfd-liveness-detection {
                     minimum-interval 1000;
@@ -3021,7 +3007,6 @@ Authentication Data Removed
             neighbor 192.88.115.82 {
                 description "[RE] 3ROX via AL2S/PITT | I2-S12542";
                 import [ SANITY-IN SET-PREF PSC-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 5050;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3063,7 +3048,6 @@ Authentication Data Removed
             neighbor 198.71.46.154 {
                 description "[RE] NIH via AL2S/ASHB | I2-S50449";
                 import [ SANITY-IN SET-PREF NIH-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 3527;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3073,7 +3057,6 @@ Authentication Data Removed
             neighbor 198.71.46.158 {
                 description "[RE] NLM via AL2S/ASHB | I2-S50448";
                 import [ SANITY-IN SET-PREF NLM-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 393689;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3088,13 +3071,11 @@ Authentication Data Removed
             neighbor 198.71.46.207 {
                 description "[RE] MREN via AL2S | I2-S12526";
                 import [ SANITY-IN SET-PREF MREN-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 22335;
             }
             neighbor 216.27.100.17 {
                 description "[RE] MAGPI via AL2S | I2-S12525";
                 import [ SANITY-IN SET-PREF MAGPI-IN CONNECTOR-IN ];
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ];
                 peer-as 10466;
             }
@@ -3111,7 +3092,6 @@ Authentication Data Removed
             neighbor 204.238.76.33 {
                 description "[RE] Drexel University | I2-S12517";
                 import [ SANITY-IN SET-PREF DREXEL-IN CONNECTOR-IN ];
-Authentication Data Removed
                 peer-as 36412;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3136,7 +3116,6 @@ Authentication Data Removed
             neighbor 2001:468:ff:185c::2 {
                 description "[RE] MAX (Mid Atlantic Crossroads) BACKUP via NGIX-E | I2-S12528";
                 import [ SANITY6 SET-PREF MAX-IN6 ];
-Authentication Data Removed
                 peer-as 10886;
             }
             neighbor 2001:468:ff:9c2::2 {
@@ -3145,19 +3124,16 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 600;
             }
             neighbor 2001:468:ff:954::2 {
                 description "[RE] MERIT via WASH | I2-S12842";
                 import [ SANITY6 SET-PREF MERIT-IN6 ];
-Authentication Data Removed
                 peer-as 237;
             }
             neighbor 2001:468:9:22::1 {
                 description "[RE] Drexel | I2-S12517";
                 import [ SANITY6 SET-PREF DREXEL-IN6 ];
-Authentication Data Removed
                 peer-as 36412;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3168,7 +3144,6 @@ Authentication Data Removed
             neighbor 2610:a8:1cab:9::1 {
                 description "[RE] OARnet multicast via AL2S | I2-S12678";
                 import [ SANITY6 SET-PREF OARNET-IN6 ];
-Authentication Data Removed
                 peer-as 600;
                 bfd-liveness-detection {
                     minimum-interval 1000;
@@ -3181,7 +3156,6 @@ Authentication Data Removed
             neighbor 2001:5e8:0:fffd:0:1:2:101 {
                 description "[RE] 3ROX via AL2S/PITT | I2-S12542";
                 import [ SANITY6 SET-PREF PSC-IN6 ];
-Authentication Data Removed
                 peer-as 5050;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3200,7 +3174,6 @@ Authentication Data Removed
             neighbor 2001:468:9:208::1 {
                 description "[RE] MAX (Mid Atlantic Crossroads) via AL2S/WASH | I2-S12528";
                 import [ SANITY6 SET-PREF MAX-IN6 ];
-Authentication Data Removed
                 peer-as 10886;
             }
             neighbor 2001:468:9:2::1 {
@@ -3229,13 +3202,11 @@ Authentication Data Removed
             neighbor 2001:468:9:20a::1 {
                 description "[RE] World Bank | I2-S12954";
                 import [ SANITY6 SET-PREF WORLDBANK-IN6 ];
-Authentication Data Removed
                 peer-as 10497;
             }
             neighbor 2001:468:ff:942::2 {
                 description "[RE] MREN via AL2S | I2-S12526";
                 import [ SANITY6 SET-PREF MREN-IN6 ];
-Authentication Data Removed
                 peer-as 22335;
             }
             neighbor 2001:468:9:20d::2 {
@@ -3246,7 +3217,6 @@ Authentication Data Removed
             neighbor 2001:468:1800:200::1 {
                 description "[RE] MAGPI via AL2S | I2-S12525";
                 import [ SANITY6 SET-PREF MAGPI-IN6 ];
-Authentication Data Removed
                 peer-as 10466;
             }
             neighbor 2620:f:0:507::2 {
@@ -3263,7 +3233,6 @@ Authentication Data Removed
             neighbor 2001:468:2300:5::5 {
                 description "[RE] NLM via AL2S/ASHB | I2-S50448";
                 import [ SANITY6 SET-PREF NLM-IN6 ];
-Authentication Data Removed
                 peer-as 393689;
                 bfd-liveness-detection {
                     minimum-interval 500;
@@ -3304,18 +3273,15 @@ Authentication Data Removed
             remove-private;
             neighbor 192.84.8.253 {
                 description "NISN | I2-S13072";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 FROM-CUDI FEDNET-OUT ];
                 peer-as 297;
             }
             neighbor 198.124.194.9 {
                 description "ESNET via NGIX | I2-S13075";
-Authentication Data Removed
                 peer-as 293;
             }
             neighbor 198.71.46.149 {
                 description "DREN via WIX | I2-S13077";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 GEANT-TO-DREN FEDNET-OUT ];
                 peer-as 668;
             }
@@ -3351,19 +3317,16 @@ Authentication Data Removed
                         }
                     }
                 }
-Authentication Data Removed
                 export [ DATATAG-DEMO SANITY-OUT ORIGINATE4 ESNET-TO-GEANT NREN-TO-GEANT USGS-TO-GEANT DREN-TO-GEANT ITN-OUT ];
                 peer-as 20965;
             }
             neighbor 64.57.28.62 {
                 description "RNP via Atlantic Wave | I2-S13181";
-Authentication Data Removed
                 export [ SANITY-OUT REMOVE-COMMS-OUT ORIGINATE4 ESNET-TO-AMPATH ITN-OUT ];
                 peer-as 1916;
             }
             neighbor 150.99.199.189 {
                 description "[RE] SINET via WIX | I2-S13133";
-Authentication Data Removed
                 peer-as 2907;
             }
             neighbor 198.71.45.211 {
@@ -3389,7 +3352,6 @@ Authentication Data Removed
                         }
                     }
                 }
-Authentication Data Removed
                 export [ SANITY-OUT ORIGINATE4 ESNET-TO-GEANT NREN-TO-GEANT USGS-TO-GEANT DREN-TO-GEANT ITN-OUT ];
                 peer-as 20965;
             }
@@ -3410,28 +3372,23 @@ Authentication Data Removed
             remove-private;
             neighbor 2001:0798:0014:10aa::11 {
                 description "GEANT - Frankfurt IPv6 | I2-S13168";
-Authentication Data Removed
                 peer-as 20965;
             }
             neighbor 2001:468:ff:18c5::2 {
                 description "redCLARA via NGIX & Awave-FIU | I2-S13057";
-Authentication Data Removed
                 peer-as 27750;
             }
             neighbor 2001:468:ff:9c4::2 {
                 description "RNP v6 via Atlantic Wave | I2-S13181";
                 import [ SANITY6 REMOVE-COMMS-IN SET-PREF-PEER ITN-IN6 RNP-IN6 ];
-Authentication Data Removed
                 peer-as 1916;
             }
             neighbor 2001:2f8:ff00:ff04::1 {
                 description "[RE] SINET via WIX | I2-S13133";
-Authentication Data Removed
                 peer-as 2907;
             }
             neighbor 2001:798:99:1::25 {
                 description "[RE]GEANT(AMS) ANA 100G via WIX/WASH | [PENDING] 3447:144";
-Authentication Data Removed
                 export [ SANITY6 REMOVE-COMMS-OUT ORIGINATE6 ITN-PEERCONTROLS-OUT ITN-OUT6 ];
                 peer-as 20965;
             }
@@ -3455,12 +3412,10 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 293;
             }
             neighbor 2001:468:9:200::0 {
                 description "NISN IPv6 via NGIX | I2-S13072";
-Authentication Data Removed
                 peer-as 297;
             }
             neighbor 2001:468:9:20c::1 {
@@ -3468,7 +3423,6 @@ Authentication Data Removed
                 family inet6 {
                     any;
                 }
-Authentication Data Removed
                 peer-as 668;
             }
         }
@@ -3776,7 +3730,6 @@ Authentication Data Removed
             /* OARnet via AL2S MCAST */
             peer 199.18.156.249 {
                 local-address 199.18.156.250;
-Authentication Data Removed
             }
             /* Mid-Atlantic Crossroads */
             peer 198.71.45.228 {
@@ -13510,7 +13463,6 @@ routing-instances {
                     neighbor 199.18.156.245 {
                         description "[CPS] Customer OARnet [NO-MONITOR]";
                         import REJECT-ALL;
-Authentication Data Removed
                         export REJECT-ALL;
                         peer-as 600;
                     }
@@ -13553,19 +13505,16 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 10886;
                     }
                     neighbor 2001:468:ffff:d4b::2 {
                         description "[CPS] Customer6 OARnet";
                         import [ SANITY6 SET-PREF-CPS-V6 CPS-OARNET-IN6 ];
-Authentication Data Removed
                         peer-as 600;
                     }
                     neighbor 2001:468:ffff:954::2 {
                         description "[CPS] Merit IPv6 via WASH";
                         import [ SANITY-IN SET-PREF-CPS-V6 CPS-MERIT-IN6 ];
-Authentication Data Removed
                         peer-as 237;
                     }
                     neighbor 2001:468:9:209::1 {
@@ -13579,7 +13528,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         peer-as 10886;
                     }
                     neighbor 2001:468:9:1::1 {
@@ -13668,7 +13616,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS15169-OUT CPS-PEERCONTROLS-OUT ];
                         peer-as 15169;
                     }
@@ -13682,7 +13629,6 @@ Authentication Data Removed
                                 }
                             }
                         }
-Authentication Data Removed
                         export [ CPS-V6-REMOVE-COMMS CPS-PEER6-OUT CPS-AS6939-OUT CPS-PEERCONTROLS-OUT ];
                         peer-as 6939;
                     }
@@ -13869,7 +13815,6 @@ Authentication Data Removed
                     neighbor 4.30.228.49 {
                         description "Commodity internet via Level(3) | I2-S06903";
                         import DEFAULT-IN;
-Authentication Data Removed
                         export TRANSIT-UPSTREAM-OUT;
                         peer-as 3356;
                     }
@@ -13889,7 +13834,6 @@ Authentication Data Removed
                     neighbor 2001:1900:2100::1295 {
                         description "Commodity internet via Level(3) | I2-S06903";
                         import DEFAULT6-IN;
-Authentication Data Removed
                         export TRANSIT6-UPSTREAM-OUT;
                         peer-as 3356;
                     }
