@@ -33,6 +33,7 @@ def myjoin(mystr,mylist):
     return str
 
 
+
 def returnAttributes(protocol,label_list):
     filelist=os.listdir(ProjectPath)
     for eachfile in filelist:
