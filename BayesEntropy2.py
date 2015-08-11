@@ -2,10 +2,10 @@
 from InPutForRulesVersion2 import *
 import collections
 import numpy
-mydict,mylist=returnAttributes()
 ProjectPath="/Library/WebServer/Documents/HWCMS_V1"
 
-def Main(filelist,filepath):
+def Main(filelist,filepath,protocol,label_list):
+    mydict,mylist=returnAttributes(protocol,label_list)
     TotalIdf=collections.defaultdict(int)
     Result=collections.defaultdict(int)
     FILECOUNT=0
