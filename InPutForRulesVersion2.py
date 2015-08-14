@@ -46,51 +46,32 @@ def returnAttributes(protocol,label_list):
             linescount=0
             mydict={}
             mylist=[]
-
-            #print(nrows)
-            #print(str(table.col_values(0)[0]).lower())
-            #linescount1=linescount
             while linescount<nrows:
-                print("dsaffa"+str(linescount))
-                #if not (str(tab1+1) in label_list):
-                    #continue
-                #if len(str(table.col_values(0)[tab1]).lower())>0 and not str(table.col_values(0)[tab1]).lower() in protocol:
-                    #continue
-                    #print(tab1)
-                    #break
-                    #pass
+
                 if not len(str(table.col_values(1)[linescount]).lower())>0:
                     linescount+=1
-                    #linescount1 = linescount + 1
                     continue
                 if len(str(table.col_values(0)[linescount]).lower())>0 and str(table.col_values(0)[linescount]).lower() in protocol:
-                    print(str(table.col_values(0)[linescount]).lower())
+                    #print(str(table.col_values(0)[linescount]).lower())
                     flag=1
                 else:
                     flag=0
                 if flag==0:
                     linescount += 1
-                    #linescount1 +=1
                     continue
                 elif flag==1:
-
                     tab1=0
                     linescount2=linescount
                     while tab1 < nrows-linescount2:
-                        #print(linescount2)
                         if not (str(tab1+1) in label_list):
                             tab1 += 1
                             continue
                         else:
-                            #print(str(table.col_values(0)[tab1]).lower())
-                            #print(str(table.col_values(0)[tab1]))
-                            #print(str(table.row_values(tab1)[1]))
                             if len(str(table.row_values(linescount)[1]))>0:
                                 mydict[str(table.row_values(tab1)[1])] = str(table.row_values(linescount2+tab1)[2])
                                 mylist.append(str(table.row_values(linescount2+tab1)[1]))
                         tab1 += 1
                         linescount += 1
-
             return mydict,mylist
 def MainFunc(filelist,filepath,protocol,linstr,outputfolder,label_list):
     mydict,mylist=returnAttributes(protocol,label_list)
