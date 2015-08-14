@@ -35,6 +35,7 @@ def myjoin(mystr,mylist):
 
 
 def returnAttributes(protocol,label_list):
+    protocol=protocol.lower()
     filelist=os.listdir(ProjectPath)
     for eachfile in filelist:
         if '.xlsx' in eachfile:
@@ -42,27 +43,53 @@ def returnAttributes(protocol,label_list):
             table = data.sheets()[0]
             nrows = table.nrows #行数
             ncols = table.ncols #列数
+            linescount=0
             mydict={}
             mylist=[]
 
             #print(nrows)
             #print(str(table.col_values(0)[0]).lower())
-
-            for tab1 in range(nrows):
-                #print(tab1+1)
-                if not (str(tab1+1) in label_list):
-                    continue
-                if len(str(table.col_values(0)[tab1]).lower())>0 and not str(table.col_values(0)[tab1]).lower() in protocol:
+            #linescount1=linescount
+            while linescount<nrows:
+                print("dsaffa"+str(linescount))
+                #if not (str(tab1+1) in label_list):
+                    #continue
+                #if len(str(table.col_values(0)[tab1]).lower())>0 and not str(table.col_values(0)[tab1]).lower() in protocol:
                     #continue
                     #print(tab1)
-                    break
+                    #break
                     #pass
-                #print(str(table.col_values(0)[tab1]).lower())
-                #print(str(table.col_values(0)[tab1]))
-                #print(str(table.row_values(tab1)[1]))
-                if len(str(table.row_values(tab1)[1]))>0:
-                    mydict[str(table.row_values(tab1)[1])] = str(table.row_values(tab1)[2])
-                    mylist.append(str(table.row_values(tab1)[1]))
+                if not len(str(table.col_values(1)[linescount]).lower())>0:
+                    linescount+=1
+                    #linescount1 = linescount + 1
+                    continue
+                if len(str(table.col_values(0)[linescount]).lower())>0 and str(table.col_values(0)[linescount]).lower() in protocol:
+                    print(str(table.col_values(0)[linescount]).lower())
+                    flag=1
+                else:
+                    flag=0
+                if flag==0:
+                    linescount += 1
+                    #linescount1 +=1
+                    continue
+                elif flag==1:
+
+                    tab1=0
+                    linescount2=linescount
+                    while tab1 < nrows-linescount2:
+                        #print(linescount2)
+                        if not (str(tab1+1) in label_list):
+                            tab1 += 1
+                            continue
+                        else:
+                            #print(str(table.col_values(0)[tab1]).lower())
+                            #print(str(table.col_values(0)[tab1]))
+                            #print(str(table.row_values(tab1)[1]))
+                            if len(str(table.row_values(linescount)[1]))>0:
+                                mydict[str(table.row_values(tab1)[1])] = str(table.row_values(linescount2+tab1)[2])
+                                mylist.append(str(table.row_values(linescount2+tab1)[1]))
+                        tab1 += 1
+                        linescount += 1
 
             return mydict,mylist
 def MainFunc(filelist,filepath,protocol,linstr,outputfolder,label_list):
@@ -165,10 +192,10 @@ def MainFunc(filelist,filepath,protocol,linstr,outputfolder,label_list):
             #print("success")
             #print(val3)
 
-L=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
-#L=['2','5']
-a,b=returnAttributes("bgp",L)
-print(b)
+#L=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
+#L=['2','3']
+#a,b=returnAttributes("HHH",L)
+#print(b)
 #mylist=["atla","chic","clev","hous","kans","losa","newy32aoa","salt","seat","wash"]
 #filelist=list(filter(lambda a: a in mylist,os.listdir(ProjectPath+'/ServerData2')))
 #print(filelist)
