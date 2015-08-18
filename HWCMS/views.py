@@ -30,7 +30,7 @@ FilesStoreFolder="ServerData2"
 TotalFileList=[]
 for eachfile in os.listdir(os.path.join(ProjectPath,FilesStoreFolder)):
     if '.' in eachfile:
-        suffix=eachfile.split('.')[1]
+        suffix=eachfile.split('.')[-1]
     else:
         suffix=""
     Time=os.stat(os.path.join(ProjectPath,FilesStoreFolder)+'/'+eachfile)[ST_MTIME]
@@ -142,7 +142,7 @@ def file_upload(request):
 
     for eachfile in tempfilenamelist:
         if '.' in eachfile:
-            suffix=eachfile.split('.')[1]
+            suffix=eachfile.split('.')[-1]
         else:
             suffix=""
         Time=os.stat(os.path.join(ProjectPath,FilesStoreFolder)+'/'+eachfile)[ST_MTIME]
@@ -152,7 +152,7 @@ def file_upload(request):
         if not eachfile in TotalFileNameList:
             TotalFileList.append(FileList(eachfile,timestr,suffix,check))
         else:
-            eachfile = eachfile.split('.')[0] + '_copy.' + eachfile.split('.')[1]
+            eachfile = eachfile.replace(suffix,"") + '_copy.' + suffix
             TotalFileList.append(FileList(eachfile,timestr,suffix,check))
             #TFilest.append(FileList(eachfile,timestr,suffix,check))
 
@@ -572,7 +572,7 @@ def index_page(request):
     TotalFileList=[]
     for eachfile in os.listdir(os.path.join(ProjectPath,FilesStoreFolder)):
         if '.' in eachfile:
-            suffix=eachfile.split('.')[1]
+            suffix=eachfile.split('.')[-1]
         else:
             suffix=""
         Time=os.stat(os.path.join(ProjectPath,FilesStoreFolder)+'/'+eachfile)[ST_MTIME]
