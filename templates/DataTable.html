@@ -36,6 +36,17 @@
 
 
         });
+
+       function send()
+ {
+document.form.action="send.asp";
+document.form.submit()
+}
+function preview()
+{
+document.form.action="preview.asp";
+document.form.submit();
+}
     </script>
 </head>
 <body>
@@ -102,14 +113,15 @@
 
             <li><a class="menuitem">Input Protocols & Attributes</a>
                             <ul class="submenu">
-                                 <li class="right">Protocol:  <input type="text"  class="warning" id="strProtocol1" name="strProtocol" value="bgp" size="15" onchange="changeProtocol()"></li>
-                                 <li class="right">Attributes: <input type="text"  class="warning" id="strAttributes1" name="strAtributes" value="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" size="15" onchange="changeAttributes()"></li>
 
                             </ul>
                         </li>
 
                         <li><a class="menuitem" >Association Rules Input</a>
                             <ul class="submenu">
+                                 <li class="left">Protocol:  <input type="text"  class="warning" id="strProtocol1" name="strProtocol" value="bgp" size="15" onchange="changeProtocol()"></li>
+                                 <li class="left">Attributes: <input type="text"  class="warning" id="strAttributes1" name="strAtributes" value="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" size="15" onchange="changeAttributes()"></li>
+
                                  <li class="right"><input type="hidden" name="OperationType" value="Association Rule"></li>
                                  <li class="right">Pattern:<input type="text"  class="success" name="strPattern" value="input patterns" size="20" ></li>
                                  <li class="right">MinSupp:<input type="text"  class="success" name="paraMinSupp" value="0.7"  ></li>
@@ -125,8 +137,8 @@
                         <form action="{% url 'rule_generate' %}" method="post" >
                         <li><a class="menuitem">Bayes Detection</a>
                             <ul class="submenu">
-                                 <li class="right">Protocol:  <input type="hidden"  class="warning" id="strProtocol2" name="strProtocol" value="bgp" size="15" ></li>
-                                 <li class="right">Attributes: <input type="hidden"  class="warning" id="strAtributes2" name="strAtributes" value="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" size="15" ></li>
+                                 <li class="left">Protocol:  <input type="text"  class="warning" id="strProtocol2" name="strProtocol" value="bgp" size="15" ></li>
+                                 <li class="left">Attributes: <input type="text"  class="warning" id="strAtributes2" name="strAtributes" value="1,2,3" size="15" ></li>
 
                                 <li class="right"><input type="hidden" name="OperationType" value="Bayes"></li>
 
