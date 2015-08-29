@@ -12,7 +12,7 @@ def Main(filelist,filepath,protocol,label_list):
     Result=collections.defaultdict(int)
     FILECOUNT=0
     B=[]
-    print("fafasdfafafafafdsf"+protocol)
+    print("bayesbayesbayesbayesbayes"+protocol)
     print(label_list)
 
     for eachfile in filelist:
