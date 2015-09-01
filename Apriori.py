@@ -177,7 +177,7 @@ class Apriori:
         self.data=[]
         self.size=0
         self.min_supp = min_supp
-        print("Init........")
+        print("Init........"+str(inputfile))
         for line in inputfile.readlines():
             #linearray = re.compile("[\d]+").findall(line)
             #linearray = re.compile("[\w]+").findall(line)

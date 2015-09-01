@@ -69,25 +69,25 @@ def returnAttributes(protocol,label_list):
                     while tab1 < nrows-linescount2:
                         print("########"+str(table.col_values(0)[tab1]).lower()+str(linescount2))
 
-                        if len(str(table.col_values(0)[tab1]).lower())==0:
-                            #print(str(table.col_values(0)[linescount]).lower())
-                            flag=1
-                        elif len(str(table.col_values(0)[tab1]).lower())>0 and not str(table.col_values(0)[tab1]).lower() in protocol:
-                            flag=0
-                        print("++++++++++++++>")
-                        print(flag)
+                        if len(str(table.row_values(linescount2+tab1)[0]))>0 and not str(table.row_values(linescount2+tab1)[0]).lower()==protocol:
+                            break
                         if not (str(tab1+1) in label_list):
                             tab1 += 1
                             continue
                         else:
+
                             if len(str(table.row_values(linescount)[1]))>0:
-                                mydict[str(table.row_values(tab1)[1])] = str(table.row_values(linescount2+tab1)[2])
+                                mydict[str(table.row_values(linescount2+tab1)[1])] = str(table.row_values(linescount2+tab1)[2])
                                 mylist.append(str(table.row_values(linescount2+tab1)[1]))
                         tab1 += 1
                         linescount += 1
             return mydict,mylist
 def MainFunc(filelist,filepath,protocol,linstr,outputfolder,label_list):
     mydict,mylist=returnAttributes(protocol,label_list)
+    print("-----------------------1")
+    print(mydict)
+    print("-----------------------2")
+    print(mylist)
     mylist3=mylist[:]
     for k,v in mydict.items():
         if '/' in v:
@@ -168,16 +168,42 @@ def MainFunc(filelist,filepath,protocol,linstr,outputfolder,label_list):
                     val3.append(itema)
 
             Output=[]
+            outputtab=0
 
             for tab in range(len(mylist)):
                 Output.append([])
-
-            for tab in range(len(mylist)):
-                pattern=re.compile(r"[\s]*"+mylist[tab]+'.*')
-                for each in val3:
-                    matchlist=pattern.findall(each)
+            for k,v in mydict.items():
+                matchlist=[]
+                if v=="int":
+                    pattern=re.compile(r"[\s]*"+k+"[\s]*[\d]+")
+                    for each in val3:
+                        #print(each)
+                        matchlist.extend(pattern.findall(each))
+                    #print("222222222222222222222222222")
+                    #print(matchlist)
+                    #print(val3)
+                elif v=="bool":
+                    pattern=re.compile(r"[\s]*"+k+'[\s]*')
+                    for each in val3:
+                        matchlist.extend(pattern.findall(each))
+                    #print("111111111111111111111")
+                    #print(matchlist)
+                else:
+                    v=v.replace('/','|').replace('\\','|')
+                    pattern=re.compile(r"[\s]*"+k+'[\s]*'+'('+v+')')
+                    for each in val3:
+                        matchlist.extend(pattern.findall(each))
                     if matchlist:
-                        Output[tab].extend(matchlist)
+                        for t in range(len(matchlist)):
+                            matchlist[t]=k+' '+matchlist[t]
+
+                if matchlist:
+                    print("333333333333333333333")
+                    print(matchlist)
+                    Output[outputtab].extend(matchlist)
+                    if len(matchlist)==1:
+                        Output[outputtab].extend(',')
+                outputtab += 1
             #print(Output)
             #print(filepath+"/output"+linstr)
             with open(ProjectPath+"/"+outputfolder+"/input_"+linstr,"a")as fout:
@@ -188,9 +214,9 @@ def MainFunc(filelist,filepath,protocol,linstr,outputfolder,label_list):
             #print(val3)
 
 #L=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
-#L=['2','3']
+#L=['1','3','4']
 #a,b=returnAttributes("isis",L)
-#print(b)
+#print(a)
 #mylist=["atla","chic","clev","hous","kans","losa","newy32aoa","salt","seat","wash"]
 #filelist=list(filter(lambda a: a in mylist,os.listdir(ProjectPath+'/ServerData2')))
 #print(filelist)
