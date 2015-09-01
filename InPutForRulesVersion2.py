@@ -56,13 +56,26 @@ def returnAttributes(protocol,label_list):
                     flag=1
                 else:
                     flag=0
+                print("---------->")
+                print(flag)
                 if flag==0:
                     linescount += 1
                     continue
                 elif flag==1:
+
                     tab1=0
                     linescount2=linescount
+                    print(nrows-linescount2)
                     while tab1 < nrows-linescount2:
+                        print("########"+str(table.col_values(0)[tab1]).lower()+str(linescount2))
+
+                        if len(str(table.col_values(0)[tab1]).lower())==0:
+                            #print(str(table.col_values(0)[linescount]).lower())
+                            flag=1
+                        elif len(str(table.col_values(0)[tab1]).lower())>0 and not str(table.col_values(0)[tab1]).lower() in protocol:
+                            flag=0
+                        print("++++++++++++++>")
+                        print(flag)
                         if not (str(tab1+1) in label_list):
                             tab1 += 1
                             continue
@@ -117,19 +130,20 @@ def MainFunc(filelist,filepath,protocol,linstr,outputfolder,label_list):
             #print("val_children000000")
             #print(val_children0)
 
-            parse0 = CiscoConfParse(val0)
+            if str(linstr)!="input patterns":
+                parse0 = CiscoConfParse(val0)
+                val_block=parse0.find_blocks(linstr2,exactmatch=False,ignore_ws=True)
+                #val_children=parse_file.find_children_w_parents(parentstr,linstr,ignore_ws=True)
+                val_children=parse0.find_all_children(linstr2,exactmatch=False,ignore_ws=True)
 
+                print("val_block...")
+                print(val_block)
+                print('val_children...')
+                print(val_children)
 
-            val_block=parse0.find_blocks(linstr2,exactmatch=False,ignore_ws=True)
-            #val_children=parse_file.find_children_w_parents(parentstr,linstr,ignore_ws=True)
-            val_children=parse0.find_all_children(linstr2,exactmatch=False,ignore_ws=True)
-
-            print("val_block...")
-            print(val_block)
-            print('val_children...')
-            print(val_children)
-
-            val1=val_block+val_children
+                val1=val_block+val_children
+            else:
+                val1=val_children0
             #val1=val_children
             #print("val1///")
             #print(val1)
@@ -175,7 +189,7 @@ def MainFunc(filelist,filepath,protocol,linstr,outputfolder,label_list):
 
 #L=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
 #L=['2','3']
-#a,b=returnAttributes("HHH",L)
+#a,b=returnAttributes("isis",L)
 #print(b)
 #mylist=["atla","chic","clev","hous","kans","losa","newy32aoa","salt","seat","wash"]
 #filelist=list(filter(lambda a: a in mylist,os.listdir(ProjectPath+'/ServerData2')))
