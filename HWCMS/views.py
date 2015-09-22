@@ -12,7 +12,7 @@ from stat import *
 import InPutForRulesVersion2,BayesEntropy2
 from Apriori import *
 from HWCMS.models import Parameter,FileList
-
+import shutil
 
 global excludelist
 global gloffset
@@ -20,7 +20,10 @@ global mylist
 global datagridpagesize
 global TotalFileList
 global FilesStoreFolder
-
+global protocol
+global label_list
+protocol="bgp"
+label_list=[1,2,3,4,5,6,7,8,9,10]
 ProjectPath="/Library/WebServer/Documents/HWCMS_V1"
 excludelist=[]
 mylist=[]
@@ -174,7 +177,9 @@ def file_upload(request):
 def LoadRules(group):
     with open(os.getcwd()+"/results/RulesFor_"+group)as fin:
         Rules=[[],[]]
-        pattern1=re.compile(r'set\(.*\)')
+        #pattern1=re.compile(r'set\(.*\)')
+        pattern1=re.compile(r'[\(|\{].*[\)|\}]')
+
         lines=fin.readlines()
         for eachline in lines:
             print(eachline)
@@ -219,7 +224,8 @@ def file_upload_for_detection(request):
     global mylist
     global patterns
     global lengthofmylist,pages,nextpage,previouspage,pagelist,ruleslist,TopList,interests
-
+    global protocol
+    global label_list
 
 
     files = request.FILES.getlist('multifile')
@@ -238,7 +244,10 @@ def file_upload_for_detection(request):
         for chunk in f.chunks():
             destination.write(chunk)
 
-        InPutForRulesVersion2.MainFunc(tempfilenames,ProjectPath+'/detect_temp',group,"detect_temp_inputrules")
+        #protocol="bgp"
+        InPutForRulesVersion2.MainFunc(tempfilenames,os.path.join(ProjectPath,FilesStoreFolder),protocol,group,"detect_temp_inputrules",label_list)
+
+        #InPutForRulesVersion2.MainFunc(tempfilenames,ProjectPath+'/detect_temp',group,"detect_temp_inputrules")
         with open(ProjectPath+"/detect_temp_inputrules/"+"input_"+group)as fin:
             for eachline in fin.readlines():
                 if len(eachline)>1:
@@ -351,6 +360,8 @@ def rule_generate(request):
     global mylist
     global patterns
     global lengthofmylist,pages,nextpage,previouspage,pagelist,ruleslist,TopList,interests
+    global protocl
+    global label_list
 
     lengthofmylist=len(TotalFileList)
 
@@ -583,6 +594,14 @@ def index_page(request):
         #TotalFileNameList.append(eachfile)
     global excludelist
     excludelist=[]
+    FolderList=["detect_temp","detect_temp_inputrules","inputrules","results"]
+    for eachFolder in FolderList:
+        if os.path.isdir(os.path.join(os.getcwd(),eachFolder)):
+            shutil.rmtree(os.path.join(os.getcwd(),eachFolder))
+            os.makedirs(os.path.join(os.getcwd(),eachFolder))
+        else:
+            os.makedirs(os.path.join(os.getcwd(),eachFolder))
+
 
     checklist=[]
     TopList=[]
